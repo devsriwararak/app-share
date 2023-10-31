@@ -17,11 +17,11 @@ const Layout = () => {
   },[])
 
   return (
-    <div className="flex flex-row bg-neutral-100 h-screen w-screen  overflow-hidden">
+    <div className="flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden  ">
       <Sidebar openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
       <div className="flex-1">
         <Header setOpenSideBar={setOpenSideBar} openSidebar={openSidebar} />
-        <div className="p-4">
+        <div className="p-4 container mx-auto">
           <div>{<Outlet />}</div>
         </div>
       </div>

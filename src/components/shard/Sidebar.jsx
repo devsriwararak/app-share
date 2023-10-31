@@ -19,12 +19,12 @@ const Sidebar = ({openSidebar, setOpenSideBar}) => {
   return (
     <div className={openSidebar ? "flex flex-col bg-white  md:w-60 p-3 text-white shadow-md border border-r-2  " : "hidden"}  >
       
-      <div className="flex items-center gap-2 px-1 py-3 ">
+      <div className="flex items-center gap-2 px-1 py-2 justify-center ">
         <FaBeer fontSize={24} color="purple" />
         <span className="text-neutral-700 font-bold text-lg">APP-SHARE</span>
       </div>
 
-      <div className="flex-1 py-8 flex flex-col gap-0.5">
+      <div className="flex-1 py-5 flex flex-col gap-0.5">
         {DASHBOARD_SIDEBAR_LINKS.map((item) => (
           <SidebarLink key={item.key} item={item}  >
             {item.label}
