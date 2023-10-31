@@ -47,7 +47,7 @@ const TransactionChart = () => {
     },
   ];
   return (
-<div className="w-60 overflow-x-scroll h-[22rem] bg-white p-4 rounded-sm flex flex-col flex-1 mt-4 border border-gray-200 shadow-sm ">
+<div className=" w-full md:w-40 overflow-x-scroll h-[22rem] bg-white p-4 rounded-sm flex flex-col flex-1 mt-4 border border-gray-200 shadow-sm ">
     <strong className="text-gray-700 text-xl ">ทดสอบกราฟ</strong>
 <div className="w-full mt-3 flex-1 text-xs">
       <ResponsiveContainer width="100%" height="100%">
