@@ -1,13 +1,21 @@
-import React from 'react'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Products from "./pages/Products/Products";
+import Dashboard from "./pages/Dashboards/Dashboard";
+import Layout from "./components/shard/Layout";
 
 const App = () => {
   return (
-    <div>
-       <h1 className="text-3xl font-bold underline md:no-underline">
-      Hello world!
-    </h1>
-    </div>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="/products" element={<Products />} />
+      </Route>
 
-export default App
+      {/* login */}
+      <Route path="/login" element={<p>555555</p>} />
+    </Routes>
+  );
+};
+
+export default App;
