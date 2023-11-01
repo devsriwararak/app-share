@@ -13,13 +13,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
 		label: 'Dashboard',
-		path: '/',
+		path: '/admin',
 		icon: <HiOutlineViewGrid />
 	},
 	{
 		key: 'products',
 		label: 'ข้อมูลสินค้า',
-		path: '/products',
+		path: '/admin/products',
 		icon: <HiOutlineCube />
 	},
 	{

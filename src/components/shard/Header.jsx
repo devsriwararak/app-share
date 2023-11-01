@@ -151,7 +151,7 @@ const Header = ({setOpenSideBar, openSidebar}) => {
                       active && "bg-gray-200",
                       "text-gray-800 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2"
                     )}
-                    onClick={() => navigate("/logout")}
+                    onClick={() => navigate("/login")}
                   >
                     ออกจากระบบ
                   </div>
