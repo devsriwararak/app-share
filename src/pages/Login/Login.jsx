@@ -16,10 +16,15 @@ const Login = ({setToken, token}) => {
   const handleSubmit = async (e)=>{
     e.preventDefault()
     const setTokenData = 123456
-   await setToken(setTokenData)
-   localStorage.setItem('Token',setTokenData)
+   
 
-   dataLogin?.username === "admin1" && navigate('/admin')
+   dataLogin?.username === "admin1" && (
+    await setToken(setTokenData) ,
+    localStorage.setItem('Token',setTokenData) ,
+     navigate('/admin')
+   )
+  
+   
 
   }
 
