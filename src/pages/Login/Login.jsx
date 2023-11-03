@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContent } from "../../auth/AuthWrapper";
 
-const Login = ({setToken, token}) => {
+const Login = ({setToken}) => {
   const [dataLogin, setDataLogin] = useState({})
   const navigate = useNavigate()
+  // const {setToken} = useContext(AuthContent)
+
+
 
   const handleChange = (e)=>{
     setDataLogin((prev)=>({
@@ -17,7 +21,6 @@ const Login = ({setToken, token}) => {
     e.preventDefault()
     const setTokenData = 123456
    
-
    dataLogin?.username === "admin1" && (
     await setToken(setTokenData) ,
     localStorage.setItem('Token',setTokenData) ,
@@ -27,6 +30,8 @@ const Login = ({setToken, token}) => {
    
 
   }
+
+
 
   return (
     <>

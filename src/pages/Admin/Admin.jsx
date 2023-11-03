@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { AuthData } from '../../auth/AuthWrapper'
 
 const Admin = () => {
+  const {user} = AuthData()
+
   return (
-    <div>Admin</div>
+    <div>( ADMIN PAGE : {user.name} )</div>
   )
 }
 

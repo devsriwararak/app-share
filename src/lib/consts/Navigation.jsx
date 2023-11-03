@@ -12,37 +12,37 @@ import {
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
-		label: 'Dashboard',
+		label: 'เมนู 1',
 		path: '/admin',
 		icon: <HiOutlineViewGrid />
 	},
 	{
 		key: 'products',
-		label: 'ข้อมูลสินค้า',
+		label: 'เมนู 2',
 		path: '/admin/products',
 		icon: <HiOutlineCube />
 	},
 	{
 		key: 'orders',
-		label: 'Orders',
+		label: 'เมนู 3',
 		path: '/orders',
 		icon: <HiOutlineShoppingCart />
 	},
 	{
 		key: 'customers',
-		label: 'Customers',
+		label: 'เมนู 4',
 		path: '/customers',
 		icon: <HiOutlineUsers />
 	},
 	{
 		key: 'transactions',
-		label: 'Transactions',
+		label: 'เมนู 5',
 		path: '/transactions',
 		icon: <HiOutlineDocumentText />
 	},
 	{
 		key: 'messages',
-		label: 'Messages',
+		label: 'เมนู 6',
 		path: '/messages',
 		icon: <HiOutlineAnnotation />
 	}
@@ -51,13 +51,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
 	{
 		key: 'settings',
-		label: 'Settings',
+		label: 'เมนู 7',
 		path: '/settings',
 		icon: <HiOutlineCog />
 	},
 	{
 		key: 'support',
-		label: 'Help & Support',
+		label: 'เมนู 8',
 		path: '/support',
 		icon: <HiOutlineQuestionMarkCircle />
 	}
