@@ -2,41 +2,42 @@ import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContent } from "../../auth/AuthWrapper";
+import toast, { Toaster } from "react-hot-toast";
 
-const Login = ({setToken}) => {
-  const [dataLogin, setDataLogin] = useState({})
-  const navigate = useNavigate()
+const Login = ({ setToken }) => {
+  const [dataLogin, setDataLogin] = useState({});
+  const navigate = useNavigate();
   // const {setToken} = useContext(AuthContent)
 
-
-
-  const handleChange = (e)=>{
-    setDataLogin((prev)=>({
+  const handleChange = (e) => {
+    setDataLogin((prev) => ({
       ...prev,
-      [e.target.name] : e.target.value 
-    }))
-  }
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault()
-    const setTokenData = 123456
-   
-   dataLogin?.username === "admin1" && (
-    await setToken(setTokenData) ,
-    localStorage.setItem('Token',setTokenData) ,
-     navigate('/admin')
-   )
-  
-   
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const setTokenData = 123456;
 
-  }
+    if(dataLogin?.username === "admin1") {
+       setToken(setTokenData),
+      localStorage.setItem("Token", setTokenData),
+      navigate('/admin')
+    }else {
+      toast.error("รหัสผ่านไม่ถูกต้อง !!");
 
+    }
 
+      
+  };
 
   return (
     <>
-
       <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
+
+        <Toaster position="top-right" reverseOrder={false} />
+        
         {/* Container */}
         <div className="p-5 bg-gray-200 flex rounded-2xl shadow-lg max-w-5xl border border-gray-200 py-16">
           {/* form */}
@@ -45,13 +46,12 @@ const Login = ({setToken}) => {
             <p className="text-sm mt-4">รายละเอียดด เดี๋ยวค่อยใส่</p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-             
               <input
                 className="p-2 mt-8 rounded-xl border focus:ring-gray-200"
                 type="text"
                 name="username"
                 placeholder="Username"
-                onChange={(e)=>handleChange(e)}
+                onChange={(e) => handleChange(e)}
               />
               <div className="relative">
                 <input
@@ -59,14 +59,17 @@ const Login = ({setToken}) => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  onChange={(e)=>handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
                 <AiOutlineEye
                   className="absolute top-1/2 right-3 -translate-y-1/2  "
                   size={20}
                 />
               </div>
-              <button type="submit" className=" bg-purple-700 text-white rounded-xl py-2 hover:scale-105 duration-300">
+              <button
+                type="submit"
+                className=" bg-purple-700 text-white rounded-xl py-2 hover:scale-105 duration-300"
+              >
                 เข้าสู่ระบบ
               </button>
             </form>
@@ -84,12 +87,11 @@ const Login = ({setToken}) => {
             </Link>
 
             <ul className="mt-4">
-                <li>- MAIN ADMIN : admin1 / 1234</li>
-                <li>-  ADMIN : admin2 / 1234</li>
-                <li>-  บ้านแชร์ A-001 : member / 1234</li>
-                <li>-  พนักงานในบ้านแชร์ A-001 : memberwork / 1234</li>
-                <li>-  ลูกค้า  : user / 1234</li>
-
+              <li>- MAIN ADMIN : admin1 / 1234</li>
+              <li>- ADMIN : admin2 / 1234</li>
+              <li>- บ้านแชร์ A-001 : member / 1234</li>
+              <li>- พนักงานในบ้านแชร์ A-001 : memberwork / 1234</li>
+              <li>- ลูกค้า : user / 1234</li>
             </ul>
           </div>
 

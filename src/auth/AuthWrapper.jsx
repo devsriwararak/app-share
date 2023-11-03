@@ -6,6 +6,7 @@ import Register from "../pages/Login/Register";
 import Dashboard from "../pages/Dashboards/Dashboard";
 import Products from "../pages/Products/Products";
 import Home from "../pages/Home";
+import Basic from "../pages/AdminMain/Basic";
 
 export const AuthContent = createContext();
 // export const AuthData = () => useContext(AuthContent);
@@ -43,11 +44,11 @@ const AuthWrapper = () => {
 
           <Route path="/admin" element={<Layout />}>
             <Route index element={<Dashboard />} />
-            <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/basic" element={<Basic />} />
           </Route>
 
 
-          <Route path="/login" element={<Login  />} />
+          <Route path="/login" element={<Login setToken={setToken}  />} />
           <Route path="/" element={token ? <Layout /> : <Login setToken={setToken}  />} />
         </Routes>
       </>

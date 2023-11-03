@@ -101,7 +101,7 @@ const Header = ({setOpenSideBar, openSidebar}) => {
                 className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
                 style={{
                   backgroundImage:
-                    'url("https://source.unsplash.com/80x80?face")',
+                    'url("https://img.freepik.com/free-photo/people-technology-concept-smiling-asian-girl-using-smartphone-texting-mobile-phone-standing-against-white-background_1258-89474.jpg?w=740&t=st=1699023939~exp=1699024539~hmac=b35c4ea6ba09d1deb11cf8323f2da4363deeee3f8b3ee61cf77030c20973633f")',
                 }}
               >
                 <span className="sr-only">Hi Jackson</span>

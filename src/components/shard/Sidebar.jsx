@@ -21,7 +21,7 @@ const Sidebar = ({openSidebar, setOpenSideBar}) => {
       
       <div className="flex items-center gap-2 px-1 py-2 justify-center ">
         <FaBeer fontSize={24} color="purple" />
-        <span className="text-neutral-700 font-bold text-lg">APP-SHARE</span>
+        <span className="text-gray-700 font-bold text-lg">APP-SHARE</span>
       </div>
 
       <div className="flex-1 py-5 flex flex-col gap-0.5">
@@ -31,7 +31,7 @@ const Sidebar = ({openSidebar, setOpenSideBar}) => {
           </SidebarLink>
         ))}
       </div>
-      <div className="flex flex-col gap-0.5 pt-2 border-t border-neutral-700">
+      <div className="flex flex-col gap-0.5 pt-2 border-t border-gray-400">
         {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => (
           <SidebarLink key={item.key} item={item} />
         ))}
@@ -55,7 +55,7 @@ function SidebarLink({ item }) {
     <Link
       to={item.path}
       className={classNames(
-        pathname === item.path ? "bg-purple-600 " : "text-neutral-600",
+        pathname === item.path ? "bg-purple-400 " : "text-gray-700",
         linkClasses
       )}
 

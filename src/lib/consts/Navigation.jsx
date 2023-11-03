@@ -12,14 +12,14 @@ import {
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
-		label: 'เมนู 1',
+		label: 'ภาพรวม',
 		path: '/admin',
 		icon: <HiOutlineViewGrid />
 	},
 	{
 		key: 'products',
-		label: 'เมนู 2',
-		path: '/admin/products',
+		label: 'ข้อมูลพื้นฐาน',
+		path: '/admin/basic',
 		icon: <HiOutlineCube />
 	},
 	{

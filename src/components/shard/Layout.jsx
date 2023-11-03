@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   const [openSidebar , setOpenSideBar] = useState(window.innerWidth >= 768)
@@ -21,6 +22,9 @@ const Layout = () => {
       <Sidebar openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
       <div className="flex-1">
         <Header setOpenSideBar={setOpenSideBar} openSidebar={openSidebar} />
+
+        <Toaster position="top-right" reverseOrder={false} />
+
         <div className="p-4 container mx-auto">
           <div>{<Outlet />}</div>
         </div>
