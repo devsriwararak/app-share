@@ -10,11 +10,11 @@ import {
 import { useNavigate } from "react-router-dom";
 
 
-const Header = ({setOpenSideBar, openSidebar}) => {
+const Header = ({openSidebar, setOpenSideBar}) => {
   const navigate = useNavigate();
   return (
     <div className="bg-white h-16 px-4 flex justify-between items-center border-b border-gray-200">
-     <HiOutlineMenu size={24} className="mr-4 cursor-pointer" onClick={()=>setOpenSideBar( ! openSidebar)}/>
+     <HiOutlineMenu  size={24} className="mr-4 cursor-pointer md:hidden" onClick={()=>setOpenSideBar( ! openSidebar)} />
       <div className="relative">
         <HiOutlineSearch
           fontSize={20}

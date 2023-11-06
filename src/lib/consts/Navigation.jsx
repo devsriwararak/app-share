@@ -17,16 +17,26 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiOutlineViewGrid />
 	},
 	{
-		key: 'products',
+		key: 'basicHome',
 		label: 'ข้อมูลพื้นฐาน',
-		path: '/admin/basic',
-		icon: <HiOutlineCube />
+		path: '/admin/basic/home',
+		icon: <HiOutlineCube />,
+		submenuActive: 1 , 
+		submenu : [
+			{label: 'A001'},
+			{label: 'A002'},
+		]
 	},
 	{
 		key: 'orders',
 		label: 'เมนู 3',
-		path: '/orders',
-		icon: <HiOutlineShoppingCart />
+		path: '/admin/home',
+		icon: <HiOutlineShoppingCart />,
+		submenuActive: 2 , 
+		submenu : [
+			{label: 'B001'},
+			{label: 'B002'},
+		]
 	},
 	{
 		key: 'customers',

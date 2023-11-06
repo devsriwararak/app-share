@@ -7,6 +7,9 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Login/Register";
 import AuthWrapper from "./auth/AuthWrapper";
 
+import './App.css'
+
+
 
 
 const App = () => {
@@ -18,24 +21,14 @@ const App = () => {
 
 
   return (
-    // <Routes>
-    //   <Route path="/admin" element={<Layout />}>
-    //     <Route index element={<Dashboard />} />
-    //     <Route path="/admin/products" element={<Products />} />
-    //   </Route>
 
-    //   {/* login */}
-    //   <Route path="/"  element={!token ? <Login setToken={setToken} token={token} /> : <Layout />} />
-
-    //   {/* <Route path="/" element={<Login setToken={setToken} token={token}/>} /> */}
-    //   <Route path="/login" element={<Login setToken={setToken} token={token}/>} />
-    //   <Route path="/register" element={<Register/>} />
-
-    // </Routes>
 
     <BrowserRouter>
     <AuthWrapper/>
     </BrowserRouter>
+
+
+ 
   );
 };
 

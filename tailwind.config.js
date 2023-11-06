@@ -25,6 +25,10 @@ module.exports = withMT({
     extend: {
       
     },
+    colors:{
+      ListItem: '#FF5733'
+    }
+
   },
   plugins: [],
 });

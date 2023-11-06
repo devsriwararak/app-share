@@ -34,7 +34,7 @@ const Login = ({ setToken }) => {
 
   return (
     <>
-      <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
+      <section className="bg-gray-50 min-h-screen flex items-center justify-center p-4 ">
 
         <Toaster position="top-right" reverseOrder={false} />
         
