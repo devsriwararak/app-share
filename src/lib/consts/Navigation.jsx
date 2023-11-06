@@ -6,7 +6,8 @@ import {
 	HiOutlineDocumentText,
 	HiOutlineAnnotation,
 	HiOutlineQuestionMarkCircle,
-	HiOutlineCog
+	HiOutlineCog,
+	HiChevronRight
 } from 'react-icons/hi'
 
 export const DASHBOARD_SIDEBAR_LINKS = [
@@ -19,12 +20,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'basicHome',
 		label: 'ข้อมูลพื้นฐาน',
-		path: '/admin/basic/home',
+		path: '/admin/',
 		icon: <HiOutlineCube />,
 		submenuActive: 1 , 
 		submenu : [
-			{label: 'A001'},
-			{label: 'A002'},
+			{label: 'ข้อมูลบ้านแชร์', key: 'basicHome', path: '/admin/basic/home', icon: <HiChevronRight />,},
+			{label: 'ข้อมูลวงค์แชร์', key: 'basicHome', path: '/admin/basic/', icon: <HiChevronRight />,},
+
 		]
 	},
 	{

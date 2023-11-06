@@ -6,10 +6,12 @@ import {
 } from "../../lib/consts/Navigation";
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
-import { HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineLogout , HiChevronDown } from "react-icons/hi";
 
 const linkClasses =
-  "flex item-center gap-2 font-light px-3 py-2 hover:bg-purple-200 hover:text-white  rounded-sm ";
+  "flex item-center gap-3 font-light px-3 py-3 hover:bg-purple-200 hover:text-white   rounded-lg ";
+const linkClassesSubMenu =
+  "flex item-center gap-2 font-light px-3 py-1 hover:bg-purple-200 hover:text-white   rounded-lg ";
 
 const Sidebar = ({ openSidebar, setOpenSideBar }) => {
   const [active, setActive] = useState(false);
@@ -87,19 +89,37 @@ function SidebarLink({ item, handleOpen, open }) {
         )}
         onClick={() => handleOpen(item?.submenuActive)}
       >
-        <span className="text-xl">{item.icon}</span>
+        <span className="text-xl ">{item.icon}</span>
         {item.label}
+        {item.submenuActive && (<span  ><HiChevronDown size={20}/></span>)}
       </Link>
 
-      {item?.submenuActive === 1 &&
-        ((filteredData = item?.submenu?.map((item) => {
-          return item;
-        })),
-        open === 1 && (
-          <ul className="text-xl text-red-500 ">
-            {JSON.stringify(filteredData)}
-          </ul>
-        ))}
+      {item?.submenuActive === 1 && open === 1 && (
+        <ul>
+          {item?.submenu?.map((dataItem, index) => (
+            <Link
+              key={index}
+              to={dataItem.path}
+              className={classNames(
+                pathname === dataItem.path
+                  ? "bg-purple-400  bg-opacity-20 text-purple-500  "
+                  : "text-gray-700 ",
+                linkClassesSubMenu
+              )}
+            >
+              <li
+                className={classNames(
+                  "text-gray-700 pl-8 cursor-pointer ",
+                  linkClassesSubMenu
+                )}
+              >
+                <span className="text-xl">{dataItem.icon}</span>
+                {dataItem.label}
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )}
 
       {item?.submenuActive === 2 &&
         ((filteredData = item?.submenu?.map((item) => {
