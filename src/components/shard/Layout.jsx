@@ -11,7 +11,7 @@ const Layout = () => {
 
 
   return (
-    <div className="flex flex-row  h-screen w-screen overflow-hidden ">
+    <div className="flex flex-row  h-screen    w-screen overflow-y-scroll ">
       <Sidebar openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
 
       <div className="flex-1 ">
@@ -19,7 +19,7 @@ const Layout = () => {
 
         <Toaster position="top-right" reverseOrder={false} />
 
-        <div className="p-4 bg-gray-200 w-full  ">
+        <div className="p-4 bg-gray-200 w-full   ">
           <div>{<Outlet />}</div>
         </div>
       </div>
