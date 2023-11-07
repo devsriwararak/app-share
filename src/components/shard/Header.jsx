@@ -13,7 +13,9 @@ import { useNavigate } from "react-router-dom";
 const Header = ({openSidebar, setOpenSideBar  }) => {
   const navigate = useNavigate();
   return (
-    <div className="bg-white h-16 px-4 flex justify-between items-center border-b border-gray-200">
+
+
+    <div className="bg-white h-16 px-4 flex justify-between items-center border-b-4 border-gray-200 shadow-sm  fixed w-full md:w-[1450px]">
      <HiOutlineMenu  size={24} className="mr-4 cursor-pointer md:hidden" onClick={()=>setOpenSideBar( ! openSidebar)} />
       <div className="relative">
         <HiOutlineSearch
