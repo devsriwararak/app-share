@@ -46,7 +46,6 @@ const AuthWrapper = () => {
             <Route index element={<Dashboard />} />
             <Route path="/admin/basic/home" element={<Basic />} />
             <Route path="/admin/home" element={<Home />} />
-
           </Route>
 
 

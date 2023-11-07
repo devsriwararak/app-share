@@ -20,24 +20,36 @@ const Login = ({ setToken }) => {
     e.preventDefault();
     const setTokenData = 123456;
 
-    if(dataLogin?.username === "admin1") {
-       setToken(setTokenData),
-      localStorage.setItem("Token", setTokenData),
-      navigate('/admin')
-    }else {
+    if (
+      dataLogin?.username === "admin1" ||
+      dataLogin?.username === "admin2" ||
+      dataLogin?.username === "member" ||
+      dataLogin?.username === "memberwork" ||
+      dataLogin?.username === "user" 
+    ) {
+      setToken(setTokenData),
+        localStorage.setItem("Token", setTokenData),
+        dataLogin?.username === "admin1" &&
+          localStorage.setItem("status", "MAIN ADMIN");
+      dataLogin?.username === "admin2" &&
+        localStorage.setItem("status", "ADMIN");
+      dataLogin?.username === "member" &&
+        localStorage.setItem("status", "บ้านแชร์ A-001");
+      dataLogin?.username === "memberwork" &&
+        localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001");
+      dataLogin?.username === "user" &&
+        localStorage.setItem("status", "ลูกค้า");
+      navigate("/admin");
+    } else {
       toast.error("รหัสผ่านไม่ถูกต้อง !!");
-
     }
-
-      
   };
 
   return (
     <>
       <section className="bg-gray-50 min-h-screen flex items-center justify-center p-4 ">
-
         <Toaster position="top-right" reverseOrder={false} />
-        
+
         {/* Container */}
         <div className="p-5 bg-gray-200 flex rounded-2xl shadow-lg max-w-5xl border border-gray-200 py-16">
           {/* form */}

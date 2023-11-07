@@ -151,7 +151,7 @@ const Header = ({openSidebar, setOpenSideBar}) => {
                       active && "bg-gray-200",
                       "text-gray-800 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2"
                     )}
-                    onClick={() => (localStorage.removeItem("Token"), navigate("/login"))}
+                    onClick={() => (localStorage.clear(), navigate("/login"))}
                   >
                     ออกจากระบบ
                   </div>

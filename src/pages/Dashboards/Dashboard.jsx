@@ -14,14 +14,17 @@ const Dashboard = () => {
 
 
       <div className="h-screen overflow-scroll">
+      <h1 className="text-xl font-bold m-4">สวัสดีผู้ใช้งานสิทธิ์ : {localStorage.getItem('status')}  </h1>
         <div className="flex gap-4 w-full">
           <DashboardStartGrid />
         </div>
 
-        <div className=" flex flex-col md:flex-row lg:flex-row gap-2 w-full container mx-auto justify-center">
+        <div className=" flex flex-col md:flex-row lg:flex-row gap-2 w-full ">
           <TransactionChart />
           <BuyerProfileChart />
         </div>
+
+       
       </div>
     </>
   );
