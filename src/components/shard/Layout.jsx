@@ -3,12 +3,22 @@ import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { Toaster } from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContent } from "../../auth/AuthWrapper";
 
 const Layout = () => {
 
   const [openSidebar, setOpenSideBar] = useState(false);
+  const testData = useContext(AuthContent)
 
+  if (!testData?.token) {
+    return <Login setToken={testData?.setToken}  />;
+  }  
 
+  useEffect(()=>{
+
+  
+  },[])
 
   return (
     <div className="flex flex-row  h-screen      w-screen overflow-y-scroll ">

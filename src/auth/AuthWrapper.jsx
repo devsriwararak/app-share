@@ -1,12 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 import Login from "../pages/Login/Login";
-import { Route, Routes } from "react-router-dom";
-import Layout from "../components/shard/Layout";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Register from "../pages/Login/Register";
-import Dashboard from "../pages/Dashboards/Dashboard";
-import Products from "../pages/Products/Products";
-import Home from "../pages/Home";
-import Basic from "../pages/AdminMain/Basic";
+
+import PrivateRoute from "../routes/PrivateRoute";
 
 export const AuthContent = createContext();
 // export const AuthData = () => useContext(AuthContent);
@@ -14,44 +11,29 @@ export const AuthContent = createContext();
 const AuthWrapper = () => {
   const [user, setUser] = useState({ name: "", isAuthenticated: false });
   const [token, setToken] = useState(localStorage.getItem("Token"));
+  const navigate = useNavigate();
 
-  if (!token) {
-    return <Login setToken={setToken}  />;
-  }
-
-  // const login = (username, password) => {
-  //   return new Promise((resolve, reject) => {
-  //     if (password === "1234") {
-  //       setUser({ name: username, isAuthenticated: true });
-  //       resolve("success");
-  //     } else {
-  //       reject("รหัสผ่านไม่ถูกต้อง");
-  //     }
-  //   });
-  // };
-
-  // const logout = () => {
-  //   setUser({ ...user, isAuthenticated: false });
-  // };
+  // if (!token) {
+  //   return <Login setToken={setToken}  />;
+  // }
 
   return (
-    <AuthContent.Provider value={{ user , token  }}>
+    <AuthContent.Provider value={{ user, token, setToken }}>
       <>
         <Routes>
-          {/* 
-          <Route path="/login" element={<Login setToken={setToken} token={token} />} />
-          <Route path="/register" element={<Register />} /> */}
-
-          <Route path="/admin" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/admin/basic/home" element={<Basic />} />
-            <Route path="/admin/home" element={<Home />} />
-          </Route>
-
-
-          <Route path="/login" element={<Login setToken={setToken}  />} />
-          <Route path="/" element={token ? <Layout /> : <Login setToken={setToken}  />} />
+        <Route path="/" element={<Login setToken={setToken} />} />
+          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
+        {token ? (
+          <PrivateRoute />
+          
+        ) : (
+          <Routes>
+            <Route path="*" element={<Navigate to="/login" />} />
+            <Navigate to="/login"  />;
+          </Routes>
+        )}
       </>
     </AuthContent.Provider>
   );
