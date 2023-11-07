@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 
-const Header = ({openSidebar, setOpenSideBar}) => {
+const Header = ({openSidebar, setOpenSideBar  }) => {
   const navigate = useNavigate();
   return (
     <div className="bg-white h-16 px-4 flex justify-between items-center border-b border-gray-200">

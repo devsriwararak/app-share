@@ -111,7 +111,7 @@ const BasicHome = () => {
   
 
   return (
-    <div>
+    <div >
       <HomeShareModal handleOpen={handleOpen} open={open} />
 
       <div className="flex flex-col md:flex-row  items-center   md:justify-between">

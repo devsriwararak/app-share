@@ -20,7 +20,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'basicHome',
 		label: 'ข้อมูลพื้นฐาน',
-		path: '/admin/',
+		// path: '/admin/',
 		icon: <HiOutlineCube />,
 		submenuActive: 1 , 
 		submenu : [

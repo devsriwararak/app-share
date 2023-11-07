@@ -7,7 +7,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 const Basic = () => {
   const [status, setStatus] = useState(1);
   return (
-    <div className=" overflow-scroll w-[360px] md:w-full  ">
+    <div className=" overflow-y-scroll w-[360px] md:w-full  ">
       <div className="bg-white p-4 rounded-lg shadow-sm border border-b-2  ">
         <div className="flex flex-row justify-center md:justify-normal gap-4">
           <Button className="flex items-center gap-3 text-sm" size="sm"  onClick={() => setStatus(1)}>
