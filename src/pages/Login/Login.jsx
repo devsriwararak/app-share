@@ -12,7 +12,7 @@ const Login = ({ setToken }) => {
   const handleChange = (e) => {
     setDataLogin((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
     }));
   };
 
