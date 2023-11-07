@@ -24,7 +24,7 @@ const Layout = () => {
     <div className="flex flex-row  h-screen      w-screen overflow-y-scroll ">
       <Sidebar openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
 
-      <div className=" flex-1     ">
+      <div className=" flex-1   ">
         <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
 
         <Toaster position="top-right" reverseOrder={false} />
