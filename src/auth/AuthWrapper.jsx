@@ -20,18 +20,15 @@ const AuthWrapper = () => {
   return (
     <AuthContent.Provider value={{ user, token, setToken }}>
       <>
-        <Routes>
-        <Route path="/" element={<Login setToken={setToken} />} />
-          <Route path="/login" element={<Login setToken={setToken} />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
         {token ? (
           <PrivateRoute />
-          
         ) : (
           <Routes>
+            <Route path="/" element={<Login setToken={setToken} />} />
+            <Route path="/login" element={<Login setToken={setToken} />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" />} />
-            <Navigate to="/login"  />;
+            {/* <Navigate to="/login" />; */}
           </Routes>
         )}
       </>
