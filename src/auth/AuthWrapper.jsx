@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Login from "../pages/Login/Login";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Register from "../pages/Login/Register";
@@ -13,9 +13,11 @@ const AuthWrapper = () => {
   const [token, setToken] = useState(localStorage.getItem("Token"));
   const navigate = useNavigate();
 
-  // if (!token) {
-  //   return <Login setToken={setToken}  />;
-  // }
+  useEffect(()=>{
+
+  },[token])
+
+
 
   return (
     <AuthContent.Provider value={{ user, token, setToken }}>
@@ -28,7 +30,6 @@ const AuthWrapper = () => {
             <Route path="/login" element={<Login setToken={setToken} />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" />} />
-            {/* <Navigate to="/login" />; */}
           </Routes>
         )}
       </>

@@ -114,16 +114,16 @@ const BasicHome = () => {
     <div >
       <HomeShareModal handleOpen={handleOpen} open={open} />
 
-      <div className="flex flex-col md:flex-row  items-center   md:justify-between">
+      <div className="flex flex-col md:flex-row  items-center   md:justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold">จัดการข้อมูลบ้านแชร์</h2>
+          <h2 className="text-lg font-bold">จัดการข้อมูลบ้านแชร์</h2>
         </div>
 
-        <div className="flex gap-2 flex-col justify-between  md:flex-row">
+        <div className="flex gap-2 flex-col   md:flex-row">
           <div className="w-72   ">
-            <Input label="ค้นหาบ้านแชร์" />
+            <Input variant="outlined" label="ค้นหาบ้านแชร์" className="" />
           </div>
-          <div className="flex justify-center">
+          <div className="">
             <Button
               onClick={handleOpen}
               variant="filled"
