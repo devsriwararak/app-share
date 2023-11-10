@@ -1,8 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Login from "../pages/Login/Login";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import Register from "../pages/Login/Register";
 
+
+
+// Components
+import Register from "../pages/Login/Register";
 import PrivateRoute from "../routes/PrivateRoute";
 
 export const AuthContent = createContext();

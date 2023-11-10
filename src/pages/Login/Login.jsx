@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContent } from "../../auth/AuthWrapper";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ setToken }) => {
   const [dataLogin, setDataLogin] = useState({});
@@ -25,12 +26,10 @@ const Login = ({ setToken }) => {
       dataLogin?.username === "admin2" ||
       dataLogin?.username === "member" ||
       dataLogin?.username === "memberwork" ||
-      dataLogin?.username === "user" 
+      dataLogin?.username === "user"
     ) {
-      setToken(setTokenData),
-        localStorage.setItem("Token", setTokenData),
-        dataLogin?.username === "admin1" &&
-          localStorage.setItem("status", "MAIN ADMIN");
+      dataLogin?.username === "admin1" &&
+        localStorage.setItem("status", "MAIN ADMIN");
       dataLogin?.username === "admin2" &&
         localStorage.setItem("status", "ADMIN");
       dataLogin?.username === "member" &&
@@ -39,28 +38,40 @@ const Login = ({ setToken }) => {
         localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001");
       dataLogin?.username === "user" &&
         localStorage.setItem("status", "ลูกค้า");
-      navigate("/admin");
+
+      toast.success("เข้าสู่ระบบสำเร็จ");
+
+      setTimeout(() => {
+        setToken(setTokenData),
+          localStorage.setItem("Token", setTokenData),
+          navigate("/admin");
+      }, 1300);
     } else {
-      toast.error("รหัสผ่านไม่ถูกต้อง !!");
+      //  ERRORR
+      toast.error("user + รหัสผ่าน ไม่ถูกต้อง");
     }
   };
 
   return (
     <>
       <section className="bg-gray-50 min-h-screen flex items-center justify-center p-4  ">
-        <Toaster position="top-right" reverseOrder={false} />
+        <ToastContainer />
 
         {/* Container */}
         <div className="p-5 m-8 bg-gray-300 flex rounded-2xl shadow-lg max-w-5xl border border-gray-300 py-16">
           {/* form */}
           <div className="sm:w-1/2 px-10 flex flex-col justify-center   ">
-            <h2 className="font-bold text-2xl text-purple-800 flex justify-center md:justify-start">เข้าสู่ระบบ</h2>
-            <p className="text-sm mt-4 flex justify-center md:justify-start">รายละเอียดด เดี๋ยวค่อยใส่</p>
+            <h2 className="font-bold text-2xl text-purple-800 flex justify-center md:justify-start">
+              เข้าสู่ระบบ
+            </h2>
+            <p className="text-sm mt-4 flex justify-center md:justify-start">
+              รายละเอียดด เดี๋ยวค่อยใส่
+            </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <input
                 className="p-2 mt-8 rounded-xl border focus:ring-gray-200"
-                type="text" 
+                type="text"
                 name="username"
                 placeholder="Username"
                 onChange={(e) => handleChange(e)}

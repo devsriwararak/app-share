@@ -30,7 +30,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
       <div
         className={`fixed top-0   left-0 h-screen w-60 md:w-2/12 p-3  text-white shadow-md border-r-2 bg-white z-10   ${
           openSidebar
-            ? "md:w-60 md:static md:top-auto md:left-auto md:shadow-none md:border-0   "
+            ? "md:w-2/12 md:static md:top-auto md:left-auto md:shadow-none md:border-0   "
             : "hidden md:block md:static md:top-auto md:left-auto md:shadow-none md:border-0   "
         }`}
       >
