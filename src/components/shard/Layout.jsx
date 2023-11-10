@@ -41,7 +41,7 @@ const Layout = () => {
       <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar}   />
 
 
-      <div className="p-4 bg-gray-200 w-full mt-16   ">
+      <div className="p-4 bg-gray-200 w-full pt-2 md:pt-24   ">
         <div>{<Outlet />}</div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const Header = ({openSidebar, setOpenSideBar  }) => {
   return (
 
 
-    <div className= " bg-white bg-opacity-80  h-16  flex justify-end items-center border-b-2 border-gray-200 shadow-sm  w-full md:w-10/12 z-10  md:fixed ">
+    <div className= " bg-white  h-16  flex justify-end items-center border-b-2 border-gray-200 shadow-sm  w-full md:w-10/12 z-10  md:fixed ">
      <HiOutlineMenu  size={24} className="mr-4 cursor-pointer md:hidden" onClick={()=>setOpenSideBar( ! openSidebar)} />
       {/* <div className="relative">
         <HiOutlineSearch

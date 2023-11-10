@@ -5,29 +5,30 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Input,
 } from "@material-tailwind/react";
 
 const HomeShareModal = ({open, handleOpen }) => {
   return (
     <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>Its a simple dialog.</DialogHeader>
+        <DialogHeader className='bg-gray-200'>สร้างบ้านแชร์</DialogHeader>
         <DialogBody>
-          The key to more success is to have a lot of pillows. Put it this way,
-          it took me twenty five years to get these plants, twenty five years of
-          blood sweat and tears, and I&apos;m never giving up, I&apos;m just
-          getting started. I&apos;m up to something. Fan luv.
+          <div className='flex flex-row gap-4 justify-center'>
+            <Input label="ค้นหาบ้านแชร์"/>
+            <Input label="ค้นหาบ้านแชร์"/>
+          </div>
         </DialogBody>
         <DialogFooter>
           <Button
-            variant="text"
+            variant="gradient"
             color="red"
             onClick={handleOpen}
             className="mr-1"
           >
-            <span>Cancel</span>
+            <span>ยกเลิก</span>
           </Button>
           <Button variant="gradient" color="green" onClick={handleOpen}>
-            <span>Confirm</span>
+            <span>บันทึก</span>
           </Button>
         </DialogFooter>
       </Dialog>

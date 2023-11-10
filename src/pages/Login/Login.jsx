@@ -55,7 +55,7 @@ const Login = ({ setToken }) => {
   return (
     <>
       <section className="bg-gray-50 min-h-screen flex items-center justify-center p-4  ">
-        <ToastContainer />
+        <ToastContainer theme="colored" autoClose={2000} />
 
         {/* Container */}
         <div className="p-5 m-8 bg-gray-300 flex rounded-2xl shadow-lg max-w-5xl border border-gray-300 py-16">

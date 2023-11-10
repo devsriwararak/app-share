@@ -111,24 +111,24 @@ const BasicHome = () => {
   
 
   return (
-    <div >
+    <div className="">
       <HomeShareModal handleOpen={handleOpen} open={open} />
 
-      <div className="flex flex-col md:flex-row  items-center   md:justify-between gap-4">
+      <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div>
           <h2 className="text-lg font-bold">จัดการข้อมูลบ้านแชร์</h2>
         </div>
 
-        <div className="flex gap-2 flex-col   md:flex-row">
+        <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72   ">
-            <Input variant="outlined" label="ค้นหาบ้านแชร์" className="" />
+            <Input variant="outlined" label="ค้นหาบ้านแชร์" className="bg-gray-100 border-1 border-red-500" />
           </div>
           <div className="">
             <Button
               onClick={handleOpen}
               variant="filled"
               color="green"
-              className="text-sm "
+              className="text-sm  flex "
             >
               สร้างบ้านแชร์
             </Button>
@@ -136,9 +136,9 @@ const BasicHome = () => {
         </div>
       </div>
 
-      <Card className=" h-[500px] w-full mt-4 ">
-        <CardBody className="overflow-y-scroll px-0">
-          <table className="w-full min-w-max table-auto text-left">
+      <Card className=" h-[500px]  w-80 mx-auto  md:w-full  mt-4 ">
+        <CardBody className="overflow-scroll px-0">
+          <table className=" w-full  min-w-max table-auto text-left">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (
