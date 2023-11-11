@@ -11,7 +11,7 @@ const Dashboard = () => {
     <>
 
 
-      <div className="h-screen ">
+      <div className="  ">
       <h1 className="text-xl font-bold m-4">สวัสดีผู้ใช้งานสิทธิ์ : {localStorage.getItem('status')}  </h1>
         <div className="flex gap-4 w-full">
           <DashboardStartGrid />
@@ -21,6 +21,23 @@ const Dashboard = () => {
           <TransactionChart />
           <BuyerProfileChart />
         </div>
+
+       <div>
+       <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+        <p>adsdsadadsad</p> <br />
+       </div>
 
        
       </div>

@@ -19,6 +19,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import HomeShareModal from "../../../components/modal/HomeShareModal";
+import { HiOutlineHome } from "react-icons/hi";
 
 const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
 
@@ -115,13 +116,14 @@ const BasicHome = () => {
       <HomeShareModal handleOpen={handleOpen} open={open} />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
-        <div>
-          <h2 className="text-lg font-bold">จัดการข้อมูลบ้านแชร์</h2>
+        <div className="flex gap-2">
+          <span ><HiOutlineHome size={24}/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลบ้านแชร์</span>
+         
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
-          <div className="w-72   ">
-            <Input variant="outlined" label="ค้นหาบ้านแชร์" className="bg-gray-100 border-1 border-red-500" />
+          <div className="w-72 bg-gray-100 rounded-md   ">
+            <Input variant="outlined" label="ค้นหาบ้านแชร์" className="" />
           </div>
           <div className="">
             <Button

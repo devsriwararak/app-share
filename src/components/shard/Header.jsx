@@ -15,19 +15,12 @@ const Header = ({openSidebar, setOpenSideBar  }) => {
   return (
 
 
-    <div className= " bg-white  h-16  flex justify-end items-center border-b-2 border-gray-200 shadow-sm  w-full md:w-10/12 z-10  md:fixed ">
-     <HiOutlineMenu  size={24} className="mr-4 cursor-pointer md:hidden" onClick={()=>setOpenSideBar( ! openSidebar)} />
-      {/* <div className="relative">
-        <HiOutlineSearch
-          fontSize={20}
-          className="text-gray-400  top-1/2 -translate-y-1/2 left-3"
-        />
-        <input
-          type="text"
-          placeholder="Search"
-          className="text-sm  focus:outline-none h-10 w-[10rem] md:w-[20rem] border border-gray-300 rounded-lg pl-11 pr-4  "
-        />
-      </div> */}
+    <div className= " bg-white  h-16  flex justify-between items-center border-b-2 border-gray-200 shadow-sm fixed w-100 md:w-10/12 z-10  ">
+     <HiOutlineMenu color="red"  size={24} className="mr-4 cursor-pointer md:hidden " onClick={()=>setOpenSideBar( ! openSidebar)} />
+     <div className="mx-4">
+      สวัสดีคุณ : main admin 001
+     </div>
+
       <div className="flex items-center gap-2 mr-6">
         <Popover className="">
           {({ open }) => (

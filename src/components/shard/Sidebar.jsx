@@ -28,13 +28,12 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
   return (
     <>
       <div
-        className={`fixed top-0   left-0 h-screen w-60 md:w-2/12 p-3  text-white shadow-md  bg-white z-10   ${
+        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-lg  bg-white z-50  ${
           openSidebar
-            ? "md:w-2/12 md:static md:top-auto md:left-auto md:shadow-none md:border-0   "
-            : "hidden md:block md:static md:top-auto md:left-auto md:shadow-none md:border-0   "
+            ? "  md:block md:static  md:top-auto md:left-auto md:shadow-lg md:border-2   "
+            : " hidden md:block  md:static   md:top-auto md:left-auto md:shadow-lg md:border-2   "
         }`}
       >
-
         <div className="flex items-center gap-2 px-1 py-2 justify-center ">
           <FaBeer fontSize={24} color="purple" />
           <span
@@ -44,6 +43,8 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
             APP-SHARE
           </span>
         </div>
+
+        <p className="text-black">{JSON.stringify(openSidebar)}</p>
 
         <div className="flex-1 py-5 flex flex-col gap-0.5">
           {DASHBOARD_SIDEBAR_LINKS.map((item) => (
