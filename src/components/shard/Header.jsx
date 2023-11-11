@@ -16,10 +16,12 @@ const Header = ({openSidebar, setOpenSideBar  }) => {
 
 
     <div className= " bg-white  h-16  flex justify-between items-center border-b-2 border-gray-200 shadow-sm fixed w-100 md:w-10/12 z-10  ">
-     <HiOutlineMenu color="red"  size={24} className="mr-4 cursor-pointer md:hidden " onClick={()=>setOpenSideBar( ! openSidebar)} />
-     <div className="mx-4">
-      สวัสดีคุณ : main admin 001
+     <div className="mx-4 text-black">
+      สวัสดีคุณ : {localStorage.getItem('status')}
      </div>
+     
+     <HiOutlineMenu color="black"  size={30} className="mr-4 cursor-pointer md:hidden " onClick={()=>setOpenSideBar( ! openSidebar)} />
+
 
       <div className="flex items-center gap-2 mr-6">
         <Popover className="">

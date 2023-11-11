@@ -12,7 +12,6 @@ const Dashboard = () => {
 
 
       <div className="  ">
-      <h1 className="text-xl text-black font-bold m-4">สวัสดีผู้ใช้งานสิทธิ์ : {localStorage.getItem('status')}  </h1>
         <div className="flex gap-4 w-full">
           <DashboardStartGrid />
         </div>

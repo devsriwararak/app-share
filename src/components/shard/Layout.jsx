@@ -36,7 +36,7 @@ const Layout = () => {
         <div className=" w-10/12   text-white    ">
           <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
 
-          <div className=" bg-gray-100 p-4 overflow-y-scroll pt-24   h-screen  w-full ">
+          <div className=" bg-gray-100 p-4 overflow-y-scroll pt-20   h-screen  w-full ">
             {<Outlet />}
           </div>
         </div>
