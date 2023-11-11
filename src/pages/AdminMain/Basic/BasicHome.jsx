@@ -117,7 +117,7 @@ const BasicHome = () => {
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
-          <span ><HiOutlineHome size={24}/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลบ้านแชร์</span>
+          <span ><HiOutlineHome size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลบ้านแชร์</span>
          
         </div>
 
