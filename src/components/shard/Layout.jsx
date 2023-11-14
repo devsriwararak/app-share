@@ -33,10 +33,10 @@ const Layout = () => {
           <Sidebar openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
         </div>
 
-        <div className=" w-10/12   text-white    ">
+        <div className=" w-full md:w-10/12   text-white    ">
           <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
 
-          <div className=" bg-gray-100 p-4 overflow-y-scroll pt-20   h-screen  w-full ">
+          <div className=" bg-gray-100 p-4 overflow-y-scroll pt-20   h-screen  ">
             {<Outlet />}
           </div>
         </div>

@@ -28,24 +28,41 @@ const Login = ({ setToken }) => {
       dataLogin?.username === "memberwork" ||
       dataLogin?.username === "user"
     ) {
-      dataLogin?.username === "admin1" &&
-        localStorage.setItem("status", "MAIN ADMIN");
-      dataLogin?.username === "admin2" &&
-        localStorage.setItem("status", "ADMIN");
-      dataLogin?.username === "member" &&
-        localStorage.setItem("status", "บ้านแชร์ A-001");
-      dataLogin?.username === "memberwork" &&
-        localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001");
-      dataLogin?.username === "user" &&
-        localStorage.setItem("status", "ลูกค้า");
+
+      localStorage.setItem("Token", setTokenData)
+
+      if(dataLogin?.username === "admin1"){
+        localStorage.setItem("status", "MAIN ADMIN"),
+        localStorage.setItem("Type", "main-admin")
+
+      }else if (dataLogin?.username === "admin2"){
+        localStorage.setItem("status", "ADMIN"),
+        localStorage.setItem("Type", "admin")
+      } 
+
+      else if (dataLogin?.username === "home") {
+        localStorage.setItem("status", "บ้านแชร์ A-001"),
+        localStorage.setItem("Type", "home")
+      } else if (dataLogin?.username === "member") {
+        localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001"),
+        localStorage.setItem("Type", "member")
+      } else if (dataLogin?.username === "user"){
+        localStorage.setItem("status", "ลูกค้า"),
+        localStorage.setItem("Type", "user")
+      }
+
 
       toast.success("เข้าสู่ระบบสำเร็จ");
 
       setTimeout(() => {
-        setToken(setTokenData),
-          localStorage.setItem("Token", setTokenData),
-          navigate("/admin");
-      }, 1300);
+        window.location.reload()
+       }, 2000);
+
+      // setTimeout(() => {
+      //   setToken(setTokenData),
+      //     localStorage.setItem("Token", setTokenData),
+      //     navigate("/admin");
+      // }, 1300);
     } else {
       //  ERRORR
       toast.error("user + รหัสผ่าน ไม่ถูกต้อง");

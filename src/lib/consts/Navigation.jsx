@@ -25,7 +25,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		submenuActive: 1 , 
 		submenu : [
 			{label: 'ข้อมูลบ้านแชร์', key: 'basicHome', path: '/admin/basic/home', icon: <HiChevronRight />,},
-			{label: 'ข้อมูลวงค์แชร์', key: 'basicHome', path: '/admin/basic/', icon: <HiChevronRight />,},
+			{label: 'ข้อมูลวงค์แชร์', key: 'basicHome', path: '/admin/basic/wong', icon: <HiChevronRight />,},
 
 		]
 	},

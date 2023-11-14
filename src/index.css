@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 
- body , p , span , button , ul , li {
+ body , p , span , button , ul , li, div {
    font-family: 'Prompt', sans-serif !important;
 }

@@ -7,12 +7,24 @@ import {
   DialogFooter,
   Input,
 } from "@material-tailwind/react";
+import { HiOutlineHome } from "react-icons/hi";
+import Select from "react-select";
+import { BankList } from "../data/BankList";
+
+const options = [
+  { value: "", label: "เลือกธนาคารที่ต้องการ" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 const HomeShareModal = ({ open, handleOpen }) => {
   return (
-    <Dialog open={open} size="lg" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200">สร้างบ้านแชร์</DialogHeader>
-      <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">
+    <Dialog open={open} size="lg" handler={handleOpen} >
+      <DialogHeader className="bg-gray-200 flex gap-2">
+        {" "}
+        <HiOutlineHome /> สร้างบ้านแชร์
+      </DialogHeader>
+      <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto  ">
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Input color="purple" label="รหัสบ้านแชร์" required />
           <Input color="purple" label="ชื่อบ้านแชร์" required />
@@ -34,10 +46,11 @@ const HomeShareModal = ({ open, handleOpen }) => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4 justify-center mt-5">
-          <Input color="purple" label="ชื่อธนาคาร" />
-          <Input color="purple" label="หมายเลขบัญชี" />
-          <Input color="purple" label="ชื่อบัญชี" />
+        <div className="flex flex-col md:flex-row gap-4  justify-center mt-5">
+          {/* <Input color="purple" label="ชื่อธนาคาร" /> */}
+          <Select  options={BankList} className="w-full  " placeholder="เลือกธนาคาร" />
+          <Input color="purple" label="หมายเลขบัญชี" className="w-full" />
+          <Input color="purple" label="ชื่อบัญชี" className="w-full" />
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center mt-5">

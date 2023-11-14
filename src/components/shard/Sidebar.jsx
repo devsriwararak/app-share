@@ -44,7 +44,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
           </span>
         </div>
 
-        <p className="text-black">{JSON.stringify(openSidebar)}</p>
+        {/* <p className="text-black">{JSON.stringify(openSidebar)}</p> */}
 
         <div className="flex-1 py-5 flex flex-col gap-0.5">
           {DASHBOARD_SIDEBAR_LINKS.map((item) => (
