@@ -126,7 +126,7 @@ const CrudAdmin = () => {
         </div>
       </div>
 
-      <Card className=" h-[550px] w-96 mx-auto   md:w-full  mt-4 ">
+      <Card className=" h-[550px] w-full mx-auto   md:w-full  mt-4 ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
           <table className=" w-full  min-w-max table-auto text-left">
             <thead > 
