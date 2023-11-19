@@ -14,9 +14,8 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
-import HomeShareModal from "../../../components/modal/HomeShareModal";
-import { HiOutlineHome , HiOutlineChatAlt2 , HiOutlinePlusCircle  } from "react-icons/hi";
-import WongShareModal from "../../../components/modal/WongShareModal";
+import { HiOutlineUserAdd , HiOutlineChatAlt2 , HiOutlinePlusCircle  } from "react-icons/hi";
+import AdminModal from "../../components/modal/AdminModal";
 
 const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
 
@@ -93,7 +92,7 @@ const TABLE_ROWS = [
   },
 ];
 
-const BasicWong = () => {
+const CrudAdmin = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -110,19 +109,19 @@ const BasicWong = () => {
 
   return (
     <div className="">
-      <WongShareModal handleOpen={handleOpen} open={open} />
+      <AdminModal handleOpen={handleOpen} open={open} />
 
-      <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
+      <div className="flex flex-col md:flex-row    items-center  md:justify-start gap-4">
         <div className="flex gap-2">
-          <span ><HiOutlineChatAlt2 size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลวงค์แชร์</span>
+          <span ><HiOutlineUserAdd size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูล ADMIN</span>
          
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md   ">
-            <Input variant="outlined" label="ค้นหาวงค์แชร์" className="" />
+            <Input variant="outlined" label="ค้นหา ADMIN" className="" />
           </div>
-          <div className="">
+          {/* <div className="">
             <Button
               onClick={handleOpen}
               variant="filled"
@@ -130,9 +129,9 @@ const BasicWong = () => {
               className="text-sm  flex items-center gap-1 "
             >
               <HiOutlinePlusCircle size={24}  />
-              สร้างวงค์แชร์
+              สร้าง ADMIN
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -279,6 +278,8 @@ const BasicWong = () => {
   );
 };
 
-export default BasicWong;
+export default CrudAdmin;
+
+
 
 

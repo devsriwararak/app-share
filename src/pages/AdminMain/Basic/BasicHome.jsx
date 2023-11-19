@@ -143,8 +143,8 @@ const BasicHome = () => {
         </div>
       </div>
 
-      <Card className=" h-[550px]  w-80 mx-auto overflow-scroll  md:w-full  mt-4 ">
-        <CardBody className="  px-2 -mt-4">
+      <Card className=" h-[550px] w-96 m-4 mx-auto   md:w-full  mt-4 ">
+        <CardBody className="  px-2 -mt-4 overflow-scroll">
           <table className=" w-full  min-w-max table-auto text-left ">
             <thead className="  ">
               <tr  >

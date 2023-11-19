@@ -6,6 +6,9 @@ import Products from "../pages/Products/Products";
 import Home from "../pages/Home";
 import BasicHome from "../pages/AdminMain/Basic/BasicHome";
 import BasicWong from "../pages/AdminMain/Basic/BasicWong";
+import CrudAdmin from "../pages/AdminMain/CrudAdmin";
+import HomeShare from "../pages/AdminMain/Homes/HomeShare";
+import GroupShare from "../pages/AdminMain/Homes/GroupShare";
 let Type = localStorage.getItem("Type");
 
 const PrivateRoute = () => {
@@ -18,6 +21,10 @@ const PrivateRoute = () => {
             <Route index element={<Dashboard />} />
             <Route path="/admin/basic/home" element={<BasicHome />} />
             <Route path="/admin/basic/wong" element={<BasicWong />} />
+            <Route path="/admin/crud-admin" element={<CrudAdmin />} />
+            <Route path="/admin/home-share" element={<HomeShare />} />
+            <Route path="/admin/group-share" element={<GroupShare />} />
+
           </Route>
           <Route path="/" element={<Navigate to="/admin" />} />
           <Route path="*" element={<Navigate to="/admin" />} />

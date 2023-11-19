@@ -28,12 +28,13 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
   return (
     <>
       <div
-        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-lg  bg-white z-50  ${
+        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-lg  bg-white z-50 overflow-y-scroll ${
           openSidebar
             ? "  md:block md:static  md:top-auto md:left-auto md:shadow-lg md:border-2   "
             : " hidden md:block  md:static   md:top-auto md:left-auto md:shadow-lg md:border-2   "
         }`}
       >
+        <p className="">{JSON.stringify(open)}</p>
         <div className="flex items-center gap-2 px-1 py-2 justify-center ">
           <FaBeer fontSize={24} color="purple" />
           <span
@@ -44,7 +45,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
           </span>
         </div>
 
-        {/* <p className="text-black">{JSON.stringify(openSidebar)}</p> */}
+        <p className="text-black">{JSON.stringify(open)}</p>
 
         <div className="flex-1 py-5 flex flex-col gap-0.5">
           {DASHBOARD_SIDEBAR_LINKS.map((item) => (
@@ -147,7 +148,7 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
         </ul>
       )}
 
-      {item?.submenuActive === 2 &&
+      {/* {item?.submenuActive === 2 &&
         ((filteredData = item?.submenu?.map((item) => {
           return item;
         })),
@@ -155,6 +156,38 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
           <ul className="text-xl text-red-500 ">
             {JSON.stringify(filteredData)}
           </ul>
+        ))} */}
+
+      {item?.submenuActive === 2 &&
+        ((filteredData = item?.submenu?.map((item) => {
+          return item;
+        })),
+        open === 2 && (
+          <ul>
+          {item?.submenu?.map((dataItem, index) => (
+            <Link
+              key={index}
+              to={dataItem.path}
+              className={classNames(
+                pathname === dataItem.path
+                  ? "bg-purple-400  bg-opacity-20 text-purple-500  "
+                  : "text-gray-700 ",
+                linkClassesSubMenu
+              )}
+              onClick={closePopup}
+            >
+              <li
+                className={classNames(
+                  "text-gray-700 pl-8 cursor-pointer ",
+                  linkClassesSubMenu
+                )}
+              >
+                <span className="text-xl">{dataItem.icon}</span>
+                {dataItem.label}
+              </li>
+            </Link>
+          ))}
+        </ul>
         ))}
     </div>
   );

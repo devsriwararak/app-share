@@ -22,20 +22,7 @@ const Dashboard = () => {
         </div>
 
        <div className="text-black mt-10">
-       <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
-        <p>adsdsadadsad</p> <br />
+       <h2 className="text-3xl">กำลังปรับปรุง !</h2> 
        </div>
 
        
