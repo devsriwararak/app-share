@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-
 import { PencilIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+
 import {
   Card,
   CardHeader,
@@ -18,13 +14,8 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
-import HomeShareModal from "../../../components/modal/HomeShareModal";
-import {
-  HiOutlineHome,
-  HiOutlinePlusCircle,
-  HiTrash,
-  HiPencilAlt,
-} from "react-icons/hi";
+import { HiOutlineUserAdd , HiOutlineChatAlt2 , HiOutlinePlusCircle, HiPencilAlt, HiTrash, HiOutlineShoppingCart  } from "react-icons/hi";
+// import AdminModal from "../../components/modal/AdminModal";
 
 const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "แก้ไข/ลบ"];
 
@@ -101,7 +92,7 @@ const TABLE_ROWS = [
   },
 ];
 
-const BasicHome = () => {
+const User = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -114,50 +105,35 @@ const BasicHome = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  
 
   return (
     <div className="">
-      <HomeShareModal handleOpen={handleOpen} open={open} />
+      {/* <AdminModal handleOpen={handleOpen} open={open} /> */}
 
-      <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
+      <div className="flex flex-col md:flex-row    items-center justify-between gap-4">
         <div className="flex gap-2">
-          <span>
-            <HiOutlineHome size={24} color="black" />
-          </span>{" "}
-          <span className="text-xl text-black font-bold">
-            {" "}
-            จัดการข้อมูลบ้านแชร์
-          </span>
+          <span ><HiOutlineShoppingCart size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลลูกค้า</span>
+         
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
-          <div className="w-72 bg-slate-50 rounded-md bg-gray-50   ">
-            <Input variant="outlined" label="ค้นหาบ้านแชร์"  />
+          <div className="w-full bg-slate-50 rounded-md bg-gray-50  ">
+            <Input variant="outlined" label="ค้นหาชื่อ / รหัส" className="" />
           </div>
-          <div className="">
-            <Button
-              onClick={handleOpen}
-              variant="filled"
-              color="purple"
-              size="sm"
-              className="text-lg  flex items-center gap-1  "
-            >
-              <HiOutlinePlusCircle size={24} />
-              สร้างบ้านแชร์
-            </Button>
-          </div>
+          <Button variant="filled" className="w-full flex items-center gap-2 text-lg" size="sm" color="purple"> <HiOutlinePlusCircle size={22} />เพิ่มลูกค้าใหม่</Button>
         </div>
       </div>
 
-      <Card className=" h-[550px] w-96 m-4 mx-auto   md:w-full  mt-4 ">
-        <CardBody className="  px-2 -mt-4 overflow-scroll">
-          <table className=" w-full  min-w-max table-auto text-left ">
-            <thead className="  ">
-              <tr>
+      <Card className=" h-[550px]  w-96 mx-auto   md:w-full  mt-4 ">
+        <CardBody className="  px-2 overflow-scroll -mt-4">
+          <table className=" w-full  min-w-max table-auto text-left">
+            <thead > 
+              <tr >
                 {TABLE_HEAD.map((head) => (
                   <th
                     key={head}
-                    className="border-y  border-blue-gray-100  bg-blue-gray-50 p-4"
+                    className="border-y border-blue-gray-100 bg-blue-gray-50 p-4"
                   >
                     <Typography
                       variant="small"
@@ -246,7 +222,7 @@ const BasicHome = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                        <div className="flex justify-start gap-4">
+                      <div className="flex justify-start gap-4">
                           <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-1  py-1.5">
                             <HiPencilAlt
                               size={22}
@@ -271,6 +247,8 @@ const BasicHome = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+        
+
           <Button
             onClick={() => handlePageChange(currentPage - 1)}
             variant="outlined"
@@ -285,23 +263,14 @@ const BasicHome = () => {
                 key={index}
                 onClick={() => handlePageChange(index + 1)}
                 variant="filled"
-                size="sm"
-                className={
-                  currentPage == index + 1
-                    ? "bg-purple-400"
-                    : "bg-white text-black"
-                }
+                size="sm" 
+                className={currentPage == index + 1 ? "bg-purple-400" : "bg-white text-black"}
               >
                 {index + 1}
               </IconButton>
             ))}
           </div>
-          <Button
-            color="purple"
-            onClick={() => handlePageChange(currentPage + 1)}
-            variant="outlined"
-            size="sm"
-          >
+          <Button color="purple"  onClick={() => handlePageChange(currentPage + 1)} variant="outlined" size="sm">
             ถัดไป
           </Button>
         </CardFooter>
@@ -310,4 +279,8 @@ const BasicHome = () => {
   );
 };
 
-export default BasicHome;
+export default User;
+
+
+
+

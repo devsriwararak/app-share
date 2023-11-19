@@ -14,10 +14,10 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
-import { HiOutlineUserAdd , HiOutlineChatAlt2 , HiOutlinePlusCircle  } from "react-icons/hi";
+import { HiOutlineUserAdd , HiOutlineChatAlt2 , HiOutlinePlusCircle, HiPencilAlt, HiTrash  } from "react-icons/hi";
 import AdminModal from "../../components/modal/AdminModal";
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
+const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "แก้ไข/ลบ"];
 
 const TABLE_ROWS = [
   {
@@ -111,31 +111,22 @@ const CrudAdmin = () => {
     <div className="">
       <AdminModal handleOpen={handleOpen} open={open} />
 
-      <div className="flex flex-col md:flex-row    items-center  md:justify-start gap-4">
+      <div className="flex flex-col md:flex-row    items-center justify-between gap-4">
         <div className="flex gap-2">
           <span ><HiOutlineUserAdd size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูล ADMIN</span>
          
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
-          <div className="w-72 bg-slate-50 rounded-md   ">
-            <Input variant="outlined" label="ค้นหา ADMIN" className="" />
+          <div className="w-72 bg-slate-50 rounded-md bg-gray-50  ">
+            <Input variant="outlined" label="ค้นหาชื่อ / รหัส"  />
           </div>
-          {/* <div className="">
-            <Button
-              onClick={handleOpen}
-              variant="filled"
-              color="green"
-              className="text-sm  flex items-center gap-1 "
-            >
-              <HiOutlinePlusCircle size={24}  />
-              สร้าง ADMIN
-            </Button>
-          </div> */}
+        
+ 
         </div>
       </div>
 
-      <Card className=" h-[550px]  w-96 mx-auto   md:w-full  mt-4 ">
+      <Card className=" h-[550px] w-96 mx-auto   md:w-full  mt-4 ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
           <table className=" w-full  min-w-max table-auto text-left">
             <thead > 
@@ -232,11 +223,22 @@ const CrudAdmin = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                        <Tooltip content="Edit User">
-                          <IconButton variant="text">
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
-                        </Tooltip>
+                      <div className="flex justify-start gap-4">
+                          <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-1  py-1.5">
+                            <HiPencilAlt
+                              size={22}
+                              color="white"
+                              className="cursor-pointer"
+                            />
+                          </div>
+                          <div className="bg-red-500 rounded-xl flex justify-center w-10 px-1 py-1.5">
+                            <HiTrash
+                              size={22}
+                              color="white"
+                              className="cursor-pointer  "
+                            />
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   );

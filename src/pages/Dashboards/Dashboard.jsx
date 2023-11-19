@@ -22,7 +22,7 @@ const Dashboard = () => {
         </div>
 
        <div className="text-black mt-10">
-       <h2 className="text-3xl">กำลังปรับปรุง !</h2> 
+       <h2 className="text-3xl">กำลังปรับปรุง ! Function นี้ (ใช้งานได้ในงวดที่ 3/3) </h2> 
        </div>
 
        

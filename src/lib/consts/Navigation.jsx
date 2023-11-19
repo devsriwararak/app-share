@@ -51,7 +51,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   // },
   {
     key: "CrudAdmin",
-    label: "ข้อมูลADMIN",
+    label: "ข้อมูล ADMIN",
     path: "/admin/crud-admin",
     icon: <HiOutlineUsers />,
   },
@@ -60,6 +60,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     label: "ข้อมูลบ้านแชร์",
     path: "/admin/home-share",
     icon: <HiOutlineViewGrid />,
+  },
+  {
+    key: "ManageUser",
+    label: "ข้อมูลลูกค้า",
+    path: "/admin/manage-user",
+    icon: <HiOutlineShoppingCart />,
   },
 
   // {

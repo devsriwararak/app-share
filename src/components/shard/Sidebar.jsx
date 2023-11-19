@@ -9,7 +9,7 @@ import classNames from "classnames";
 import { HiOutlineLogout, HiChevronDown } from "react-icons/hi";
 
 const linkClasses =
-  "flex item-center gap-3 font-light px-3 py-3 hover:bg-purple-200 hover:text-white   rounded-lg ";
+  "flex item-center gap-3 font-light px-3 py-2 hover:bg-purple-200 hover:text-white   rounded-lg ";
 const linkClassesSubMenu =
   "flex item-center gap-2 font-light px-3 py-1 hover:bg-purple-200 hover:text-white   rounded-lg ";
 
@@ -45,7 +45,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
           </span>
         </div>
 
-        <p className="text-black">{JSON.stringify(open)}</p>
+        {/* <p className="text-black">{JSON.stringify(open)}</p> */}
 
         <div className="flex-1 py-5 flex flex-col gap-0.5">
           {DASHBOARD_SIDEBAR_LINKS.map((item) => (
@@ -71,12 +71,12 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
           ))}
 
           <div
-            className={classNames("text-red-500 cursor-pointer", linkClasses)}
+            className={classNames("text-white cursor-pointer bg-red-600 ", linkClasses)}
           >
             <span className="text-xl">
               <HiOutlineLogout />
             </span>
-            Logout
+            ออกจากระบบ
           </div>
         </div>
       </div>

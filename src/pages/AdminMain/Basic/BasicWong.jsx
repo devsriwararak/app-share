@@ -15,10 +15,10 @@ import {
   Input,
 } from "@material-tailwind/react";
 import HomeShareModal from "../../../components/modal/HomeShareModal";
-import { HiOutlineHome , HiOutlineChatAlt2 , HiOutlinePlusCircle  } from "react-icons/hi";
+import { HiOutlineHome , HiOutlineChatAlt2 , HiOutlinePlusCircle, HiPencilAlt, HiTrash  } from "react-icons/hi";
 import WongShareModal from "../../../components/modal/WongShareModal";
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
+const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "แก้ไข/ลบ"];
 
 const TABLE_ROWS = [
   {
@@ -119,15 +119,16 @@ const BasicWong = () => {
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
-          <div className="w-72 bg-slate-50 rounded-md   ">
-            <Input variant="outlined" label="ค้นหาวงค์แชร์" className="" />
+          <div className="w-72 bg-slate-50 rounded-md  bg-gray-50  ">
+            <Input variant="outlined" label="ค้นหาวงค์แชร์"  />
           </div>
           <div className="">
             <Button
               onClick={handleOpen}
               variant="filled"
-              color="green"
-              className="text-sm  flex items-center gap-1 "
+              color="purple"
+              size="sm"
+              className="text-lg  flex items-center gap-1 "
             >
               <HiOutlinePlusCircle size={24}  />
               สร้างวงค์แชร์
@@ -233,11 +234,22 @@ const BasicWong = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                        <Tooltip content="Edit User">
-                          <IconButton variant="text">
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
-                        </Tooltip>
+                      <div className="flex justify-start gap-4">
+                          <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-1  py-1.5">
+                            <HiPencilAlt
+                              size={22}
+                              color="white"
+                              className="cursor-pointer"
+                            />
+                          </div>
+                          <div className="bg-red-500 rounded-xl flex justify-center w-10 px-1 py-1.5">
+                            <HiTrash
+                              size={22}
+                              color="white"
+                              className="cursor-pointer  "
+                            />
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   );

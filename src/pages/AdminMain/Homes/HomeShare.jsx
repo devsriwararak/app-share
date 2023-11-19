@@ -11,6 +11,7 @@ import {
 import Select from "react-select";
 import HomeAdminModal from "../../../components/modal/HomeShare/HomeAdminModal";
 import HomeMemberModal from "../../../components/modal/HomeShare/HomeMemberModal";
+import { HiPencilAlt, HiTrash } from "react-icons/hi";
 
 const HomeShare = () => {
   const options = [
@@ -19,7 +20,7 @@ const HomeShare = () => {
     { value: "vanilla", label: "Vanilla" },
   ];
 
-  const TABLE_HEAD = ["Name", "Job", "Employed", ""];
+  const TABLE_HEAD = ["Name", "Job", "Employed", "แก้ไข/ลบ"];
 
   const TABLE_ROWS = [
     {
@@ -67,7 +68,6 @@ const HomeShare = () => {
   const handleOpen1 = () => setOpen1(!open1);
   const handleOpen2 = () => setOpen2(!open2);
 
-
   return (
     <>
       <HomeAdminModal handleOpen={handleOpen1} open={open1} />
@@ -75,15 +75,15 @@ const HomeShare = () => {
 
       <Card className="mt-2 ">
         <CardBody className=" ">
-          <div className="flex justify-between gap-4">
+          <div className="flex flex-col md:flex-row justify-between gap-4">
             <Typography
               variant="h5"
               color="blue-gray"
-              className="mb-2 w-1/2  md:w-8/12 "
+              className="mb-2 w-full text-center  md:w-8/12 "
             >
               ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
             </Typography>
-            <div className="w-1/2 md:w-4/12">
+            <div className="w-full md:w-4/12">
               <Select options={options} placeholder="เลือกบ้านแชร์" />
             </div>
           </div>
@@ -93,7 +93,7 @@ const HomeShare = () => {
         <div className="w-full">
           <Card className="mt-6 ">
             <CardBody>
-              <div className="flex justify-between gap-4 items-center">
+              <div className="flex flex-col md:flex-row md:justify-between gap-4 items-center">
                 <Typography variant="h5" color="blue-gray" className="mb-2">
                   ข้อมูลเจ้าของบ้านแชร์
                 </Typography>
@@ -163,15 +163,14 @@ const HomeShare = () => {
                           </Typography>
                         </td>
                         <td className="p-4">
-                          <Typography
-                            as="a"
-                            href="#"
-                            variant="small"
-                            color="blue-gray"
-                            className="font-medium"
-                          >
-                            Edit
-                          </Typography>
+                          <div className="flex justify-start gap-2">
+                            <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-0  py-1 cursor-pointer">
+                              <HiPencilAlt size={20} color="white" />
+                            </div>
+                            <div className="bg-red-500 rounded-xl flex justify-center w-10 px-0 py-1 cursor-pointer">
+                              <HiTrash size={20} color="white" />
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -219,7 +218,7 @@ const HomeShare = () => {
         <div className="w-full">
           <Card className="mt-6 ">
             <CardBody>
-              <div className="flex justify-between gap-4 items-center">
+              <div className="flex flex-col md:flex-row md:justify-between gap-4 items-center">
                 <Typography variant="h5" color="blue-gray" className="mb-2">
                   ข้อมูลพนักงานบ้านแชร์
                 </Typography>
@@ -227,7 +226,12 @@ const HomeShare = () => {
                   <Input label="ค้นหาเจ้าของบ้านแชร์" />
                 </div>
                 <div className="">
-                  <Button onClick={handleOpen2} className="text-sm" size="sm" color="purple">
+                  <Button
+                    onClick={handleOpen2}
+                    className="text-sm"
+                    size="sm"
+                    color="purple"
+                  >
                     เพิ่มพนักงาน
                   </Button>
                 </div>
@@ -284,15 +288,14 @@ const HomeShare = () => {
                           </Typography>
                         </td>
                         <td className="p-4">
-                          <Typography
-                            as="a"
-                            href="#"
-                            variant="small"
-                            color="blue-gray"
-                            className="font-medium"
-                          >
-                            Edit
-                          </Typography>
+                          <div className="flex justify-start gap-2">
+                            <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-0  py-1 cursor-pointer">
+                              <HiPencilAlt size={20} color="white" />
+                            </div>
+                            <div className="bg-red-500 rounded-xl flex justify-center w-10 px-0 py-1 cursor-pointer">
+                              <HiTrash size={20} color="white" />
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     ))}
