@@ -9,88 +9,135 @@ import {
   HiOutlineCog,
   HiChevronRight,
 } from "react-icons/hi";
+let Type = localStorage.getItem("Type");
+// MAIN-ADMIN  AND  ADMIN
 
-export const DASHBOARD_SIDEBAR_LINKS = [
-  {
-    key: "dashboard",
-    label: "ภาพรวม",
-    path: "/admin",
-    icon: <HiOutlineViewGrid />,
-  },
-  {
-    key: "basicHome",
-    label: "ข้อมูลพื้นฐาน",
-    // path: '/admin/',
-    icon: <HiOutlineCube />,
-    submenuActive: 1,
-    submenu: [
+// export const DASHBOARD_SIDEBAR_LINKS = [
+//   {
+//     key: "dashboard",
+//     label: Type,
+//     path: "/admin",
+//     icon: <HiOutlineViewGrid />,
+//   },
+//   {
+//     key: "basicHome",
+//     label: "ข้อมูลพื้นฐาน",
+//     icon: <HiOutlineCube />,
+//     submenuActive: 1,
+//     submenu: [
+//       {
+//         label: "ข้อมูลบ้านแชร์",
+//         key: "basicHome_1",
+//         path: "/admin/basic/home",
+//         icon: <HiChevronRight />,
+//       },
+//       {
+//         label: "ข้อมูลวงค์แชร์",
+//         key: "basicHome_2",
+//         path: "/admin/basic/wong",
+//         icon: <HiChevronRight />,
+//       },
+//     ],
+//   },
+//   Type == "admin"
+//     ? { key: "noData" }
+//     : {
+//         key: "CrudAdmin",
+//         label: "ข้อมูลผู้ดูแลระบบ",
+//         path: "/admin/crud-admin",
+//         icon: <HiOutlineUsers />,
+//       },
+//   {
+//     key: "ManageBasicHome",
+//     label: "ข้อมูลบ้านแชร์",
+//     path: "/admin/home-share",
+//     icon: <HiOutlineViewGrid />,
+//   },
+//   {
+//     key: "ManageUser",
+//     label: "ข้อมูลลูกค้า",
+//     path: "/admin/manage-user",
+//     icon: <HiOutlineShoppingCart />,
+//   }
+// ];
+
+export const DASHBOARD_SIDEBAR_LINKS =
+  Type == "main-admin" || Type == "admin" // MAIN_ADMIN - ADMIN
+    ? [
+        {
+          key: "dashboard",
+          label: Type,
+          path: "/admin",
+          icon: <HiOutlineViewGrid />,
+        },
+        {
+          key: "basicHome",
+          label: "ข้อมูลพื้นฐาน",
+          icon: <HiOutlineCube />,
+          submenuActive: 1,
+          submenu: [
+            {
+              label: "ข้อมูลบ้านแชร์",
+              key: "basicHome_1",
+              path: "/admin/basic/home",
+              icon: <HiChevronRight />,
+            },
+            {
+              label: "ข้อมูลวงค์แชร์",
+              key: "basicHome_2",
+              path: "/admin/basic/wong",
+              icon: <HiChevronRight />,
+            },
+          ],
+        },
+        Type == "admin"
+          ? { key: "noData" }
+          : {
+              key: "CrudAdmin",
+              label: "ข้อมูลผู้ดูแลระบบ",
+              path: "/admin/crud-admin",
+              icon: <HiOutlineUsers />,
+            },
+
+        {
+          key: "ManageBasicHome",
+          label: "ข้อมูลบ้านแชร์",
+          path: "/admin/home-share",
+          icon: <HiOutlineViewGrid />,
+        },
+        {
+          key: "ManageUser",
+          label: "ข้อมูลลูกค้า",
+          path: "/admin/manage-user",
+          icon: <HiOutlineShoppingCart />,
+        },
+      ]
+    : Type == "user" // USER
+    ? [
+        {
+          key: "dashboard",
+          label: "useee",
+          path: "/admin",
+          icon: <HiOutlineViewGrid />,
+        },
+      ]
+    : Type == "home" // HOME
+    ? [
+        {
+          key: "dashboard",
+          label: "homeee",
+          path: "/admin",
+          icon: <HiOutlineViewGrid />,
+        },
+      ]
+    : Type == "member" ? [
       {
-        label: "ข้อมูลบ้านแชร์",
-        key: "basicHome_1",
-        path: "/admin/basic/home",
-        icon: <HiChevronRight />,
+        key: "dashboard",
+        label: "member",
+        path: "/admin",
+        icon: <HiOutlineViewGrid />,
       },
-      {
-        label: "ข้อมูลวงค์แชร์",
-        key: "basicHome_2",
-        path: "/admin/basic/wong",
-        icon: <HiChevronRight />,
-      },
-    ],
-  },
-  // {
-  // 	key: 'orders',
-  // 	label: 'เมนู 3',
-  // 	// path: '/admin/home',
-  // 	icon: <HiOutlineShoppingCart />,
-  // 	submenuActive: 2 ,
-  // 	submenu : [
-  // 		{label: 'B001'},
-  // 		{label: 'B002'},
-  // 	]
-  // },
-  {
-    key: "CrudAdmin",
-    label: "ข้อมูล ADMIN",
-    path: "/admin/crud-admin",
-    icon: <HiOutlineUsers />,
-  },
-  {
-    key: "ManageBasicHome",
-    label: "ข้อมูลบ้านแชร์",
-    path: "/admin/home-share",
-    icon: <HiOutlineViewGrid />,
-  },
-  {
-    key: "ManageUser",
-    label: "ข้อมูลลูกค้า",
-    path: "/admin/manage-user",
-    icon: <HiOutlineShoppingCart />,
-  },
-
-  // {
-  //   key: "HomeShare",
-  //   label: "จัดการเจ้าของบ้านแชร์",
-  //   // path: '/admin/',
-  //   icon: <HiOutlineCube />,
-  //   submenuActive: 2,
-  //   submenu: [
-  //     {
-  //       label: "ข้อมูลเจ้าของบ้านแชร์",
-  //       key: "basicHome",
-  //       path: "/admin/home-share",
-  //       icon: <HiChevronRight />,
-  //     },
-  //     {
-  //       label: "ข้อมูลลูกแชร์",
-  //       key: "basicHome",
-  //       path: "/admin/group-share",
-  //       icon: <HiChevronRight />,
-  //     },
-  //   ],
-  // },
-
-];
+    ]:[]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
   {

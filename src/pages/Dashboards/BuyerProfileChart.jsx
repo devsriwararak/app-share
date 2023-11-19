@@ -23,7 +23,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const BuyerProfileChart = () => {
   return (
-    <div className='bg-white mt-4 border border-gray-200 w-full md:w-60 h-[22rem] p-4 flex flex-col '>
+    <div className='bg-white mt-4 border border-gray-200 w-full md:w-60 h-[22rem] p-4 flex flex-col rounded-lg shadow-lg '>
         <strong>test 01</strong>
         <div className='w-full   mt-3 flex-1 text-xs '> 
         <ResponsiveContainer width="100%" height="100%">

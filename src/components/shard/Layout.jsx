@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useContext } from "react";
 import { AuthContent } from "../../auth/AuthWrapper";
+import { Card, CardBody } from "@material-tailwind/react";
 
 const Layout = () => {
   const [openSidebar, setOpenSideBar] = useState(false);
@@ -37,7 +38,11 @@ const Layout = () => {
           <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
 
           <div className=" bg-gray-100 p-4 overflow-y-scroll pt-20   h-screen  ">
-            {<Outlet />}
+            <Card>
+              <CardBody>
+              {<Outlet />}
+              </CardBody>
+            </Card>
           </div>
         </div>
       </div>

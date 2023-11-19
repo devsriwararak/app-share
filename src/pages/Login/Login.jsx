@@ -24,8 +24,8 @@ const Login = ({ setToken }) => {
     if (
       dataLogin?.username === "admin1" ||
       dataLogin?.username === "admin2" ||
+      dataLogin?.username === "home" ||
       dataLogin?.username === "member" ||
-      dataLogin?.username === "memberwork" ||
       dataLogin?.username === "user"
     ) {
 
@@ -129,8 +129,8 @@ const Login = ({ setToken }) => {
             <ul className="mt-4 b">
               <li>- MAIN ADMIN : admin1 / 1234</li>
               <li>- ADMIN : admin2 / 1234</li>
-              <li>- บ้านแชร์ A-001 : member / 1234</li>
-              <li>- พนักงานในบ้านแชร์ A-001 : memberwork / 1234</li>
+              <li>- บ้านแชร์ A-001 : home / 1234</li>
+              <li>- พนักงานในบ้านแชร์ A-001 : member / 1234</li>
               <li>- ลูกค้า : user / 1234</li>
             </ul>
           </div>

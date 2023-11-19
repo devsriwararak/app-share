@@ -132,7 +132,7 @@ const BasicHome = () => {
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md bg-gray-50   ">
-            <Input variant="outlined" label="ค้นหาบ้านแชร์"  />
+            <Input variant="outlined" label="ค้นหาบ้านแชร์" color="purple"  />
           </div>
           <div className="">
             <Button
@@ -148,8 +148,9 @@ const BasicHome = () => {
           </div>
         </div>
       </div>
+      
 
-      <Card className=" h-[550px] w-full m-4 mx-auto   md:w-full  mt-4 ">
+      <Card className=" h-[550px] w-full m-4 mx-auto shadow-lg   md:w-full  mt-8 ">
         <CardBody className="  px-2 -mt-4 overflow-scroll">
           <table className=" w-full  min-w-max table-auto text-left ">
             <thead className="  ">
@@ -270,7 +271,7 @@ const BasicHome = () => {
             </tbody>
           </table>
         </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4 ">
           <Button
             onClick={() => handlePageChange(currentPage - 1)}
             variant="outlined"

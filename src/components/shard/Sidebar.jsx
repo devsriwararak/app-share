@@ -48,22 +48,20 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
         {/* <p className="text-black">{JSON.stringify(open)}</p> */}
 
         <div className="flex-1 py-5 flex flex-col gap-0.5">
-          {DASHBOARD_SIDEBAR_LINKS.map((item) => (
+          {DASHBOARD_SIDEBAR_LINKS?.map((item, index) => (
             <SidebarLink
-              key={item.key}
+              key={index}
               item={item}
               handleOpen={handleOpen}
               open={open}
               closePopup={closePopup}
-            >
-              {/* {item.label} */}
-            </SidebarLink>
+            ></SidebarLink>
           ))}
         </div>
         <div className="flex flex-col gap-0.5 pt-2 border-t border-gray-400">
-          {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => (
+          {DASHBOARD_SIDEBAR_BOTTOM_LINKS?.map((item) => (
             <SidebarLink
-              key={item.key}
+              key={item?.key}
               item={item}
               openSidebar={openSidebar}
               setOpenSideBar={setOpenSideBar}
@@ -71,7 +69,10 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
           ))}
 
           <div
-            className={classNames("text-white cursor-pointer bg-red-600 ", linkClasses)}
+            className={classNames(
+              "text-white cursor-pointer bg-red-600 ",
+              linkClasses
+            )}
           >
             <span className="text-xl">
               <HiOutlineLogout />
@@ -101,24 +102,28 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
 
   return (
     <div>
-      <Link
-        to={item.path}
-        className={classNames(
-          pathname === item.path
-            ? "bg-purple-400 bg-opacity-20 text-purple-500 "
-            : "text-gray-700",
-          linkClasses
-        )}
-        onClick={check}
-      >
-        <span className="text-xl ">{item.icon}</span>
-        {item.label}
-        {item.submenuActive && (
-          <span>
-            <HiChevronDown size={20} />
-          </span>
-        )}
-      </Link>
+      {item.key == "noData" ? (
+        ""
+      ) : (
+        <Link
+          to={item.path}
+          className={classNames(
+            pathname === item.path
+              ? "bg-purple-400 bg-opacity-20 text-purple-500 "
+              : "text-gray-700",
+            linkClasses
+          )}
+          onClick={check}
+        >
+          <span className="text-xl ">{item.icon}</span>
+          {item.label}
+          {item.submenuActive && (
+            <span>
+              <HiChevronDown size={20} />
+            </span>
+          )}
+        </Link>
+      )}
 
       {item?.submenuActive === 1 && open === 1 && (
         <ul>
@@ -164,30 +169,30 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
         })),
         open === 2 && (
           <ul>
-          {item?.submenu?.map((dataItem, index) => (
-            <Link
-              key={index}
-              to={dataItem.path}
-              className={classNames(
-                pathname === dataItem.path
-                  ? "bg-purple-400  bg-opacity-20 text-purple-500  "
-                  : "text-gray-700 ",
-                linkClassesSubMenu
-              )}
-              onClick={closePopup}
-            >
-              <li
+            {item?.submenu?.map((dataItem, index) => (
+              <Link
+                key={index}
+                to={dataItem.path}
                 className={classNames(
-                  "text-gray-700 pl-8 cursor-pointer ",
+                  pathname === dataItem.path
+                    ? "bg-purple-400  bg-opacity-20 text-purple-500  "
+                    : "text-gray-700 ",
                   linkClassesSubMenu
                 )}
+                onClick={closePopup}
               >
-                <span className="text-xl">{dataItem.icon}</span>
-                {dataItem.label}
-              </li>
-            </Link>
-          ))}
-        </ul>
+                <li
+                  className={classNames(
+                    "text-gray-700 pl-8 cursor-pointer ",
+                    linkClassesSubMenu
+                  )}
+                >
+                  <span className="text-xl">{dataItem.icon}</span>
+                  {dataItem.label}
+                </li>
+              </Link>
+            ))}
+          </ul>
         ))}
     </div>
   );

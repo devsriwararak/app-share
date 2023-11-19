@@ -73,34 +73,35 @@ const HomeShare = () => {
       <HomeAdminModal handleOpen={handleOpen1} open={open1} />
       <HomeMemberModal handleOpen={handleOpen2} open={open2} />
 
-      <Card className="mt-2 ">
-        <CardBody className=" ">
-          <div className="flex flex-col md:flex-row justify-between gap-4">
-            <Typography
-              variant="h5"
-              color="blue-gray"
-              className="mb-2 w-full text-center  md:w-8/12 "
-            >
-              ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
-            </Typography>
-            <div className="w-full md:w-4/12">
-              <Select options={options} placeholder="เลือกบ้านแชร์" />
-            </div>
-          </div>
-        </CardBody>
-      </Card>
-      <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-4">
+      
+
+      <div className="flex flex-col md:flex-row justify-start items-center gap-4">
+        <Typography
+          variant="h5"
+          color="blue-gray"
+          className="mb-2"
+        >
+          ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
+        </Typography>
+        <div className="w-full md:w-4/12">
+          <Select options={options} placeholder="เลือกบ้านแชร์" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-4 ">
         <div className="w-full">
-          <Card className="mt-6 ">
+          <Card className="mt-6 shadow-lg border border-gray-200 ">
             <CardBody>
-              <div className="flex flex-col md:flex-row md:justify-between gap-4 items-center">
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+              <div className="flex flex-col md:flex-row md:justify-between gap-2 items-center">
+             <div className="  ">
+             <Typography variant="text" color="blue-gray" className="mb-2  font-bold">
                   ข้อมูลเจ้าของบ้านแชร์
                 </Typography>
-                <div className="flex-1">
+             </div>
+                <div className="   ">
                   <Input label="ค้นหาเจ้าของบ้านแชร์" />
                 </div>
-                <div className="">
+                <div className="   flex justify-end">
                   <Button
                     onClick={handleOpen1}
                     className="text-sm"
@@ -112,7 +113,7 @@ const HomeShare = () => {
                 </div>
               </div>
 
-              <Card className="h-full w-full mt-6 overflow-scroll">
+              <Card className="h-full w-full mt-6 overflow-scroll ">
                 <table className="w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
@@ -216,10 +217,10 @@ const HomeShare = () => {
           </Card>
         </div>
         <div className="w-full">
-          <Card className="mt-6 ">
+          <Card className="mt-6 shadow-lg border border-gray-200  ">
             <CardBody>
               <div className="flex flex-col md:flex-row md:justify-between gap-4 items-center">
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+              <Typography variant="text" color="blue-gray" className="mb-2  font-bold">
                   ข้อมูลพนักงานบ้านแชร์
                 </Typography>
                 <div className="flex-1">
