@@ -18,15 +18,23 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
-import HomeShareModal from "../../../components/modal/HomeShareModal";
 import {
   HiOutlineHome,
   HiOutlinePlusCircle,
   HiTrash,
   HiPencilAlt,
 } from "react-icons/hi";
+import HomeShareModal from "../../../components/modal/Basic/HomeShareModal";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "แก้ไข/ลบ"];
+const TABLE_HEAD = [
+  "ลำดับ",
+  "รหัสบ้านแชร์",
+  "ชื่อบ้านแชร์",
+  "สถานะ",
+  "แก้ไข/ลบ",
+];
 
 const TABLE_ROWS = [
   {
@@ -102,8 +110,9 @@ const TABLE_ROWS = [
 ];
 
 const BasicHome = () => {
+  const [id, setId] = useState(null);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = (number) => (setOpen(!open), setId(number));
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -115,9 +124,26 @@ const BasicHome = () => {
     setCurrentPage(page);
   };
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: `ต้องการลบ ID : ${id}`,
+      text: "คุณต้องการที่จะลบข้อมูลนี้ จริงหรือไม่ ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ลบ",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("ลบข้อมูลสำเร็จ");
+      }
+    });
+  };
+
   return (
     <div className="">
-      <HomeShareModal handleOpen={handleOpen} open={open} />
+      <HomeShareModal handleOpen={handleOpen} open={open} id={id} />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
@@ -132,15 +158,15 @@ const BasicHome = () => {
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md bg-gray-50   ">
-            <Input variant="outlined" label="ค้นหาบ้านแชร์" color="purple"  />
+            <Input variant="outlined" label="ค้นหาบ้านแชร์" color="purple" />
           </div>
           <div className="">
             <Button
-              onClick={handleOpen}
+              onClick={() => handleOpen(null)}
               variant="filled"
               color="purple"
               size="sm"
-              className="text-lg  flex items-center gap-1  "
+              className="text-sm  flex items-center gap-1  "
             >
               <HiOutlinePlusCircle size={24} />
               สร้างบ้านแชร์
@@ -148,7 +174,6 @@ const BasicHome = () => {
           </div>
         </div>
       </div>
-      
 
       <Card className=" h-[550px] w-full m-4 mx-auto shadow-lg   md:w-full  mt-8 ">
         <CardBody className="  px-2 -mt-4 overflow-scroll">
@@ -191,7 +216,7 @@ const BasicHome = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    <tr key={index}>
                       <td className={classes}>
                         <Typography
                           variant="small"
@@ -247,21 +272,20 @@ const BasicHome = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                        <div className="flex justify-start gap-4">
-                          <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-1  py-1.5">
-                            <HiPencilAlt
-                              size={22}
-                              color="white"
-                              className="cursor-pointer"
-                            />
-                          </div>
-                          <div className="bg-red-500 rounded-xl flex justify-center w-10 px-1 py-1.5">
-                            <HiTrash
-                              size={22}
-                              color="white"
-                              className="cursor-pointer  "
-                            />
-                          </div>
+                        <div className="flex  gap-2 ">
+                        <HiPencilAlt
+                            size={20}
+                            color="white"
+                            className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                            onClick={() => handleOpen(1)}
+                          />
+
+                          <HiTrash
+                            size={25}
+                            color="white"
+                            className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5  "
+                            onClick={() => handleDelete(2)}
+                          />
                         </div>
                       </td>
                     </tr>

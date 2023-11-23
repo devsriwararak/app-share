@@ -7,6 +7,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { HiOutlineLogout, HiChevronDown } from "react-icons/hi";
+import Swal from "sweetalert2";
 
 const linkClasses =
   "flex item-center gap-3 font-light px-3 py-2 hover:bg-purple-200 hover:text-white   rounded-lg ";
@@ -23,6 +24,23 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
   };
   const closePopup = () => {
     setOpenSideBar(!openSidebar);
+  };
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: `ออกจากระบบ`,
+      text: "คุณต้องการที่จะออกจากระบบ จริงหรือไม่ ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ตกลง",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear(), (window.location.href = "/login");
+      }
+    });
   };
 
   return (
@@ -70,9 +88,10 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
 
           <div
             className={classNames(
-              "text-white cursor-pointer bg-red-600 ",
-              linkClasses
+              "text-white cursor-pointer bg-red-500  ",
+              "flex item-center gap-3 font-light px-3 py-2 hover:bg-red-700 hover:text-white   rounded-lg"
             )}
+            onClick={handleLogout}
           >
             <span className="text-xl">
               <HiOutlineLogout />
@@ -99,6 +118,7 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
       closePopup();
     }
   };
+
 
   return (
     <div>

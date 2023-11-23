@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContent } from "../../auth/AuthWrapper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Login = ({ setToken }) => {
   const [dataLogin, setDataLogin] = useState({});
@@ -19,54 +21,95 @@ const Login = ({ setToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const setTokenData = 123456;
 
-    if (
-      dataLogin?.username === "admin1" ||
-      dataLogin?.username === "admin2" ||
-      dataLogin?.username === "home" ||
-      dataLogin?.username === "member" ||
-      dataLogin?.username === "user"
-    ) {
+    let localstatus = "";
+    let localType = "";
+    let check = 0;
 
-      localStorage.setItem("Token", setTokenData)
-
-      if(dataLogin?.username === "admin1"){
-        localStorage.setItem("status", "MAIN ADMIN"),
-        localStorage.setItem("Type", "main-admin")
-
-      }else if (dataLogin?.username === "admin2"){
-        localStorage.setItem("status", "ADMIN"),
-        localStorage.setItem("Type", "admin")
-      } 
-
-      else if (dataLogin?.username === "home") {
-        localStorage.setItem("status", "บ้านแชร์ A-001"),
-        localStorage.setItem("Type", "home")
-      } else if (dataLogin?.username === "member") {
-        localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001"),
-        localStorage.setItem("Type", "member")
-      } else if (dataLogin?.username === "user"){
-        localStorage.setItem("status", "ลูกค้า"),
-        localStorage.setItem("Type", "user")
+    if (dataLogin.username) {
+      if (dataLogin.username === "000") {
+        localstatus = "เจ้าของระบบ";
+        localType = "main-admin";
+        check = 1;
+      } else if (dataLogin.username === "111") {
+        localstatus = "ผู้ดูแลระบบ";
+        localType = "admin";
+        check = 1;
+      } else if (dataLogin.username === "222") {
+        localstatus = "ลูกค้า";
+        localType = "user";
+        check = 1;
+      } else if (dataLogin.username === "333") {
+        localstatus = "บ้านแชร์ A-001";
+        localType = "home";
+        check = 1;
+      } else if (dataLogin.username === "444") {
+        localstatus = "พนักงานในบ้านแชร์ A-001";
+        localType = "member";
+        check = 1;
+      } else {
+        toast.error("รหัสผ่านไม่ถูกต้อง 1 !");
+        check = 0;
       }
-
-
-      toast.success("เข้าสู่ระบบสำเร็จ");
-
+      {
+        check === 1 && localStorage.setItem("Token", "1234");
+      }
+      localStorage.setItem("status", localstatus);
+      localStorage.setItem("Type", localType);
       setTimeout(() => {
-        window.location.reload()
-       }, 2000);
-
-      // setTimeout(() => {
-      //   setToken(setTokenData),
-      //     localStorage.setItem("Token", setTokenData),
-      //     navigate("/admin");
-      // }, 1300);
+        window.location.reload();
+      }, 1000);
     } else {
-      //  ERRORR
-      toast.error("user + รหัสผ่าน ไม่ถูกต้อง");
+      toast.error("รหัสผ่านไม่ถูกต้อง  2!");
     }
+
+    // try {
+    //   const res = await axios.post(
+    //     `${import.meta.env.VITE_APP_API}/login`,
+    //     dataLogin
+    //   );
+    //   console.log(res.data);
+
+    //   if (res.data.error) {
+    //     toast.error(res.data.error);
+    //   } else {
+    //     toast.success(res.data.result);
+
+    //     const token = res.data.token;
+    //     const decoded = jwtDecode(token);
+    //     console.log(decoded);
+    //     localStorage.setItem("Token", token);
+
+    //     // แบ่ง navigate
+    //     if (decoded.level === "0") {
+    //       // status - 0
+    //       localStorage.setItem("status", "เจ้าของระบบ");
+    //       localStorage.setItem("Type", "main-admin");
+    //     } else if (decoded.level === "1") {
+    //       // status - 1
+    //       localStorage.setItem("status", "ผู้ดูแลระบบ");
+    //       localStorage.setItem("Type", "admin");
+    //     } else if (decoded.level === "2") {
+    //       // status - 2
+    //       localStorage.setItem("status", "ลูกค้า");
+    //       localStorage.setItem("Type", "user");
+    //     } else if (decoded.level === "3") {
+    //       // status - 3
+    //       localStorage.setItem("status", "บ้านแชร์ A-001");
+    //       localStorage.setItem("Type", "home");
+    //     } else if (decoded.level === "4") {
+    //       // status - 4
+    //       localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001");
+    //       localStorage.setItem("Type", "member");
+    //     }
+    //   setTimeout(() => {
+    //     window.location.reload()
+    //    }, 1000);
+
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -127,11 +170,11 @@ const Login = ({ setToken }) => {
             </Link>
 
             <ul className="mt-4 b">
-              <li>- MAIN ADMIN : admin1 / 1234</li>
-              <li>- ADMIN : admin2 / 1234</li>
-              <li>- บ้านแชร์ A-001 : home / 1234</li>
-              <li>- พนักงานในบ้านแชร์ A-001 : member / 1234</li>
-              <li>- ลูกค้า : user / 1234</li>
+              <li>- MAIN ADMIN : 000 / 000</li>
+              <li>- ADMIN : 111 / 111</li>
+              <li>- บ้านแชร์ A-001 : 222 / 222</li>
+              <li>- พนักงานในบ้านแชร์ A-001 : 333 / 333</li>
+              <li>- ลูกค้า : 444 / 444</li>
             </ul>
           </div>
 

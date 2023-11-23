@@ -12,6 +12,8 @@ import Select from "react-select";
 import HomeAdminModal from "../../../components/modal/HomeShare/HomeAdminModal";
 import HomeMemberModal from "../../../components/modal/HomeShare/HomeMemberModal";
 import { HiPencilAlt, HiTrash } from "react-icons/hi";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const HomeShare = () => {
   const options = [
@@ -20,31 +22,31 @@ const HomeShare = () => {
     { value: "vanilla", label: "Vanilla" },
   ];
 
-  const TABLE_HEAD = ["Name", "Job", "Employed", "แก้ไข/ลบ"];
+  const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อ", "username", "แก้ไข/ลบ"];
 
   const TABLE_ROWS = [
     {
-      name: "John Michael",
+      name: "1",
       job: "Manager",
       date: "23/04/18",
     },
     {
-      name: "Alexa Liras",
+      name: "2",
       job: "Developer",
       date: "23/04/18",
     },
     {
-      name: "Laurent Perrier",
+      name: "3",
       job: "Executive",
       date: "19/09/17",
     },
     {
-      name: "Michael Levi",
+      name: "4",
       job: "Developer",
       date: "24/12/08",
     },
     {
-      name: "Richard Gran",
+      name: "5",
       job: "Manager",
       date: "04/10/21",
     },
@@ -68,19 +70,30 @@ const HomeShare = () => {
   const handleOpen1 = () => setOpen1(!open1);
   const handleOpen2 = () => setOpen2(!open2);
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: `ต้องการลบ ID : ${id}`,
+      text: "คุณต้องการที่จะลบข้อมูลนี้ จริงหรือไม่ ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ลบ",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("ลบข้อมูลสำเร็จ");
+      }
+    });
+  };
+
   return (
     <>
       <HomeAdminModal handleOpen={handleOpen1} open={open1} />
       <HomeMemberModal handleOpen={handleOpen2} open={open2} />
 
-      
-
-      <div className="flex flex-col md:flex-row justify-start items-center gap-4">
-        <Typography
-          variant="h5"
-          color="blue-gray"
-          className="mb-2"
-        >
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <Typography variant="h5" color="blue-gray" className="mb-2">
           ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
         </Typography>
         <div className="w-full md:w-4/12">
@@ -93,11 +106,15 @@ const HomeShare = () => {
           <Card className="mt-6 shadow-lg border border-gray-200 ">
             <CardBody>
               <div className="flex flex-col md:flex-row md:justify-between gap-2 items-center">
-             <div className="  ">
-             <Typography variant="text" color="blue-gray" className="mb-2  font-bold">
-                  ข้อมูลเจ้าของบ้านแชร์
-                </Typography>
-             </div>
+                <div className="  ">
+                  <Typography
+                    variant="paragraph"
+                    color="blue-gray"
+                    className="mb-2  font-bold"
+                  >
+                    ข้อมูลเจ้าของบ้านแชร์
+                  </Typography>
+                </div>
                 <div className="   ">
                   <Input label="ค้นหาเจ้าของบ้านแชร์" />
                 </div>
@@ -160,17 +177,31 @@ const HomeShare = () => {
                             color="blue-gray"
                             className="font-normal"
                           >
+                            {name}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
                             {date}
                           </Typography>
                         </td>
                         <td className="p-4">
-                          <div className="flex justify-start gap-2">
-                            <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-0  py-1 cursor-pointer">
-                              <HiPencilAlt size={20} color="white" />
-                            </div>
-                            <div className="bg-red-500 rounded-xl flex justify-center w-10 px-0 py-1 cursor-pointer">
-                              <HiTrash size={20} color="white" />
-                            </div>
+                          <div className="flex  gap-2 ">
+                            <HiPencilAlt
+                              size={24}
+                              color="white"
+                              className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                            />
+                            <HiTrash
+                              size={24}
+                              color="white"
+                              className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                              onClick={() => handleDelete(2)}
+                            />
                           </div>
                         </td>
                       </tr>
@@ -220,7 +251,11 @@ const HomeShare = () => {
           <Card className="mt-6 shadow-lg border border-gray-200  ">
             <CardBody>
               <div className="flex flex-col md:flex-row md:justify-between gap-4 items-center">
-              <Typography variant="text" color="blue-gray" className="mb-2  font-bold">
+                <Typography
+                  variant="paragraph"
+                  color="blue-gray"
+                  className="mb-2  font-bold"
+                >
                   ข้อมูลพนักงานบ้านแชร์
                 </Typography>
                 <div className="flex-1">
@@ -285,17 +320,31 @@ const HomeShare = () => {
                             color="blue-gray"
                             className="font-normal"
                           >
+                            {name}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
                             {date}
                           </Typography>
                         </td>
                         <td className="p-4">
-                          <div className="flex justify-start gap-2">
-                            <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-0  py-1 cursor-pointer">
-                              <HiPencilAlt size={20} color="white" />
-                            </div>
-                            <div className="bg-red-500 rounded-xl flex justify-center w-10 px-0 py-1 cursor-pointer">
-                              <HiTrash size={20} color="white" />
-                            </div>
+                          <div className="flex  gap-2 ">
+                            <HiPencilAlt
+                              size={24}
+                              color="white"
+                              className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                            />
+                            <HiTrash
+                              size={24}
+                              color="white"
+                              className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                              onClick={() => handleDelete(2)}
+                            />
                           </div>
                         </td>
                       </tr>

@@ -14,11 +14,21 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
-import HomeShareModal from "../../../components/modal/HomeShareModal";
-import { HiOutlineHome , HiOutlineChatAlt2 , HiOutlinePlusCircle, HiPencilAlt, HiTrash  } from "react-icons/hi";
-import WongShareModal from "../../../components/modal/WongShareModal";
+// import HomeShareModal from "../../../components/modal/HomeShareModal";
+import {
+  HiOutlineHome,
+  HiOutlineChatAlt2,
+  HiOutlinePlusCircle,
+  HiPencilAlt,
+  HiTrash,
+  HiOutlineDesktopComputer 
+} from "react-icons/hi";
+import WongShareModal from "../../../components/modal/Basic/WongShareModal";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import ViewWongShare from "../../../components/modal/Basic/ViewWongShare";
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "แก้ไข/ลบ"];
+const TABLE_HEAD = ["ลำดับ", "ชื่อวงแชร์", "Date", "Status", "แก้ไข/ลบ"];
 
 const TABLE_ROWS = [
   {
@@ -94,8 +104,12 @@ const TABLE_ROWS = [
 ];
 
 const BasicWong = () => {
+  const [id, setId] = useState(null);
+
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(!open);
+  const [openView, setOpenView] = useState(false);
+  const handleOpen = (number) => (setOpen(!open), setId(number));
+  const handleOpenView = (number) => (setOpenView(!openView), setId(number));
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -106,31 +120,53 @@ const BasicWong = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: `ต้องการลบ ID : ${id}`,
+      text: "คุณต้องการที่จะลบข้อมูลนี้ จริงหรือไม่ ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ลบ",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("ลบข้อมูลสำเร็จ");
+      }
+    });
+  };
 
   return (
     <div className="">
-      <WongShareModal handleOpen={handleOpen} open={open} />
+      <WongShareModal handleOpen={handleOpen} open={open} id={id} />
+      <ViewWongShare handleOpen={handleOpenView} open={openView} id={id}   />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
-          <span ><HiOutlineChatAlt2 size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลวงค์แชร์</span>
-         
+          <span>
+            <HiOutlineChatAlt2 size={24} color="black" />
+          </span>{" "}
+          <span className="text-xl text-black font-bold">
+            {" "}
+            จัดการข้อมูลวงค์แชร์
+          </span>
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md  bg-gray-50  ">
-            <Input variant="outlined" label="ค้นหาวงค์แชร์"  />
+            <Input variant="outlined" label="ค้นหาวงค์แชร์" />
           </div>
           <div className="">
             <Button
-              onClick={handleOpen}
+              onClick={() => handleOpen(null)}
               variant="filled"
               color="purple"
               size="sm"
-              className="text-lg  flex items-center gap-1 "
+              className="text-sm  flex items-center gap-1 "
             >
-              <HiOutlinePlusCircle size={24}  />
+              <HiOutlinePlusCircle size={24} />
               สร้างวงค์แชร์
             </Button>
           </div>
@@ -140,8 +176,8 @@ const BasicWong = () => {
       <Card className=" h-[550px]  w-full mx-auto   md:w-full  mt-8 shadow-lg ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
           <table className=" w-full  min-w-max table-auto text-left">
-            <thead > 
-              <tr >
+            <thead>
+              <tr>
                 {TABLE_HEAD.map((head) => (
                   <th
                     key={head}
@@ -178,7 +214,7 @@ const BasicWong = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    <tr key={index}>
                       <td className={classes}>
                         <Typography
                           variant="small"
@@ -234,21 +270,25 @@ const BasicWong = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                      <div className="flex justify-start gap-4">
-                          <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-1  py-1.5">
-                            <HiPencilAlt
-                              size={22}
-                              color="white"
-                              className="cursor-pointer"
-                            />
-                          </div>
-                          <div className="bg-red-500 rounded-xl flex justify-center w-10 px-1 py-1.5">
-                            <HiTrash
-                              size={22}
-                              color="white"
-                              className="cursor-pointer  "
-                            />
-                          </div>
+                        <div className="flex  gap-2 ">
+                          <HiOutlineDesktopComputer
+                            size={24}
+                            color="white"
+                            className="cursor-pointer bg-gray-900 rounded-full w-8 h-8 p-1.5 "
+                            onClick={()=>handleOpenView(3)}
+                          />
+                          <HiPencilAlt
+                            size={24}
+                            color="white"
+                            className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                            onClick={() => handleOpen(1)}
+                          />
+                          <HiTrash
+                            size={24}
+                            color="white"
+                            className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                            onClick={() => handleDelete(2)}
+                          />
                         </div>
                       </td>
                     </tr>
@@ -259,8 +299,6 @@ const BasicWong = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        
-
           <Button
             onClick={() => handlePageChange(currentPage - 1)}
             variant="outlined"
@@ -275,14 +313,23 @@ const BasicWong = () => {
                 key={index}
                 onClick={() => handlePageChange(index + 1)}
                 variant="filled"
-                size="sm" 
-                className={currentPage == index + 1 ? "bg-purple-400" : "bg-white text-black"}
+                size="sm"
+                className={
+                  currentPage == index + 1
+                    ? "bg-purple-400"
+                    : "bg-white text-black"
+                }
               >
                 {index + 1}
               </IconButton>
             ))}
           </div>
-          <Button color="purple"  onClick={() => handlePageChange(currentPage + 1)} variant="outlined" size="sm">
+          <Button
+            color="purple"
+            onClick={() => handlePageChange(currentPage + 1)}
+            variant="outlined"
+            size="sm"
+          >
             ถัดไป
           </Button>
         </CardFooter>
@@ -292,5 +339,3 @@ const BasicWong = () => {
 };
 
 export default BasicWong;
-
-

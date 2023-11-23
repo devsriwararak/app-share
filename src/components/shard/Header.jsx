@@ -5,23 +5,43 @@ import {
   HiOutlineBell,
   HiOutlineChatAlt,
   HiOutlineSearch,
-  HiOutlineMenu
+  HiOutlineMenu,
 } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-
-const Header = ({openSidebar, setOpenSideBar  }) => {
+const Header = ({ openSidebar, setOpenSideBar }) => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: `ออกจากระบบ`,
+      text: "คุณต้องการที่จะออกจากระบบ จริงหรือไม่ ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ตกลง",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear(), (window.location.href = "/login");
+      }
+    });
+  };
   return (
+    <div className=" bg-white  h-16  flex justify-between items-center border-b-2 border-gray-200 shadow-sm fixed w-full md:w-10/12 z-10  ">
+      <div className="mx-4 text-black">
+        สวัสดีคุณ : {localStorage.getItem("status")}
+      </div>
 
-
-    <div className= " bg-white  h-16  flex justify-between items-center border-b-2 border-gray-200 shadow-sm fixed w-full md:w-10/12 z-10  ">
-     <div className="mx-4 text-black">
-      สวัสดีคุณ : {localStorage.getItem('status')}
-     </div>
-     
-     <HiOutlineMenu color="black"  size={30} className="mr-4 cursor-pointer md:hidden " onClick={()=>setOpenSideBar( ! openSidebar)} />
-
+      <HiOutlineMenu
+        color="black"
+        size={30}
+        className="mr-4 cursor-pointer md:hidden "
+        onClick={() => setOpenSideBar(!openSidebar)}
+      />
 
       <div className="flex items-center gap-2 mr-6">
         <Popover className="">
@@ -145,10 +165,10 @@ const Header = ({openSidebar, setOpenSideBar  }) => {
                 {({ active }) => (
                   <div
                     className={classNames(
-                      active && "bg-gray-200",
-                      "text-gray-800 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2"
+                      active && "bg-red-500 text-white",
+                      "text-gray-800 focus:bg-red-500 cursor-pointer rounded-sm px-4  py-2"
                     )}
-                    onClick={() => (localStorage.clear(), window.location.href="/login")}
+                    onClick={handleLogout}
                   >
                     ออกจากระบบ
                   </div>

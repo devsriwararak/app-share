@@ -8,8 +8,9 @@ import {
   Input,
   Textarea,
 } from "@material-tailwind/react";
-import { HiOutlineHome ,HiOutlineUserAdd } from "react-icons/hi";
+import { HiOutlineHome , HiOutlineShoppingCart } from "react-icons/hi";
 import Select from "react-select";
+import {BankList} from "../../data/BankList";
 
 const options = [
   { value: "", label: "เลือกธนาคารที่ต้องการ" },
@@ -17,48 +18,50 @@ const options = [
   { value: "vanilla", label: "Vanilla" },
 ];
 
-const HomeMemberModal = ({ open, handleOpen }) => {
+const AddUser = ({ open, handleOpen }) => {
   return (
     <Dialog open={open} size="sm" handler={handleOpen}>
       <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
         {" "}
-        <HiOutlineUserAdd  /> สร้างพักงานบ้านแชร์
+        <HiOutlineShoppingCart /> เพิ่มลูกค้าใหม่
       </DialogHeader>
       <DialogBody className=" py-5 h-96 overflow-y-scroll md:h-full md:overflow-auto   ">
+ 
 
-        <div className="flex flex-col md:flex-row gap-2 justify-center">
-          <Select
-            options={options}
+        <div className="grid grid-flow-row md:grid-cols-2 gap-4   mt-3  ">
+          <Input
+            color="red"
+            label="Username"
+            error
+            required
             className="w-full"
-            placeholder="เลือกบ้านแชร์"
+          />
+          <Input
+            color="red"
+            label="password"
+            error
+            required
+            className="w-full"
           />
         </div>
 
-        <div className="grid grid-flow-row md:grid-cols-2 gap-2 mx-auto mt-3  ">
-          <Input color="red" label="Username" error required />
-          <Input color="red" label="password" error required />
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-2  justify-center mt-3">
+        <div className="flex flex-col md:flex-row gap-4  justify-center mt-3">
           <Input color="purple" label="ชื่อ" className="w-full" />
           <Input color="purple" label="สกุล" className="w-full" />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-2  justify-center mt-3">
-          <Input color="purple" label="เบอร์โทร" className="w-full" />
-          <Input color="purple" label="LINE ID (ถ้ามี)" className="w-full" />
+
+
+        <div className="flex flex-col md:flex-row gap-4 justify-center mt-3">
+        <Input color="purple" label="เบอร์โทร" />
         </div>
 
         <div className="flex flex-col md:flex-row gap-2  justify-center mt-3">
           <Textarea color="purple" label="ที่อยู่" className="w-full" />
         </div>
 
-      
-  
-      
       </DialogBody>
       <DialogFooter>
-        
         <Button
           variant="gradient"
           color="red"
@@ -68,7 +71,13 @@ const HomeMemberModal = ({ open, handleOpen }) => {
         >
           <span>ยกเลิก</span>
         </Button>
-        <Button variant="gradient" color="green" className="text-sm" size="sm" onClick={handleOpen}>
+        <Button
+          variant="gradient"
+          color="green"
+          onClick={handleOpen}
+          size="sm"
+          className="text-sm"
+        >
           <span>บันทึก</span>
         </Button>
       </DialogFooter>
@@ -76,7 +85,4 @@ const HomeMemberModal = ({ open, handleOpen }) => {
   );
 };
 
-export default HomeMemberModal;
-
-
-
+export default AddUser;

@@ -14,16 +14,25 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
-import { HiOutlineUserAdd , HiOutlineChatAlt2 , HiOutlinePlusCircle, HiPencilAlt, HiTrash, HiOutlineShoppingCart  } from "react-icons/hi";
-// import AdminModal from "../../components/modal/AdminModal";
+import {
+  HiOutlineUserAdd,
+  HiOutlineChatAlt2,
+  HiOutlinePlusCircle,
+  HiPencilAlt,
+  HiTrash,
+  HiOutlineShoppingCart,
+} from "react-icons/hi";
+import AddUser from "../../../components/modal/User/AddUser";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "แก้ไข/ลบ"];
+const TABLE_HEAD = ["ลำดับ", "Amount", "Date", "Status", "แก้ไข/ลบ"];
 
 const TABLE_ROWS = [
   {
-    img: "/img/logos/logo-spotify.svg",
+    img: "https://img.freepik.com/free-photo/woman-holding-black-friday-shopping-bags_23-2149093528.jpg?w=826&t=st=1700725663~exp=1700726263~hmac=2ef6beba69c47d67e82f517049553fe922e07e9e1bafaad29d78fc5f1feb9cbc",
     name: "Spotify",
-    amount: "$2,500",
+    amount: "1",
     date: "Wed 3:00pm",
     status: "นาย",
     account: "visa",
@@ -33,7 +42,7 @@ const TABLE_ROWS = [
   {
     img: "/img/logos/logo-amazon.svg",
     name: "Amazon",
-    amount: "$5,000",
+    amount: "2",
     date: "Wed 1:00pm",
     status: "paid",
     account: "master-card",
@@ -43,7 +52,7 @@ const TABLE_ROWS = [
   {
     img: "/img/logos/logo-pinterest.svg",
     name: "Pinterest",
-    amount: "$3,400",
+    amount: "3",
     date: "Mon 7:40pm",
     status: "pending",
     account: "master-card",
@@ -53,7 +62,7 @@ const TABLE_ROWS = [
   {
     img: "/img/logos/logo-google.svg",
     name: "Google",
-    amount: "$1,000",
+    amount: "4",
     date: "Wed 5:00pm",
     status: "paid",
     account: "visa",
@@ -63,7 +72,7 @@ const TABLE_ROWS = [
   {
     img: "/img/logos/logo-netflix.svg",
     name: "netflix",
-    amount: "$14,000",
+    amount: "5",
     date: "Wed 3:30am",
     status: "cancelled",
     account: "visa",
@@ -73,7 +82,7 @@ const TABLE_ROWS = [
   {
     img: "/img/logos/logo-netflix.svg",
     name: "netflix",
-    amount: "$14,000",
+    amount: "6",
     date: "Wed 3:30am",
     status: "cancelled",
     account: "visa",
@@ -83,7 +92,7 @@ const TABLE_ROWS = [
   {
     img: "/img/logos/logo-netflix.svg",
     name: "netflix",
-    amount: "$14,000",
+    amount: "7",
     date: "Wed 3:30am",
     status: "cancelled",
     account: "visa",
@@ -105,31 +114,63 @@ const User = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: `ต้องการลบ ID : ${id}`,
+      text: "คุณต้องการที่จะลบข้อมูลนี้ จริงหรือไม่ ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "gray",
+      confirmButtonText: "ลบ",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("ลบข้อมูลสำเร็จ");
+      }
+    });
+  };
 
   return (
     <div className="">
       {/* <AdminModal handleOpen={handleOpen} open={open} /> */}
 
+      <AddUser handleOpen={handleOpen} open={open} />
+
       <div className="flex flex-col md:flex-row    items-center justify-between gap-4">
         <div className="flex gap-2">
-          <span ><HiOutlineShoppingCart size={24} color="black"/></span> <span className="text-xl text-black font-bold"> จัดการข้อมูลลูกค้า</span>
-         
+          <span>
+            <HiOutlineShoppingCart size={24} color="black" />
+          </span>{" "}
+          <span className="text-xl text-black font-bold">
+            {" "}
+            จัดการข้อมูลลูกค้า
+          </span>
         </div>
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-full bg-slate-50 rounded-md bg-gray-50  ">
             <Input variant="outlined" label="ค้นหาชื่อ / รหัส" className="" />
           </div>
-          <Button variant="filled" className="w-full flex items-center gap-2 text-lg" size="sm" color="purple"> <HiOutlinePlusCircle size={22} />เพิ่มลูกค้าใหม่</Button>
+          <Button
+            variant="filled"
+            className="w-full flex items-center gap-2 text-sm"
+            size="sm"
+            color="purple"
+            onClick={handleOpen}
+          >
+            <HiOutlinePlusCircle size={22} />
+            เพิ่มลูกค้าใหม่
+          </Button>
         </div>
       </div>
 
       <Card className=" h-[550px]  w-full mx-auto   md:w-full  mt-4 ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
           <table className=" w-full  min-w-max table-auto text-left">
-            <thead > 
-              <tr >
+            <thead>
+              <tr>
                 {TABLE_HEAD.map((head) => (
                   <th
                     key={head}
@@ -166,7 +207,7 @@ const User = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    <tr key={index}>
                       <td className={classes}>
                         <Typography
                           variant="small"
@@ -222,22 +263,19 @@ const User = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                      <div className="flex justify-start gap-4">
-                          <div className="bg-purple-500 rounded-xl flex justify-center w-10 px-1  py-1.5">
+                      <div className="flex  gap-2 ">
                             <HiPencilAlt
-                              size={22}
+                              size={24}
                               color="white"
-                              className="cursor-pointer"
+                              className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
                             />
-                          </div>
-                          <div className="bg-red-500 rounded-xl flex justify-center w-10 px-1 py-1.5">
                             <HiTrash
-                              size={22}
+                              size={24}
                               color="white"
-                              className="cursor-pointer  "
+                              className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                              onClick={() => handleDelete(2)}
                             />
                           </div>
-                        </div>
                       </td>
                     </tr>
                   );
@@ -247,8 +285,6 @@ const User = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        
-
           <Button
             onClick={() => handlePageChange(currentPage - 1)}
             variant="outlined"
@@ -263,14 +299,23 @@ const User = () => {
                 key={index}
                 onClick={() => handlePageChange(index + 1)}
                 variant="filled"
-                size="sm" 
-                className={currentPage == index + 1 ? "bg-purple-400" : "bg-white text-black"}
+                size="sm"
+                className={
+                  currentPage == index + 1
+                    ? "bg-purple-400"
+                    : "bg-white text-black"
+                }
               >
                 {index + 1}
               </IconButton>
             ))}
           </div>
-          <Button color="purple"  onClick={() => handlePageChange(currentPage + 1)} variant="outlined" size="sm">
+          <Button
+            color="purple"
+            onClick={() => handlePageChange(currentPage + 1)}
+            variant="outlined"
+            size="sm"
+          >
             ถัดไป
           </Button>
         </CardFooter>
@@ -280,7 +325,3 @@ const User = () => {
 };
 
 export default User;
-
-
-
-

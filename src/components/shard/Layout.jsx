@@ -5,6 +5,7 @@ import Header from "./Header";
 import { useContext } from "react";
 import { AuthContent } from "../../auth/AuthWrapper";
 import { Card, CardBody } from "@material-tailwind/react";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   const [openSidebar, setOpenSideBar] = useState(false);
@@ -36,6 +37,7 @@ const Layout = () => {
 
         <div className=" w-full md:w-10/12   text-white    ">
           <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
+          <ToastContainer theme="colored" autoClose={2000} />
 
           <div className=" bg-gray-100 p-4 overflow-y-scroll pt-20   h-screen  ">
             <Card>

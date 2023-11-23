@@ -14,7 +14,7 @@ import {
 } from "react-icons/hi";
 import Select from "react-select";
 
-const WongShareModal = ({ open, handleOpen }) => {
+const WongShareModal = ({ open, handleOpen , id }) => {
   const options = [
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
@@ -34,8 +34,8 @@ const WongShareModal = ({ open, handleOpen }) => {
 
   return (
     <Dialog open={open} size="lg" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2">
-        <HiOutlineChatAlt2 /> สร้างวงค์แชร์
+      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+        <HiOutlineChatAlt2 />  {id ? "แก้ไขวงค์แชร์" : "สร้างวงค์แชร์"}
       </DialogHeader>
       <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -68,11 +68,12 @@ const WongShareModal = ({ open, handleOpen }) => {
               variant="gradient"
               color="red"
               onClick={handleOpen}
-              className="mr-1"
+              className="mr-1 text-sm"
+              size="sm"
             >
               <span>ยกเลิก</span>
             </Button>
-            <Button type="submit" variant="gradient" color="green">
+            <Button type="submit" variant="gradient" color="green" className="text-sm " size="sm"> 
               <span>บันทึก</span>
             </Button>
           </div>
