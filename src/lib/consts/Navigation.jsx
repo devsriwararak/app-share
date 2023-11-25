@@ -11,6 +11,7 @@ import {
   HiOutlineChartSquareBar,
   HiOutlineUserGroup,
   HiOutlineUserCircle,
+  HiOutlineUserAdd,
 } from "react-icons/hi";
 let Type = localStorage.getItem("Type");
 
@@ -70,13 +71,19 @@ export const DASHBOARD_SIDEBAR_LINKS =
         {
           key: "dashboard",
           label: "ภาพรวม",
-          path: "/admin",
+          path: "/user",
           icon: <HiOutlineViewGrid />,
+        },
+        {
+          key: "addToWongShare",
+          label: "ขอเข้าวงค์แชร์",
+          path: "/user/add-to-wong-share",
+          icon: <HiOutlineUserAdd />,
         },
         {
           key: "myHomeShare",
           label: "บ้านแชร์ของฉัน",
-          path: "/admin",
+          path: "/user/my-wong",
           icon: <HiOutlineLocationMarker />,
         },
         {

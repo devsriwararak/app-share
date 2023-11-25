@@ -12,6 +12,9 @@ import GroupShare from "../pages/AdminMain/Homes/GroupShare";
 import User from "../pages/AdminMain/User/User";
 import Member from "../pages/Member/Member";
 import Wong from "../pages/Home/Basic/Wong";
+import AddToWongShare from "../pages/User/addToWongShare";
+import IndexUser from '../pages/User/User'
+import MyWong from "../pages/User/MyWong";
 let Type = localStorage.getItem("Type");
 
 const PrivateRoute = () => {
@@ -36,7 +39,12 @@ const PrivateRoute = () => {
       )}
       {Type == "user" ? (
         <Routes>
-          <Route path="/user" element={<Layout />} />
+          <Route  path="/user" element={<Layout />}>
+            <Route index element={<IndexUser />} />
+            <Route path="/user/add-to-wong-share" element={<AddToWongShare />} />
+            <Route path="/user/my-wong" element={<MyWong />} />
+
+          </Route>
           <Route path="/" element={<Navigate to="/user" />} />
           <Route path="*" element={<Navigate to="/user" />} />
         </Routes>
