@@ -22,6 +22,8 @@ const HomeMemberModal = ({ open, handleOpen }) => {
     <Dialog open={open} size="sm" handler={handleOpen}>
       <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
         {" "}
+
+        
         <HiOutlineUserAdd  /> สร้างพักงานบ้านแชร์
       </DialogHeader>
       <DialogBody className=" py-5 h-96 overflow-y-scroll md:h-full md:overflow-auto   ">

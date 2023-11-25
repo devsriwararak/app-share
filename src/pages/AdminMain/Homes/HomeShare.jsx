@@ -11,7 +11,7 @@ import {
 import Select from "react-select";
 import HomeAdminModal from "../../../components/modal/HomeShare/HomeAdminModal";
 import HomeMemberModal from "../../../components/modal/HomeShare/HomeMemberModal";
-import { HiPencilAlt, HiTrash } from "react-icons/hi";
+import { HiDatabase, HiPencilAlt, HiTrash } from "react-icons/hi";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
@@ -93,8 +93,10 @@ const HomeShare = () => {
       <HomeMemberModal handleOpen={handleOpen2} open={open2} />
 
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-          ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
+      
+        <Typography variant="h5" color="blue-gray" className="mb-2 flex gap-2 items-center
+        ">
+        <HiDatabase/>  ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
         </Typography>
         <div className="w-full md:w-4/12">
           <Select options={options} placeholder="เลือกบ้านแชร์" />

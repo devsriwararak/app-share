@@ -3,63 +3,16 @@ import {
   HiOutlineCube,
   HiOutlineShoppingCart,
   HiOutlineUsers,
-  HiOutlineDocumentText,
-  HiOutlineAnnotation,
   HiOutlineQuestionMarkCircle,
   HiOutlineCog,
   HiChevronRight,
+  HiOutlineLocationMarker,
+  HiDatabase,
+  HiOutlineChartSquareBar,
+  HiOutlineUserGroup,
+  HiOutlineUserCircle,
 } from "react-icons/hi";
 let Type = localStorage.getItem("Type");
-// MAIN-ADMIN  AND  ADMIN
-
-// export const DASHBOARD_SIDEBAR_LINKS = [
-//   {
-//     key: "dashboard",
-//     label: Type,
-//     path: "/admin",
-//     icon: <HiOutlineViewGrid />,
-//   },
-//   {
-//     key: "basicHome",
-//     label: "ข้อมูลพื้นฐาน",
-//     icon: <HiOutlineCube />,
-//     submenuActive: 1,
-//     submenu: [
-//       {
-//         label: "ข้อมูลบ้านแชร์",
-//         key: "basicHome_1",
-//         path: "/admin/basic/home",
-//         icon: <HiChevronRight />,
-//       },
-//       {
-//         label: "ข้อมูลวงค์แชร์",
-//         key: "basicHome_2",
-//         path: "/admin/basic/wong",
-//         icon: <HiChevronRight />,
-//       },
-//     ],
-//   },
-//   Type == "admin"
-//     ? { key: "noData" }
-//     : {
-//         key: "CrudAdmin",
-//         label: "ข้อมูลผู้ดูแลระบบ",
-//         path: "/admin/crud-admin",
-//         icon: <HiOutlineUsers />,
-//       },
-//   {
-//     key: "ManageBasicHome",
-//     label: "ข้อมูลบ้านแชร์",
-//     path: "/admin/home-share",
-//     icon: <HiOutlineViewGrid />,
-//   },
-//   {
-//     key: "ManageUser",
-//     label: "ข้อมูลลูกค้า",
-//     path: "/admin/manage-user",
-//     icon: <HiOutlineShoppingCart />,
-//   }
-// ];
 
 export const DASHBOARD_SIDEBAR_LINKS =
   Type == "main-admin" || Type == "admin" // MAIN_ADMIN - ADMIN
@@ -101,9 +54,9 @@ export const DASHBOARD_SIDEBAR_LINKS =
 
         {
           key: "ManageBasicHome",
-          label: "ข้อมูลบ้านแชร์",
+          label: "บ้านแชร์-พนักงาน",
           path: "/admin/home-share",
-          icon: <HiOutlineViewGrid />,
+          icon: <HiDatabase />,
         },
         {
           key: "ManageUser",
@@ -116,40 +69,72 @@ export const DASHBOARD_SIDEBAR_LINKS =
     ? [
         {
           key: "dashboard",
-          label: "useee",
+          label: "ภาพรวม",
           path: "/admin",
           icon: <HiOutlineViewGrid />,
         },
+        {
+          key: "myHomeShare",
+          label: "บ้านแชร์ของฉัน",
+          path: "/admin",
+          icon: <HiOutlineLocationMarker />,
+        },
+        {
+          key: "user-report",
+          label: "รายงาน",
+          path: "/admin",
+          icon: <HiOutlineChartSquareBar />,
+        },
       ]
-    : Type == "home" // HOME
+    : Type == "home" || Type == "member" // HOME
+    ? [
+        {
+          key: "home-dashboard",
+          label: "ภาพรวม",
+          path: "/admin",
+          icon: <HiOutlineViewGrid />,
+        },
+        {
+          key: "home-homeShare",
+          label: "ลูกแชร์",
+          path: "/admin",
+          icon: <HiOutlineUserCircle />,
+        },
+        {
+          key: "home-homeShare",
+          label: "วงแชร์",
+          path: "/admin",
+          icon: <HiOutlineCube />,
+        },
+        Type == "home" ? {
+          key: "home-homeShare",
+          label: "พนักงาน",
+          path: "/admin",
+          icon: <HiOutlineUserGroup />,
+        } : {key: "noData"},
+        {
+          key: "home-homeShare",
+          label: "รายงาน",
+          path: "/admin",
+          icon: <HiOutlineChartSquareBar />,
+        },
+      ]
+    : Type == "member"
     ? [
         {
           key: "dashboard",
-          label: "homeee",
+          label: "member",
           path: "/admin",
           icon: <HiOutlineViewGrid />,
         },
       ]
-    : Type == "member" ? [
-      {
-        key: "dashboard",
-        label: "member",
-        path: "/admin",
-        icon: <HiOutlineViewGrid />,
-      },
-    ]:[]
+    : [];
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
   {
     key: "settings",
-    label: "เมนู 7",
+    label: "ข้อมูลส่วนตัว",
     path: "/settings",
     icon: <HiOutlineCog />,
-  },
-  {
-    key: "support",
-    label: "เมนู 8",
-    path: "/support",
-    icon: <HiOutlineQuestionMarkCircle />,
   },
 ];
