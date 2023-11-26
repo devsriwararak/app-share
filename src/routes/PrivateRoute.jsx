@@ -55,7 +55,7 @@ const PrivateRoute = () => {
         ""
       )}
 
-      {Type == "home" ? (
+      {Type == "home" || Type == "member" ? (
         <Routes>
           <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
@@ -73,7 +73,7 @@ const PrivateRoute = () => {
         ""
       )}
 
-      {Type == "member" ? (
+      {/* {Type == "member" ? (
         <Routes>
           <Route path="/member" element={<Layout />}>
             <Route index element={<Member />} />
@@ -83,7 +83,7 @@ const PrivateRoute = () => {
         </Routes>
       ) : (
         ""
-      )}
+      )} */}
     </>
   );
 };
