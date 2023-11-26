@@ -12,7 +12,7 @@ import GroupShare from "../pages/AdminMain/Homes/GroupShare";
 import User from "../pages/AdminMain/User/User";
 import Member from "../pages/Member/Member";
 import Wong from "../pages/Home/Basic/Wong";
-import AddToWongShare from "../pages/User/addToWongShare";
+import AddToWongShare from "../pages/User/AddToWongShare";
 import IndexUser from '../pages/User/User'
 import MyWong from "../pages/User/MyWong";
 let Type = localStorage.getItem("Type");
