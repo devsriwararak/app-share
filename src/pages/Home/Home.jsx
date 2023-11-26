@@ -2,28 +2,10 @@ import React from 'react'
 
 const s = () => {
   return (
-    <div className='text-red-500'>
-        <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-        <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-        <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-
-         <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2> <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          
-          <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          
-          <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          
-              <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-              <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          
-              <h2>xxxxxxxxxxxxxxxxxxxxxxx</h2>
-          
-          
-
-    </div>
+    <div>
+    <h1 className='text-3xl'>ADMIN - HOME PAGE ! </h1>
+    <p className='text-lg'>ถาพรวม จะดำเนินการในงวดที่ 3/3 ครับ</p>
+  </div>
   )
 }
 

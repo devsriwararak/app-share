@@ -21,7 +21,8 @@ import {
   HiOutlinePlusCircle,
   HiPencilAlt,
   HiTrash,
-  HiOutlineDesktopComputer 
+  HiOutlineDesktopComputer, 
+  HiOutlinePlusSm
 } from "react-icons/hi";
 import WongShareModal from "../../../components/modal/Basic/WongShareModal";
 import Swal from "sweetalert2";
@@ -166,7 +167,7 @@ const BasicWong = () => {
               size="sm"
               className="text-sm  flex items-center gap-1 "
             >
-              <HiOutlinePlusCircle size={24} />
+              <HiOutlinePlusSm size={20}  />
               สร้างวงค์แชร์
             </Button>
           </div>
@@ -186,7 +187,7 @@ const BasicWong = () => {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                      className="font-bold leading-none opacity-90"
                     >
                       {head}
                     </Typography>

@@ -21,6 +21,7 @@ import {
   HiPencilAlt,
   HiTrash,
   HiOutlineShoppingCart,
+  HiOutlinePlusSm,
 } from "react-icons/hi";
 import AddUser from "../../../components/modal/User/AddUser";
 import Swal from "sweetalert2";
@@ -160,7 +161,7 @@ const User = () => {
             color="purple"
             onClick={handleOpen}
           >
-            <HiOutlinePlusCircle size={22} />
+            <HiOutlinePlusSm size={20}  />
             เพิ่มลูกค้าใหม่
           </Button>
         </div>
@@ -179,7 +180,7 @@ const User = () => {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                      className="font-bold leading-none opacity-90"
                     >
                       {head}
                     </Typography>

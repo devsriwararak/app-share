@@ -10,11 +10,14 @@ import CrudAdmin from "../pages/AdminMain/CrudAdmin";
 import HomeShare from "../pages/AdminMain/Homes/HomeShare";
 import GroupShare from "../pages/AdminMain/Homes/GroupShare";
 import User from "../pages/AdminMain/User/User";
-import Member from "../pages/Member/Member";
-import Wong from "../pages/Home/Basic/Wong";
+import Member from "../pages/Home/Member";
 import AddToWongShare from "../pages/User/AddToWongShare";
 import IndexUser from '../pages/User/User'
 import MyWong from "../pages/User/MyWong";
+import ManageUser from "../pages/Home/User/ManageUser";
+import HomeWongShare from '../pages/Home/HomeWongShare'
+import Play from "../pages/Home/Play/Play";
+import HomeRePort from '../pages/Home/Report/HomeReport'
 let Type = localStorage.getItem("Type");
 
 const PrivateRoute = () => {
@@ -56,7 +59,12 @@ const PrivateRoute = () => {
         <Routes>
           <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="/home/basic/wong" element={<Wong />} />
+            <Route path="/home/manage-user" element={<ManageUser />} />
+            <Route path="/home/wong-share" element={<HomeWongShare />} />
+            <Route path="/home/member" element={<Member />} />
+            <Route path="/home/play" element={<Play />} />
+            <Route path="/home/report" element={<HomeRePort />} />
+
           </Route>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="*" element={<Navigate to="/home" />} />

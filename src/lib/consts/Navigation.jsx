@@ -12,6 +12,7 @@ import {
   HiOutlineUserGroup,
   HiOutlineUserCircle,
   HiOutlineUserAdd,
+  HiOutlinePlay,
 } from "react-icons/hi";
 let Type = localStorage.getItem("Type");
 
@@ -98,31 +99,37 @@ export const DASHBOARD_SIDEBAR_LINKS =
         {
           key: "home-dashboard",
           label: "ภาพรวม",
-          path: "/admin",
+          path: "/home",
           icon: <HiOutlineViewGrid />,
         },
         {
           key: "home-homeShare",
           label: "ลูกแชร์",
-          path: "/admin",
+          path: "/home/manage-user",
           icon: <HiOutlineUserCircle />,
         },
         {
           key: "home-homeShare",
           label: "วงแชร์",
-          path: "/admin",
+          path: "/home/wong-share",
           icon: <HiOutlineCube />,
         },
         Type == "home" ? {
           key: "home-homeShare",
           label: "พนักงาน",
-          path: "/admin",
+          path: "/home/member",
           icon: <HiOutlineUserGroup />,
         } : {key: "noData"},
         {
+          key: "play-share",
+          label: "เล่นแชร์",
+          path: "/home/play",
+          icon: <HiOutlinePlay />,
+        },
+        {
           key: "home-homeShare",
           label: "รายงาน",
-          path: "/admin",
+          path: "/home/report",
           icon: <HiOutlineChartSquareBar />,
         },
       ]

@@ -163,7 +163,7 @@ const CrudAdmin = () => {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                      className="font-bold leading-none opacity-90"
                     >
                       {head}
                     </Typography>

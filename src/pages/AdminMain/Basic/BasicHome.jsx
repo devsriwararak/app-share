@@ -23,6 +23,7 @@ import {
   HiOutlinePlusCircle,
   HiTrash,
   HiPencilAlt,
+  HiOutlinePlusSm,
 } from "react-icons/hi";
 import HomeShareModal from "../../../components/modal/Basic/HomeShareModal";
 import Swal from "sweetalert2";
@@ -168,7 +169,7 @@ const BasicHome = () => {
               size="sm"
               className="text-sm  flex items-center gap-1  "
             >
-              <HiOutlinePlusCircle size={24} />
+              <HiOutlinePlusSm size={20}  />
               สร้างบ้านแชร์
             </Button>
           </div>
@@ -188,7 +189,7 @@ const BasicHome = () => {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                      className="font-bold leading-none opacity-90"
                     >
                       {head}
                     </Typography>

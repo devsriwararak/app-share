@@ -7,6 +7,7 @@ import {
   Input,
   Typography,
 } from "@material-tailwind/react";
+import classNames from "classnames";
 import React, { useState } from "react";
 import { HiOutlineHeart, HiOutlineUserAdd } from "react-icons/hi";
 import Select from "react-select";
@@ -19,26 +20,31 @@ const TABLE_ROWS = [
     name: "John Michael",
     job: "Manager",
     date: "23/04/18",
+    status: "รอดำเนินการ",
   },
   {
     name: "Alexa Liras",
     job: "Developer",
     date: "23/04/18",
+    status: "รอดำเนินการ",
   },
   {
     name: "Laurent Perrier",
     job: "Executive",
     date: "19/09/17",
+    status: "ปฏิเสธ",
   },
   {
     name: "Michael Levi",
     job: "Developer",
     date: "24/12/08",
+    status: "เข้าร่วม",
   },
   {
     name: "Richard Gran",
     job: "Manager",
     date: "04/10/21",
+    status: "เข้าร่วม",
   },
 ];
 
@@ -141,7 +147,12 @@ const AddToWongShare = () => {
               </div>
 
               <div className="flex justify-end mt-5">
-                <Button color="purple" variant="filled" onClick={handleAddWong} disabled={!data.wong}>
+                <Button
+                  color="purple"
+                  variant="filled"
+                  onClick={handleAddWong}
+                  disabled={!data.wong}
+                >
                   เข้าร่วม
                 </Button>
               </div>
@@ -163,70 +174,91 @@ const AddToWongShare = () => {
                 />
               </div>
 
-              <table className="w-full min-w-max table-auto text-center mt-4">
-                <thead>
-                  <tr>
-                    {TABLE_HEAD.map((head) => (
-                      <th
-                        key={head}
-                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                      >
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal leading-none opacity-70"
-                        >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {TABLE_ROWS.map(({ name, job, date }, index) => (
-                    <tr key={name} className="even:bg-blue-gray-50/50">
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {name}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {job}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          as="a"
-                          href="#"
-                          variant="small"
-                          color="blue-gray"
-                          className="font-medium"
-                        >
-                          Edit
-                        </Typography>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <Card>
+                <CardBody>
+                  <table className="w-full min-w-max table-auto text-center mt1">
+                    <thead>
+                      <tr>
+                        {TABLE_HEAD.map((head) => (
+                          <th
+                            key={head}
+                            className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                          >
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-bold leading-none opacity-90"
+                            >
+                              {head}
+                            </Typography>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {TABLE_ROWS.map(({ name, job, date, status }, index) => (
+                        <tr key={name} className="even:bg-blue-gray-50/50">
+                          <td className="p-4">
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal"
+                            >
+                              {name}
+                            </Typography>
+                          </td>
+                          <td className="p-4">
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal"
+                            >
+                              {job}
+                            </Typography>
+                          </td>
+                          <td className="p-4">
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal"
+                            >
+                              {date}
+                            </Typography>
+                          </td>
+                          <td className="p-4">
+                            <Typography
+                              variant="small"
+                              color={
+                                status === "รอดำเนินการ"
+                                  ? "orange"
+                                  : status === "ปฏิเสธ"
+                                  ? "red"
+                                  : status === "เข้าร่วม"
+                                  ? "green"
+                                  : ""
+                              }
+                              // className="font-bold"
+                              className={classNames(
+                                status === "รอดำเนินการ"
+                                  ? "bg-orange-100"
+                                  : status === "ปฏิเสธ"
+                                  ? "bg-red-100"
+                                  : status === "เข้าร่วม"
+                                  ? "bg-green-100"
+                                  : "",
+                                "font-bold p-1"
+                              )}
+                            >
+                              {status}
+                            </Typography>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </CardBody>
+              </Card>
+              
             </CardBody>
           </Card>
         </div>
