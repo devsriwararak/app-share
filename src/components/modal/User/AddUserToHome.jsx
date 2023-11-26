@@ -10,18 +10,20 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
-import { FcPlus } from "react-icons/fc";
+import { FcEditImage, FcEmptyTrash, FcPlus } from "react-icons/fc";
 
 import {
   HiOutlineHome,
+  HiOutlinePencilAlt,
   HiOutlineUserAdd,
   HiOutlineUsers,
+  HiTrash,
 } from "react-icons/hi";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 
-const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อลูกแชร์", "เลือก"];
+const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อลูกแชร์", "เลือก", "แก้ไข/ลบ"];
 
 const TABLE_ROWS = [
   {
@@ -77,13 +79,13 @@ const AddUserToHome = ({ handleOpen, open }) => {
   };
   return (
     <div>
-      <Dialog open={open} size="xl" handler={handleOpen} >
+      <Dialog open={open} size="xl" handler={handleOpen}>
         <DialogHeader className="bg-gray-200 rounded-lg flex gap-2">
           {" "}
           <HiOutlineUsers />
           จัดการลูกแชร์
         </DialogHeader>
-        <DialogBody  className="overflow-y-scroll h-[500px] md:h-full">
+        <DialogBody className="overflow-y-scroll h-[500px] md:h-full">
           <div className="flex flex-col md:flex-row gap-4">
             <Card className="w-full ring-2 ring-gray-300/20">
               <CardBody>
@@ -199,7 +201,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                 />
 
                 <Card>
-                  <CardBody className="h-96 overflow-y-scroll">
+                  <CardBody className=" overflow-y-scroll h-72 ">
                     <table className="w-full min-w-max table-auto text-center mt1">
                       <thead>
                         <tr>
@@ -223,7 +225,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                         {TABLE_ROWS.map(
                           ({ name, job, date, status }, index) => (
                             <tr key={name} className="even:bg-blue-gray-50/50">
-                              <td className="p-4">
+                              <td className="p-2">
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
@@ -232,7 +234,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                                   {name}
                                 </Typography>
                               </td>
-                              <td className="p-4">
+                              <td className="p-2">
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
@@ -241,7 +243,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                                   {job}
                                 </Typography>
                               </td>
-                              <td className="p-4">
+                              <td className="p-2">
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
@@ -250,7 +252,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                                   {date}
                                 </Typography>
                               </td>
-                              <td className="p-4">
+                              <td className="p-2">
                                 <Typography
                                   variant="small"
                                   color={
@@ -277,6 +279,12 @@ const AddUserToHome = ({ handleOpen, open }) => {
                                   {status}
                                 </Typography>
                               </td>
+                              <td className="p-2 ">
+                                <div className="flex cursor-pointer gap-2">
+                                  <HiOutlinePencilAlt className="bg-purple-500 p-1 rounded-full" color="white" size={30} />
+                                  <HiTrash  className="bg-red-500 p-1 rounded-full" color="white" size={30} />
+                                </div>
+                              </td>
                             </tr>
                           )
                         )}
@@ -284,6 +292,30 @@ const AddUserToHome = ({ handleOpen, open }) => {
                     </table>
                   </CardBody>
                 </Card>
+
+                <div className="flex flex-col md:flex-row gap-4 mt-5 items-center">
+                  <div className="w-full">
+                    <b className="font-bold">ชื่อลูกแชร์ : </b>{" "}
+                    <span>{data.name}</span>
+                  </div>
+                  <Select
+                    className="w-full"
+                    options={options}
+                    placeholder="เลือกสถานะใหม่"
+                  />
+                </div>
+                <div className="flex justify-end mt-5">
+                  <Button
+                    color="purple"
+                    size="md"
+                    className="text-sm"
+                    onClick={handleAddUser}
+                  >
+                    อัพเดท
+                  </Button>
+                </div>
+
+
               </CardBody>
             </Card>
           </div>
