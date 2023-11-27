@@ -197,7 +197,7 @@ const AddToWongShare = () => {
                     </thead>
                     <tbody>
                       {TABLE_ROWS.map(({ name, job, date, status }, index) => (
-                        <tr key={name} className="even:bg-blue-gray-50/50">
+                        <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
                           <td className="p-4">
                             <Typography
                               variant="small"

@@ -75,7 +75,7 @@ const MyWongActivity = ({ data }) => {
                 </thead>
                 <tbody>
                   {TABLE_ROWS_2.map(({ name, job, date, price }, index) => (
-                    <tr key={name} className="even:bg-blue-gray-50/50">
+                    <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
                       <td className="p-4">
                         <Typography
                           variant="small"
@@ -151,7 +151,7 @@ const MyWongActivity = ({ data }) => {
                 </thead>
                 <tbody>
                   {TABLE_ROWS_2.map(({ name, job, date, price }, index) => (
-                    <tr key={name} className="even:bg-blue-gray-50/50">
+                    <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
                       <td className="p-4">
                         <Typography
                           variant="small"

@@ -207,10 +207,10 @@ const HomeWongShare = () => {
                   const isLast = index === TABLE_ROWS.length - 1;
                   const classes = isLast
                     ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
+                    : "p-4 border-b border-blue-gray-50 ";
 
                   return (
-                    <tr key={index}>
+                    <tr key={index} className="hover:bg-gray-200">
                       <td className={classes}>
                         <Typography
                           variant="small"

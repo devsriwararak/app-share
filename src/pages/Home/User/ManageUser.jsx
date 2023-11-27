@@ -59,7 +59,7 @@ const ManageUser = () => {
         <Card className="ring-2 ring-gray-800/5 w-full md:w-4/12">
           <CardBody>
             <div className="flex flex-col md:flex-row   md:justify-between">
-              <h2 className="text-xl font-bold flex items-center gap-3">
+              <h2 className="text-lg text-black font-bold flex items-center gap-3">
                 <HiOutlineUsers />
                 ลูกแชร์ (3)
               </h2>
@@ -93,7 +93,7 @@ const ManageUser = () => {
                 </thead>
                 <tbody>
                   {TABLE_ROWS.map(({ name, job, date }, index) => (
-                    <tr key={name} className="even:bg-blue-gray-50/50">
+                    <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
                       <td className="p-4">
                         <Typography
                           variant="small"

@@ -217,7 +217,7 @@ const BasicHome = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={index}>
+                    <tr key={index} className="hover:bg-gray-200">
                       <td className={classes}>
                         <Typography
                           variant="small"

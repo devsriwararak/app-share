@@ -6,7 +6,7 @@ const DataUser = ({ data }) => {
   return (
     <>
       <div className="flex justify-between">
-        <h2 className="text-xl font-bold flex items-center gap-3">
+        <h2 className="text-lg text-black font-bold flex items-center gap-3">
           <HiOutlineHome /> ข้อมูลลูกแชร์
         </h2>
 
