@@ -152,6 +152,8 @@ const AddToWongShare = () => {
                   variant="filled"
                   onClick={handleAddWong}
                   disabled={!data.wong}
+                  size="sm"
+                  className=" text-sm"
                 >
                   เข้าร่วม
                 </Button>
@@ -246,7 +248,7 @@ const AddToWongShare = () => {
                                   : status === "เข้าร่วม"
                                   ? "bg-green-100"
                                   : "",
-                                "font-bold p-1"
+                                "font-bold p-1 rounded-lg"
                               )}
                             >
                               {status}

@@ -56,7 +56,7 @@ const Play = () => {
               <Button
                 color="purple"
                 size="sm"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2  text-sm"
                 onClick={handleOpen}
               >
                 <HiOutlinePlus size={18} />
@@ -90,23 +90,26 @@ const Play = () => {
       <div className="w-full md:w-2/3 ">
         <div className="flex gap-2">
           <Button
-            className="flex flex-col md:flex-row gap-2 items-center"
+            className="flex flex-col md:flex-row gap-2 items-center text-sm"
             color="blue"
             onClick={() => handleStatusBtn(1)}
+            size="sm"
           >
             <HiOutlinePencilAlt size={22} /> ข้อมูลพื้นฐาน
           </Button>
           <Button
-            className="flex  flex-col md:flex-row gap-2 items-center"
+            className="flex  flex-col md:flex-row gap-2 items-center  text-sm"
             color="green"
             onClick={() => handleStatusBtn(2)}
+            size="sm"
           >
             <HiOutlinePlay size={22} /> รายละเอียดวงแชร์
           </Button>
           <Button
-            className="flex  flex-col md:flex-row gap-2 items-center"
+            className="flex  flex-col md:flex-row gap-2 items-center  text-sm"
             color="orange"
             onClick={() => handleStatusBtn(3)}
+            size="sm"
           >
             <HiOutlineCash size={22} />
             รายละอียดค่างวดและสถานะการชำระเงิน

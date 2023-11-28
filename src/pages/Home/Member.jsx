@@ -134,7 +134,7 @@ const Member = () => {
               variant="filled"
               color="purple"
               size="sm"
-              className="text-sm  flex items-center gap-1 "
+              className="text-sm  flex items-center gap-1  "
             >
               <HiOutlinePlusSm size={20}  />
               สร้างพนักงาน

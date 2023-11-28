@@ -63,7 +63,7 @@ const ManageUser = () => {
                 <HiOutlineUsers />
                 ลูกแชร์ (3)
               </h2>
-              <Button className="text-[14px] flex items-center gap-2" color="purple" size="sm" variant="filled" onClick={handleOpen}>
+              <Button className="text-[14px] flex items-center gap-2  text-sm" color="purple" size="sm" variant="filled" onClick={handleOpen}>
                 <HiOutlinePlusSm size={20}   />เพิ่มลูกแชร์ใหม่
               </Button>
             </div>
@@ -134,8 +134,8 @@ const ManageUser = () => {
 
         <div className="w-full md:w-8/12 ">
           <div className="flex flex-row gap-4 justify-center md:justify-start">
-            <Button color="blue" size="sm" className="text-[14px] flex items-center gap-2" onClick={()=>handleBtnPage(1)}><HiOutlineHome size={20} /> ข้อมูลลูกแชร์</Button>
-            <Button color="green" size="sm" className="text-[14px] flex items-center gap-2" onClick={()=>handleBtnPage(2)}> <HiOutlineCalendar size={20}/> ข้อมูลกิจกรรม</Button>
+            <Button color="blue" size="sm" className=" text-sm flex items-center gap-2 " onClick={()=>handleBtnPage(1)}><HiOutlineHome size={20} /> ข้อมูลลูกแชร์</Button>
+            <Button color="green" size="sm" className=" text-sm flex items-center gap-2" onClick={()=>handleBtnPage(2)}> <HiOutlineCalendar size={20}/> ข้อมูลกิจกรรม</Button>
 
           </div>
           <Card className="ring-2  ring-gray-800/5 mt-6 ">

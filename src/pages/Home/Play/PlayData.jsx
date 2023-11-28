@@ -19,9 +19,15 @@ const PlayData = ({ data, setData }) => {
 
   return (
     <div>
-      <h2 className="text-lg text-black font-bold flex gap-2 items-center">
-        <HiOutlinePencilAlt size={22} /> แก้ไขข้อมูลวงแชร์ ({data.name})
-      </h2>
+      <div className="flex flex-col md:flex-row justify-between">
+        <h2 className="text-lg text-black font-bold flex gap-2 items-center">
+          <HiOutlinePencilAlt size={22} /> แก้ไขข้อมูลวงแชร์ ({data.name})
+        </h2>
+        <Button color="purple" size="sm" className="text-sm" onClick={handleUpdate}>
+          อัพเดท
+        </Button>
+      </div>
+
       <div className="flex flex-col md:flex-row gap-4 mt-5">
         <Input
           type="text"
@@ -59,12 +65,15 @@ const PlayData = ({ data, setData }) => {
           options={options}
           placeholder="ประเภทค่าดูแล ชำระงวดแรก / ชำระตอนได้เงิน"
         />
-        <Input className="w-full" type="text" label="ประเภท" color="purple" />
+        <Input className="w-full" type="text" label="ดอกเบี้ย" color="purple" />
       </div>
       <div className="flex flex-col md:flex-row gap-4 mt-4">
         <Input className="w-full" type="text" label="จำนวนมือ" color="purple" />
-
         <Input className="w-full" type="text" label="เงินต้น" color="purple" />
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <Input className="w-full" type="text" label="ส่งงวดละ" color="purple" />
         <Input
           className="w-full"
           type="text"
@@ -74,15 +83,10 @@ const PlayData = ({ data, setData }) => {
       </div>
 
       <div className="mt-4">
-      <Textarea  label="หมายเหตุ" color="purple" />
-
+        <Textarea label="หมายเหตุ" color="purple" />
       </div>
 
-      <div className="mt-2 flex justify-end">
-        <Button color="purple" onClick={handleUpdate}>
-          อัพเดท
-        </Button>
-      </div>
+ 
     </div>
   );
 };

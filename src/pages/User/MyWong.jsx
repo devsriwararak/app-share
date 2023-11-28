@@ -221,13 +221,13 @@ const MyWong = () => {
           <Card className="ring-1 ring-gray-200">
             <CardBody>
               <div className="flex flex-col md:flex-row gap-4">
-                <Button color="green" onClick={() => HandleSelectBtn(1)}>
+                <Button color="green" onClick={() => HandleSelectBtn(1)} size="sm" className=" text-sm">
                   ข้อมูลบ้านแชร์
                 </Button>
-                <Button color="blue" onClick={() => HandleSelectBtn(2)}>
+                <Button color="blue" onClick={() => HandleSelectBtn(2)} size="sm" className=" text-sm">
                   ข้อมูลวงค์แชร์
                 </Button>
-                <Button color="orange" onClick={() => HandleSelectBtn(3)}>
+                <Button color="orange" onClick={() => HandleSelectBtn(3)} size="sm" className=" text-sm">
                   ข้อมูลกิจกรรม
                 </Button>
               </div>

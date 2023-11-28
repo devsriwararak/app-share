@@ -54,11 +54,12 @@ const AddMember = ({ handleOpen, open }) => {
               variant="filled"
               color="red"
               onClick={handleOpen}
-              className="mr-1"
+              className="mr-1  text-sm"
+              size="sm"
             >
               <span>ยกเลิก</span>
             </Button>
-            <Button variant="filled" type="submit" color="purple" onClick={handleOpen}>
+            <Button variant="filled" type="submit" size="sm" color="purple" onClick={handleOpen} className=" text-sm">
               <span>บันทึก</span>
             </Button>
           </div>
