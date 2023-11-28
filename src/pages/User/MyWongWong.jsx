@@ -4,7 +4,7 @@ import React from "react";
 const MyWongWong = ({ data }) => {
   return (
     <div>
-      <h1 className="text-lg text-black">ข้อมูลวงค์แชร์  {data.wong}</h1>
+      <h1 className="text-lg text-black">ข้อมูลวงค์แชร์.  {data.wong}</h1>
 
       <div className="flex flex-col md:flex-row gap-4 mt-4">
         <div className="w-full">
