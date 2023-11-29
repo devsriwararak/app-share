@@ -43,11 +43,11 @@ const MyWongWong = ({ data }) => {
 
       <div className="flex flex-col md:flex-row gap-4 mt-8">
         <Card className="w-full ring-2 ring-gray-200">
-          <CardBody><p className='text-lg'>ข้อมูลวงค์แชร์ จะดำเนินการในงวดที่ 3/3 ครับ</p></CardBody>
+          <CardBody><p className='text-lg'>ข้อมูลวงค์แชร์ จะดำเนินการในงวดที่ 3/3 ครับ.</p></CardBody>
         </Card>
 
         <Card className="w-full ring-2 ring-gray-200">
-          <CardBody><p className='text-lg'>ข้อมูลวงค์แชร์ จะดำเนินการในงวดที่ 3/3 ครับ</p></CardBody>
+          <CardBody><p className='text-lg'>ข้อมูลวงค์แชร์ จะดำเนินการในงวดที่ 3/3 ครับ.</p></CardBody>
         </Card>
 
       </div>
