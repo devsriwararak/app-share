@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
@@ -28,6 +28,7 @@ import {
 import HomeShareModal from "../../../components/modal/Basic/HomeShareModal";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const TABLE_HEAD = [
   "ลำดับ",
@@ -115,14 +116,32 @@ const BasicHome = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = (number) => (setOpen(!open), setId(number));
 
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [dataToModal , setDataTomodal] = useState({})
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = TABLE_ROWS.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(TABLE_ROWS.length / itemsPerPage);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=${search}`
+      );
+      console.log(res.data);
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDelete = (id) => {
@@ -137,14 +156,43 @@ const BasicHome = () => {
       cancelButtonText: "ยกเลิก",
     }).then((result) => {
       if (result.isConfirmed) {
-        toast.success("ลบข้อมูลสำเร็จ");
+        deleteData(id)
+
       }
     });
   };
 
+  const deleteData = async (id) =>{
+    console.log(id);
+    try {
+      const res = await axios.delete(`${import.meta.env.VITE_APP_API}/homesh/delete/${id}`)
+      console.log(res);
+      toast.success("ลบข้อมูลสำเร็จ");
+      fetchData()
+    } catch (error) {
+      console.log(error);
+      toast.error("ลบข้อมูลสำเร็จ");
+
+    }
+
+  }
+
+  const handleOpenEdit = (id, sh_name)=>{
+    handleOpen(id)
+    setDataTomodal({sh_name:sh_name})
+    console.log(sh_name);
+
+  }
+
+
+
+  useEffect(() => {
+    fetchData();
+  }, [search]);
+
   return (
     <div className="">
-      <HomeShareModal handleOpen={handleOpen} open={open} id={id} />
+      <HomeShareModal handleOpen={handleOpen} open={open} id={id} fetchData={fetchData} dataToModal={dataToModal}  />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
@@ -159,7 +207,12 @@ const BasicHome = () => {
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md bg-gray-50   ">
-            <Input variant="outlined" label="ค้นหาบ้านแชร์" color="purple" />
+            <Input
+              variant="outlined"
+              label="ค้นหาบ้านแชร์"
+              color="purple"
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
           <div className="">
             <Button
@@ -169,7 +222,7 @@ const BasicHome = () => {
               size="sm"
               className="text-sm  flex items-center gap-1  "
             >
-              <HiOutlinePlusSm size={20}  />
+              <HiOutlinePlusSm size={20} />
               สร้างบ้านแชร์
             </Button>
           </div>
@@ -198,101 +251,74 @@ const BasicHome = () => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map(
-                (
-                  {
-                    name,
-                    amount,
-                    date,
-                    status,
-                    account,
-                    accountNumber,
-                    expiry,
-                  },
-                  index
-                ) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
+              {data.map((item, index) => {
+                const isLast = index === data.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-                  return (
-                    <tr key={index} className="hover:bg-gray-200">
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {amount}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <div className="w-max">
-                          <Chip
-                            size="sm"
-                            variant="ghost"
-                            value={status}
-                            color={
-                              status === "paid"
-                                ? "green"
-                                : status === "pending"
-                                ? "amber"
-                                : "red"
-                            }
-                          />
-                        </div>
-                      </td>
-                      <td className={classes}>
-                        <div className="flex items-center gap-3">
-                          <div className="flex flex-col">
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal capitalize"
-                            >
-                              {account.split("-").join(" ")} {accountNumber}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal opacity-70"
-                            >
-                              {expiry}
-                            </Typography>
-                          </div>
-                        </div>
-                      </td>
-                      <td className={classes}>
-                        <div className="flex  gap-2 ">
+                return (
+                  <tr key={index} className="hover:bg-gray-200">
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {index + 1}
+                      </Typography>
+                    </td>
+
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item.sh_code}
+                      </Typography>
+                    </td>
+                    
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item.sh_name}
+                      </Typography>
+                    </td>
+           
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                       ออนไลน์
+                      </Typography>
+                    </td>
+
+                    <td className={classes}>
+                      <div className="flex  gap-2 ">
                         <HiPencilAlt
-                            size={20}
-                            color="white"
-                            className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
-                            onClick={() => handleOpen(1)}
-                          />
+                          size={20}
+                          color="white"
+                          className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                          onClick={() => handleOpenEdit(item.id, item.sh_name)}
+                        />
 
-                          <HiTrash
-                            size={25}
-                            color="white"
-                            className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5  "
-                            onClick={() => handleDelete(2)}
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
+                        <HiTrash
+                          size={25}
+                          color="white"
+                          className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5  "
+                          onClick={() => handleDelete(item.id)}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </CardBody>
