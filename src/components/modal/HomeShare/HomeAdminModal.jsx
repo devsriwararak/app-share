@@ -23,7 +23,7 @@ const options = [
 const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
   const [dataHomeSelect, setDataHomeSelect] = useState([]);
   const [sendData, setSendData] = useState({});
-  const [message , setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   const fetchHome = async () => {
     try {
@@ -50,16 +50,17 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
 
   const handleSubmit = async () => {
     const data = {
-      username: sendData.username,
-      share_w_id: sendData.share_w_id,
-      password: sendData.password,
-      f_name: sendData.f_name,
-      l_nane: sendData.l_nane,
-      address: sendData.address,
-      bank: sendData.bank,
-      bank_acc: sendData.bank_acc,
-      bank_name: sendData.bank_name,
-      tel: sendData.tel,
+      username: sendData.username || "",
+      share_w_id: sendData.share_w_id || "",
+      password: sendData.password || "",
+      f_name: sendData.f_name || "",
+      l_nane: sendData.l_nane || "",
+      address: sendData.address || "",
+      bank: sendData.bank || "",
+      bank_acc: sendData.bank_acc || "",
+      bank_name: sendData.bank_name || "",
+      tel: sendData.tel || "",
+      line : sendData.line || ""
     };
     console.log(data);
     try {
@@ -78,10 +79,10 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
         toast.success("บันทึกสำเร็จ");
         handleOpen();
         setSendData({});
-        setMessage('')
+        setMessage("");
       } else {
         toast.error("ไม่สามารถลงทะเบียนได้");
-        setMessage('มีผู้ใช้งานนี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !')
+        setMessage("มีผู้ใช้งานนี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !");
 
         // setSendData({});
       }
@@ -92,7 +93,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
 
   const handleUpdate = async () => {
     const data = {
-      id: sendData.id  || "" ,
+      id: sendData.id || "",
       username: sendData.username || "",
       share_w_id: sendData.share_w_id || "",
       password: sendData.password || "",
@@ -103,36 +104,45 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
       bank_acc: sendData.bank_acc || "",
       bank_name: sendData.bank_name || "",
       tel: sendData.tel || "",
+      line : sendData.line || ""
     };
     console.log(data);
     try {
-      const res = await axios.put(`${import.meta.env.VITE_APP_API}/edit`,data , {
-        headers : {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+      const res = await axios.put(
+        `${import.meta.env.VITE_APP_API}/edit`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
         }
-      })
+      );
       console.log(res.data);
-      if(res.data.error){
-        toast.error('ไม่สามารถดำเนินการได้')
-        setMessage('มีผู้ใช้งานนี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !')
-      }else {
-        toast.success('บันทึกข้อมูลสำเร็จ')
-        handleOpen()
-        setMessage('')
+      if (res.data.error) {
+        toast.error("ไม่สามารถดำเนินการได้");
+        setMessage("มีผู้ใช้งานนี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !");
+      } else {
+        toast.success("บันทึกข้อมูลสำเร็จ");
+        handleOpen();
+        setMessage("");
+        fetchDataHome();
       }
-  
-
     } catch (error) {
       console.log(error);
-      toast.error('ไม่สามารถดำเนินการได้')
+      toast.error("ไม่สามารถดำเนินการได้");
     }
   };
 
   useEffect(() => {
     fetchHome();
-    setSendData((prev)=>({
-      ...prev,
-    }, dataToModal))
+    setSendData(
+      (prev) => (
+        {
+          ...prev,
+        },
+        dataToModal
+      )
+    );
   }, [dataToModal]);
 
   return (
@@ -152,7 +162,13 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             options={dataHomeSelect}
             className="w-full"
             placeholder="เลือกบ้านแชร์"
-            // defaultValue={dataToModal?.id ? dataHomeSelect.find(option => option.value == dataToModal?.share_w_id) : ""}
+            defaultValue={
+              dataToModal?.id
+                ? dataHomeSelect.find(
+                    (option) => option.value == dataToModal?.share_w_id
+                  )
+                : ""
+            }
             onChange={(e) =>
               setSendData((prev) => ({
                 ...prev,
@@ -171,7 +187,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="username"
             onChange={(e) => handleChange(e)}
-            value={sendData?.username || ''}
+            value={sendData?.username || ""}
           />
           <Input
             color="red"
@@ -181,7 +197,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="password"
             onChange={(e) => handleChange(e)}
-            value={sendData?.password || ''}
+            value={sendData?.password || ""}
           />
         </div>
 
@@ -192,7 +208,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="f_name"
             onChange={(e) => handleChange(e)}
-            value={sendData?.f_name || ''}
+            value={sendData?.f_name || ""}
           />
           <Input
             color="purple"
@@ -200,7 +216,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="l_nane"
             onChange={(e) => handleChange(e)}
-            value={sendData?.l_nane || ''}
+            value={sendData?.l_nane || ""}
           />
         </div>
 
@@ -230,7 +246,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="bank_acc"
             onChange={(e) => handleChange(e)}
-            value={sendData?.bank_acc || ''}
+            value={sendData?.bank_acc || ""}
           />
           <Input
             color="purple"
@@ -238,7 +254,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="bank_name"
             onChange={(e) => handleChange(e)}
-            value={sendData?.bank_name || ''}
+            value={sendData?.bank_name || ""}
           />
         </div>
 
@@ -248,9 +264,15 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             label="เบอร์โทร"
             name="tel"
             onChange={(e) => handleChange(e)}
-            value={sendData?.tel || ''}
+            value={sendData?.tel || ""}
           />
-          <Input color="purple" label="Line ID (ถ้ามี)" disabled />
+          <Input
+            color="purple"
+            label="Line ID (ถ้ามี)"
+            name="line"
+            onChange={(e) => handleChange(e)}
+            value={sendData?.line || ""}
+          />
         </div>
 
         <div className="flex flex-col md:flex-row gap-2  justify-center mt-3">
@@ -260,12 +282,11 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
             className="w-full"
             name="address"
             onChange={(e) => handleChange(e)}
-            value={sendData?.address || ''}
+            value={sendData?.address || ""}
           />
         </div>
       </DialogBody>
       <DialogFooter>
-
         <h4 className="text-lg mx-4 text-red-500">{message}</h4>
         <Button
           variant="gradient"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -22,8 +22,9 @@ import {
 import Select from "react-select";
 import { toast } from "react-toastify";
 import classNames from "classnames";
+import axios from "axios";
 
-const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อลูกแชร์", "เลือก", "แก้ไข/ลบ"];
+const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อลูกแชร์", "เลือก"];
 
 const TABLE_ROWS = [
   {
@@ -66,17 +67,49 @@ const options = [
 
 const AddUserToHome = ({ handleOpen, open }) => {
   const [data, setData] = useState({});
+  const [dataUser, setDataUser] = useState([]);
+  const [searchUser, setSearchuser] = useState("");
+  const [sendDataUser, setSendDataUser] = useState({});
 
-  const handleSelectUser = (name) => {
-    setData((prev) => ({
+  const fetchDataUser = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}/u-search?name=${searchUser}`
+      );
+      console.log(res.data);
+      setDataUser(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeUser = (item) => {
+    setSendDataUser((prev) => ({
       ...prev,
-      name: name,
+      id: item.id,
+      f_name: item.f_name,
     }));
+  };
+
+  const fetchDataWongShare = async () => {
+    // try {
+    //   const res = await axios.get(
+    //     `${import.meta.env.VITE_APP_API}/sharehouse/mem-w-search?w_search=1`
+    //   );
+    //   console.log(res.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const handleAddUser = () => {
     toast.success("บันทึกสำเร็จ");
   };
+
+  useEffect(() => {
+    fetchDataUser();
+    fetchDataWongShare();
+  }, [searchUser]);
   return (
     <div>
       <Dialog open={open} size="xl" handler={handleOpen}>
@@ -95,7 +128,11 @@ const AddUserToHome = ({ handleOpen, open }) => {
                     เพิ่มลูกแชร์เข้าบ้านตัวเอง
                   </h2>
                   <div>
-                    <Input label="ค้นหา รหัส หรือ ชื่อลูกแชร์" />
+                    <Input
+                      color="purple"
+                      label="ค้นหา รหัส หรือ ชื่อลูกแชร์"
+                      onChange={(e) => setSearchuser(e.target.value)}
+                    />
                   </div>
                 </div>
 
@@ -120,15 +157,18 @@ const AddUserToHome = ({ handleOpen, open }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {TABLE_ROWS.map(({ name, job, date }, index) => (
-                        <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
+                      {dataUser.map((item, index) => (
+                        <tr
+                          key={item.id}
+                          className="even:bg-blue-gray-50/50 hover:bg-gray-200"
+                        >
                           <td className="p-4">
                             <Typography
                               variant="small"
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {name}
+                              {index + 1}
                             </Typography>
                           </td>
                           <td className="p-4">
@@ -137,7 +177,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {job}
+                              {item.code}
                             </Typography>
                           </td>
                           <td className="p-4">
@@ -146,13 +186,13 @@ const AddUserToHome = ({ handleOpen, open }) => {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {date}
+                              {item.f_name}
                             </Typography>
                           </td>
                           <td className="p-4 flex justify-center">
                             <FcPlus
                               className="cursor-pointer"
-                              onClick={() => handleSelectUser(job)}
+                              onClick={() => handleChangeUser(item)}
                               size={30}
                             />
                           </td>
@@ -164,8 +204,8 @@ const AddUserToHome = ({ handleOpen, open }) => {
 
                 <div className="flex flex-col md:flex-row gap-4 mt-5 items-center">
                   <div className="w-full">
-                    <b className="font-bold">ชื่อลูกแชร์ : </b>{" "}
-                    <span>{data.name}</span>
+                    <b className="font-bold">ชื่อลูกแชร์ : </b>
+                    <span>{sendDataUser.f_name}</span>
                   </div>
                   <Select
                     className="w-full"
@@ -224,7 +264,10 @@ const AddUserToHome = ({ handleOpen, open }) => {
                       <tbody>
                         {TABLE_ROWS.map(
                           ({ name, job, date, status }, index) => (
-                            <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
+                            <tr
+                              key={name}
+                              className="even:bg-blue-gray-50/50 hover:bg-gray-200"
+                            >
                               <td className="p-2">
                                 <Typography
                                   variant="small"
@@ -281,8 +324,16 @@ const AddUserToHome = ({ handleOpen, open }) => {
                               </td>
                               <td className="p-2 ">
                                 <div className="flex cursor-pointer gap-2">
-                                  <HiOutlinePencilAlt className="bg-purple-500 p-1 rounded-full" color="white" size={30} />
-                                  <HiTrash  className="bg-red-500 p-1 rounded-full" color="white" size={30} />
+                                  <HiOutlinePencilAlt
+                                    className="bg-purple-500 p-1 rounded-full"
+                                    color="white"
+                                    size={30}
+                                  />
+                                  <HiTrash
+                                    className="bg-red-500 p-1 rounded-full"
+                                    color="white"
+                                    size={30}
+                                  />
                                 </div>
                               </td>
                             </tr>
@@ -314,8 +365,6 @@ const AddUserToHome = ({ handleOpen, open }) => {
                     อัพเดท
                   </Button>
                 </div>
-
-
               </CardBody>
             </Card>
           </div>

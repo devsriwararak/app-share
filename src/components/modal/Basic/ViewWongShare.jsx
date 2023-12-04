@@ -30,7 +30,7 @@ const ViewWongShare = ({ open, handleOpen, id, dataToModal }) => {
   return (
     <Dialog open={open} size="md" handler={handleOpen}>
       <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
-        <HiOutlineDesktopComputer /> ข้อมูลวงแชร์ที่ : {dataToModal?.id}
+        <HiOutlineDesktopComputer /> ข้อมูลวงแชร์ที่ : {dataToModal?.p_code}
       </DialogHeader>
       <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">
         <div className="flex flex-col md:flex-row gap-4">

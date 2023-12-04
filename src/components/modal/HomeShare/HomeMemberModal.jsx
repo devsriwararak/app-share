@@ -62,6 +62,7 @@ const HomeMemberModal = ({
       l_nane: sendData.l_nane,
       address: sendData.address,
       tel: sendData.tel,
+      line : sendData.line
     };
     console.log(data);
     try {
@@ -100,6 +101,7 @@ const HomeMemberModal = ({
       l_nane: sendData.l_nane || "",
       address: sendData.address || "",
       tel: sendData.tel || "",
+      line: sendData.line || "",
     };
     console.log(data);
     try {
@@ -120,6 +122,7 @@ const HomeMemberModal = ({
         toast.success("บันทึกข้อมูลสำเร็จ");
         handleOpen();
         setMessage("");
+        fetchDataMember()
       }
     } catch (error) {
       console.log(error);
@@ -164,6 +167,13 @@ const HomeMemberModal = ({
                   ...prev,
                   share_w_id: e.value,
                 }))
+              }
+              defaultValue={
+                dataToModal?.id
+                  ? dataHomeSelect.find(
+                      (option) => option.value == dataToModal?.share_w_id
+                    )
+                  : ""
               }
             />
           </div>
@@ -219,12 +229,13 @@ const HomeMemberModal = ({
               className="w-full"
               value={sendData?.tel || ""}
             />
-            <Input
-              color="purple"
-              label="LINE ID (ถ้ามี)"
-              disabled
-              className="w-full"
-            />
+           <Input
+            color="purple"
+            label="Line ID (ถ้ามี)"
+            name="line"
+            onChange={(e) => handleChange(e)}
+            value={sendData?.line || ""}
+          />
           </div>
 
           <div className="flex flex-col md:flex-row gap-2  justify-center mt-3">

@@ -75,6 +75,7 @@ const HomeShare = () => {
         `${import.meta.env.VITE_APP_API}/m-search?name=${search2}`
       );
       setDataMember(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }

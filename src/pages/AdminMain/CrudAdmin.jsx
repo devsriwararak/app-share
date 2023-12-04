@@ -367,6 +367,8 @@ const ModalAdmin = ({ handleOpen, open, dataToModal }) => {
       console.log(error);
     }
   }
+
+  
   // useEffect(() => {
   //   setSendData((prev)=>({
   //     ...prev,
@@ -415,7 +417,7 @@ const ModalAdmin = ({ handleOpen, open, dataToModal }) => {
             <Input name="username" label="username" color="purple" value={sendData?.username || ""} onChange={(e)=>handleChange(e)}   />
           </div>
           <div className="w-full">
-            {/* <Input name="password" type="password" label="password" color="purple" value={sendData?.password || ""} onChange={(e)=>handleChange(e)}   /> */}
+            <Input name="password" type="password" label="password" color="purple" value={sendData?.password || ""} onChange={(e)=>handleChange(e)}   />
           </div>
         </div>
 

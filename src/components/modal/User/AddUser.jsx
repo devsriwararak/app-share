@@ -29,7 +29,6 @@ const AddUser = ({ open, handleOpen, fetchData, dataToModal }) => {
     e.preventDefault();
     const data = {
       username: sendData.username,
-      share_w_id: sendData.share_w_id,
       password: sendData.password,
       f_name: sendData.f_name,
       l_nane: sendData.l_nane,
