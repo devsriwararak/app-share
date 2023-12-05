@@ -28,46 +28,52 @@ const ViewMember = ({ open, handleOpen, id, dataToModal }) => {
   };
 
   return (
-    <Dialog open={open} size="md" handler={handleOpen}>
+    <Dialog open={open} size="sm" handler={handleOpen}>
       <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
         <HiOutlineDesktopComputer /> ข้อมูลพนักงาน : {dataToModal?.code}
       </DialogHeader>
       <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">
 
-        <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <div className="w-full">
-            <b className=" font-semibold text-black">รหัส : </b>
-            <span className="text-black">{dataToModal?.code}</span>
+            <b className=" font-semibold text-gray-800">รหัสพนักงาน : </b>
+            <span className="text-gray-700">{dataToModal?.code}</span>
           </div>
           <div className="w-full">
-            <b className=" font-semibold text-black" >ชื่อ : </b>
-            <span className="text-black">{dataToModal?.f_name}</span>
-          </div>
-          <div className="w-full">
-            <b className=" font-semibold text-black">สกุล : </b>
-            <span className="text-black">{dataToModal?.l_nane}</span>
+            <b className=" font-semibold text-gray-800" >username : </b>
+            <span className="text-gray-700">{dataToModal?.username}</span>
           </div>
         
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <div className="flex flex-col md:flex-row gap-4 mt-6">
+   
           <div className="w-full">
-            <b className=" font-semibold text-black" >username : </b>
-            <span className="text-black">{dataToModal?.username}</span>
+            <b className=" font-semibold text-gray-800" >ชื่อ : </b>
+            <span className="text-gray-700">{dataToModal?.f_name}</span>
           </div>
           <div className="w-full">
-            <b className=" font-semibold text-black">เบอร์โทรศัพท์ : </b>
-            <span className="text-black">{dataToModal?.tel}</span>
+            <b className=" font-semibold text-gray-800">สกุล : </b>
+            <span className="text-gray-700">{dataToModal?.l_nane}</span>
+          </div>
+        
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-4 mt-6">
+    
+          <div className="w-full">
+            <b className=" font-semibold text-gray-800">เบอร์โทรศัพท์ : </b>
+            <span className="text-gray-700">{dataToModal?.tel}</span>
           </div>
           <div className="w-full">
-            <b className=" font-semibold text-black">line ID  : </b>
-            <span className="text-black">{dataToModal?.line}</span>
+            <b className=" font-semibold text-gray-800">line ID  : </b>
+            <span className="text-gray-700">{dataToModal?.line}</span>
           </div>
         </div>
 
-        <div className="w-full mt-4">
-            <b className=" font-semibold text-black">ที่อยู่  : </b>
-            <span className="text-black">{dataToModal?.address}</span>
+        <div className="w-full mt-6">
+            <b className=" font-semibold  text-gray-800">ที่อยู่  : </b>
+            <span className="text-gray-700">{dataToModal?.address}</span>
           </div>
 
  

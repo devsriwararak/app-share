@@ -72,7 +72,7 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
 
   return (
     <Dialog open={open} size="sm" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+      <DialogHeader className="bg-gray-200 text-lg flex gap-2 rounded-lg">
         {" "}
         <HiOutlineHome /> {id ? "แก้ไขบ้านแชร์" : "สร้างบ้านแชร์"}
       </DialogHeader>

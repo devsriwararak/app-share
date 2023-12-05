@@ -147,7 +147,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
 
   return (
     <Dialog open={open} size="sm" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg text-lg">
         {" "}
         <HiOutlineHome />{" "}
         {dataToModal?.id

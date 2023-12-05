@@ -33,6 +33,7 @@ const AddMember = ({ handleOpen, open, fetchData, dataToModal }) => {
       address: sendData.address || "",
       tel: sendData.tel || "",
       line: sendData.line || "",
+      share_w_id : localStorage.getItem('share_w_id') || ""
     };
     console.log(data);
     try {
@@ -87,11 +88,12 @@ const AddMember = ({ handleOpen, open, fetchData, dataToModal }) => {
       if(res.data.error){
         toast.error('ไม่สามารถดำเนินการได้')
         setMessage('มีผู้ใช้งานนี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !')
-
+       
       }else {
         toast.success('บันทึกสำเร็จ')
         handleOpen()
         setMessage('')
+        fetchData()
 
       }
     } catch (error) {
@@ -130,6 +132,7 @@ const AddMember = ({ handleOpen, open, fetchData, dataToModal }) => {
               onChange={(e) => handleChange(e)}
               value={sendData?.f_name || ""}
               required
+              autoComplete="off"
             />
             <Input
               label="สกุล"
@@ -138,11 +141,12 @@ const AddMember = ({ handleOpen, open, fetchData, dataToModal }) => {
               onChange={(e) => handleChange(e)}
               value={sendData?.l_nane || ""}
               required
+              autoComplete="off"
             />
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 mt-4">
-            <div className="bg-yellow-100  w-full rounded-lg">
+            <div className="bg-yellow-100   w-full rounded-lg">
               <Input
                 label="Username"
                 color="red"
@@ -150,6 +154,7 @@ const AddMember = ({ handleOpen, open, fetchData, dataToModal }) => {
                 onChange={(e) => handleChange(e)}
                 value={sendData?.username || ""}
                 required
+                autoComplete="off"
               />
             </div>
             <div className="bg-yellow-100  w-full rounded-lg">

@@ -85,6 +85,7 @@ const Member = () => {
 
   const [data, setData] = useState([]);
   const [dataToModal , setDataToModal] = useState({})
+  const [search, setSearch] = useState("")
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -99,7 +100,7 @@ const Member = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/sharehouse/mem-search?name=`,
+        `${import.meta.env.VITE_APP_API}/sharehouse/mem-search?name=${search}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("Token")}`,
@@ -153,12 +154,12 @@ const Member = () => {
    number === 1 && handleOpen(1)
    number === 3 && handleOpenView(3)
    
-   console.log(item);
+  //  console.log(item);
   }
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [search]);
 
   return (
     <div className="">
@@ -178,11 +179,11 @@ const Member = () => {
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md  bg-gray-50  ">
-            <Input variant="outlined" label="ค้นหาพนักงาน" />
+            <Input variant="outlined" label="ค้นหาพนักงาน" onChange={(e)=>setSearch(e.target.value)} />
           </div>
           <div className="">
             <Button
-              onClick={() => (handleOpen(null) , dataToModal({}))}
+              onClick={() => (handleOpen(null) , setDataToModal({}))}
               variant="filled"
               color="purple"
               size="sm"

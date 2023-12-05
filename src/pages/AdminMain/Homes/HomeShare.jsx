@@ -167,7 +167,7 @@ const HomeShare = () => {
                     color="blue-gray"
                     className="mb-2  font-bold"
                   >
-                    ข้อมูลเจ้าของบ้านแชร์
+                    เจ้าของบ้านแชร์
                   </Typography>
                 </div>
                 <div className="   ">
@@ -320,7 +320,7 @@ const HomeShare = () => {
                   color="blue-gray"
                   className="mb-2  font-bold"
                 >
-                  ข้อมูลพนักงานบ้านแชร์
+                  พนักงานบ้านแชร์
                 </Typography>
                 <div className="flex-1">
                   <Input

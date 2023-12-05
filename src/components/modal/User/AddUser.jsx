@@ -113,7 +113,7 @@ const AddUser = ({ open, handleOpen, fetchData, dataToModal }) => {
 
   return (
     <Dialog open={open} size="sm" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg text-lg">
         {" "}
         <HiOutlineShoppingCart />
         {dataToModal?.id

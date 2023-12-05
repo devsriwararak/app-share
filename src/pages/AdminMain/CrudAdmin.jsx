@@ -389,8 +389,8 @@ const ModalAdmin = ({ handleOpen, open, dataToModal }) => {
 
   return (
     <Dialog open={open} size="sm" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 rounded-lg">
-        แก้ไข ADMIN : {dataToModal?.code}{" "}
+      <DialogHeader className="bg-gray-200 rounded-lg text-lg">
+        แก้ไขผู้ดูแลระบบ : {dataToModal?.code}{" "}
       </DialogHeader>
       <DialogBody>
         {/* {JSON.stringify(sendData)} */}

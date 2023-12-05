@@ -82,6 +82,7 @@ const Login = ({ setToken }) => {
         console.log(decoded);
         localStorage.setItem("Token", token);
         localStorage.setItem("id", decoded.id);
+        localStorage.setItem("name", decoded.f_name +" " + decoded.l_nane);
 
         // แบ่ง navigate
         if (decoded.level === "0") {
@@ -98,11 +99,11 @@ const Login = ({ setToken }) => {
           localStorage.setItem("Type", "user");
         } else if (decoded.level === "3") {
           // status - 3
-          localStorage.setItem("status", "บ้านแชร์ A-001");
+          fetchDataHome(decoded.share_w_id , decoded.level)
           localStorage.setItem("Type", "home");
         } else if (decoded.level === "4") {
           // status - 4
-          localStorage.setItem("status", "พนักงานในบ้านแชร์ A-001");
+          fetchDataHome(decoded.share_w_id , decoded.level)
           localStorage.setItem("Type", "member");
         }
       setTimeout(() => {
@@ -115,6 +116,18 @@ const Login = ({ setToken }) => {
       toast.error(error)
     }
   };
+
+  const fetchDataHome = async(share_w_id, level)=> {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_APP_API}/homesh/home-search?name=${share_w_id}`)
+      // console.log(res.data[0].sh_name);
+      level ==="3" && (localStorage.setItem("status", res.data[0].sh_name || ""), localStorage.setItem("share_w_id", share_w_id || ""));
+      level ==="4" && (localStorage.setItem("status", `พนักงาน : ${res.data[0].sh_name || ""}`),localStorage.setItem("share_w_id", share_w_id || "") );
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>

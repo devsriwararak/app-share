@@ -138,7 +138,7 @@ const WongShareModal = ({ open, handleOpen, id, fetchData, dataToModal }) => {
 
   return (
     <Dialog open={open} size="lg" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg text-lg">
         <HiOutlineChatAlt2 /> {id ? "แก้ไขวงค์แชร์" : "สร้างวงค์แชร์"}
       </DialogHeader>
       <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">

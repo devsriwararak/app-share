@@ -29,30 +29,30 @@ const ViewWongShare = ({ open, handleOpen, id, dataToModal }) => {
 
   return (
     <Dialog open={open} size="md" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg text-lg ">
         <HiOutlineDesktopComputer /> ข้อมูลวงแชร์ที่ : {dataToModal?.p_code}
       </DialogHeader>
       <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="w-1/3">
-            <b className=" font-semibold text-black" >บ้านแชร์ : </b>
-            <span className="text-black">{dataToModal?.share_id}</span>
+            <b className=" font-semibold text-gray-800" >บ้านแชร์ : </b>
+            <span className="text-gray-600">{dataToModal?.share_id}</span>
           </div>
           <div className="w-2/3">
-            <b className=" font-semibold text-black">รหัสวงแชร์ : </b>
-            <span className="text-black">{dataToModal?.p_code}</span>
+            <b className=" font-semibold text-gray-800">รหัสวงแชร์ : </b>
+            <span className="text-gray-600">{dataToModal?.p_code}</span>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mt-4">
         
           <div className="w-1/3">
-            <b className=" font-semibold text-black">ชื่อวงแชร์ : </b>
-            <span className="text-black">{dataToModal?.p_share_name}</span>
+            <b className=" font-semibold text-gray-800">ชื่อวงแชร์ : </b>
+            <span className="text-gray-600">{dataToModal?.p_share_name}</span>
           </div>
           <div className="w-2/3">
-            <b className=" font-semibold text-black">รูปแบบวงแชร์ : </b>
-            <span className="text-black">
+            <b className=" font-semibold text-gray-800">รูปแบบวงแชร์ : </b>
+            <span className="text-gray-600">
             {dataToModal?.p_share_type === "1" && "บิดดอกตาม"}
             {dataToModal?.p_share_type === "2" && "ดอกตาม"}
             {dataToModal?.p_share_type === "3" && "ขั้นบันได"}
@@ -64,39 +64,39 @@ const ViewWongShare = ({ open, handleOpen, id, dataToModal }) => {
 
         <div className="flex flex-col md:flex-row gap-4 mt-4">
           <div className="w-full">
-            <b className=" font-semibold text-black">ดอกเบี้ย : </b>
-            <span className="text-black">{dataToModal?.p_share_interest}</span>
+            <b className=" font-semibold text-gray-800">ดอกเบี้ย : </b>
+            <span className="text-gray-600">{dataToModal?.p_share_interest}</span>
           </div>
           <div className="w-full">
-            <b className=" font-semibold text-black">ส่งต่องวด : </b>
-            <span className="text-black">{dataToModal?.p_share_send_per}</span>
+            <b className=" font-semibold text-gray-800">ส่งต่องวด : </b>
+            <span className="text-gray-600">{dataToModal?.p_share_send_per}</span>
           </div>
           <div className="w-full">
-            <b className=" font-semibold text-black">จำนวนเงินต้น : </b>
-            <span className="text-black">{dataToModal?.p_share_paid}</span>
+            <b className=" font-semibold text-gray-800">จำนวนเงินต้น : </b>
+            <span className="text-gray-700">{dataToModal?.p_share_paid}</span>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mt-4">
           <div className="w-1/3">
-            <b className=" font-semibold text-black">ค่าดูแลวง : </b>
-            <span className="text-black">{dataToModal?.p_share_maintain}</span>
+            <b className=" font-semibold text-gray-800">ค่าดูแลวง : </b>
+            <span className="text-gray-600">{dataToModal?.p_share_maintain}</span>
           </div>
           <div className="w-2/3">
-            <b className=" font-semibold text-black">จำนวนมือ : </b>
-            <span className="text-black">{dataToModal?.p_share_hand}</span>
+            <b className=" font-semibold text-gray-800">จำนวนมือ : </b>
+            <span className="text-gray-600">{dataToModal?.p_share_hand}</span>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mt-4">
           <div className="w-full">
-            <b className=" font-semibold text-black">หมายเหตุ : </b>
-            <span className="text-black">{dataToModal?.p_share_req}</span>
+            <b className=" font-semibold text-gray-800">หมายเหตุ : </b>
+            <span className="text-gray-700">{dataToModal?.p_share_req}</span>
           </div>
         </div>
 
         <div className="flex justify-end mt-4">
-          <Button onClick={() => handleOpen()} color="gray">
+          <Button onClick={() => handleOpen()} className="bg-gray-700 ">
             ออก
           </Button>
         </div>
