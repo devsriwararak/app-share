@@ -5,12 +5,13 @@ import {
   Input,
   Typography,
 } from "@material-tailwind/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineCalendar, HiOutlineHome, HiOutlinePencilAlt, HiOutlinePlus, HiOutlinePlusSm, HiOutlineUsers } from "react-icons/hi";
 import { FcPlus } from "react-icons/fc";
 import DataUser from "./DataUser";
 import DataActivity from "./DataActivity";
 import AddUserToHome from "../../../components/modal/User/AddUserToHome";
+import axios from "axios";
 
 const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อ", "เลือก"];
 
@@ -43,20 +44,30 @@ const ManageUser = () => {
     setStatusBtn(number)
   }
 
-  const handelClick = (code, name)=>{
-    setData((prev)=>({
-      ...prev,
-      name: name,
-      code:code
-    }))
-  }
+const fetchDataMyUser = async()=>{
+try {
+  const res = await axios.get(`${import.meta.env.VITE_APP_API}/sharehouse/usere-search`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("Token")}`,
+
+    }
+  })
+  console.log(res.data);
+} catch (error) {
+  console.log(error);
+}
+}
+
+useEffect(()=>{
+  fetchDataMyUser()
+},[])
 
   return (
     <div>
       <AddUserToHome handleOpen={handleOpen} open={open}  />
 
       <div className="flex flex-col md:flex-row gap-4">
-        <Card className="ring-2 ring-gray-800/5 w-full md:w-4/12">
+        <Card className="ring-2 ring-gray-800/5 w-full md:w-1/3">
           <CardBody>
             <div className="flex flex-col md:flex-row   md:justify-between">
               <h2 className="text-lg text-black font-bold flex items-center gap-3">
@@ -71,68 +82,22 @@ const ManageUser = () => {
               <Input className="" label="ค้นหา รหัส หรือ ชื่อลูกค้า" color="purple" />
             </div>
 
-            <Card className=" w-full overflow-y-scroll mt-5">
-              <table className="w-full min-w-max table-auto text-center">
-                <thead>
-                  <tr>
-                    {TABLE_HEAD.map((head) => (
-                      <th
-                        key={head}
-                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                      >
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-bold leading-none opacity-90"
-                        >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {TABLE_ROWS.map(({ name, job, date }, index) => (
-                    <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {name}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {job}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className="p-4 flex justify-center cursor-pointer">
-                        <FcPlus onClick={()=>handelClick(job, date )} size={25} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Card>
+            <ul className="mt-5 overflow-y-scroll">
+                {TABLE_ROWS.map((item, index) => (
+                  <li className=" hover:bg-gray-200 py-2 flex justify-between items-center" key={index}>
+                    {`${item.date} (${item.job})`}
+                    <FcPlus className=" cursor-pointer" onClick={() => handleClick_1(index)} size={23} />
+                  </li>
+                ))}
+              </ul>
+
+
+
+     
           </CardBody>
         </Card>
 
-        <div className="w-full md:w-8/12 ">
+        <div className="w-full md:w-2/3 ">
           <div className="flex flex-row gap-4 justify-center md:justify-start">
             <Button color="blue" size="sm" className=" text-sm flex items-center gap-2 " onClick={()=>handleBtnPage(1)}><HiOutlineHome size={20} /> ข้อมูลลูกแชร์</Button>
             <Button color="green" size="sm" className=" text-sm flex items-center gap-2" onClick={()=>handleBtnPage(2)}> <HiOutlineCalendar size={20}/> ข้อมูลกิจกรรม</Button>

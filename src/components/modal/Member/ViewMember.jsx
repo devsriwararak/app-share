@@ -28,8 +28,8 @@ const ViewMember = ({ open, handleOpen, id, dataToModal }) => {
   };
 
   return (
-    <Dialog open={open} size="sm" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 flex gap-2 rounded-lg">
+    <Dialog open={open} size="md" handler={handleOpen}>
+      <DialogHeader className="bg-gray-200 flex text-lg gap-2 rounded-lg">
         <HiOutlineDesktopComputer /> ข้อมูลพนักงาน : {dataToModal?.code}
       </DialogHeader>
       <DialogBody className=" py-10 h-96 overflow-scroll md:h-full md:overflow-auto ">

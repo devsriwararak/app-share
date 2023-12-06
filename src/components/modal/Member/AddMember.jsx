@@ -117,7 +117,7 @@ const AddMember = ({ handleOpen, open, fetchData, dataToModal }) => {
 
   return (
     <Dialog open={open} size="md" handler={handleOpen}>
-      <DialogHeader className="bg-gray-200 rounded-lg flex gap-4">
+      <DialogHeader className="bg-gray-200 rounded-lg flex gap-4 text-lg">
         <HiOutlineUserGroup size={24} color="black" /> สร้างพนักงานใหม่
       </DialogHeader>
       <DialogBody>

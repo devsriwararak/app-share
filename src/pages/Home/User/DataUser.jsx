@@ -37,14 +37,14 @@ const DataUser = ({ data }) => {
 
       <div className="flex flex-col md:flex-row gap-4 mt-16">
         <Card className="w-full ring-2 ring-gray-800/5 mt-8 md:mt-0">
-          <CardHeader className="h-14 bg-purple-800 text-white flex justify-center items-center text-lg font-bold ring-1 ring-gray-300">
+          <CardHeader className="h-14 bg-purple-800 text-white flex justify-center items-center text-md font-bold ring-1 ring-gray-300">
             วงแชร์ทั้งหมดที่เล่น
           </CardHeader>
           <CardBody>ดำเนินการทำใน งวดที่3/3 ครับ</CardBody>
         </Card>
 
         <Card className="w-full ring-2 ring-gray-800/5 mt-8 md:mt-0">
-          <CardHeader className="h-14 bg-purple-800 text-white flex justify-center items-center text-lg font-bold ring-1 ring-gray-300">
+          <CardHeader className="h-14 bg-purple-800 text-white flex justify-center items-center text-md  font-bold ring-1 ring-gray-300">
             สรุปยอดมือเป็นมือตาย
           </CardHeader>
           <CardBody>ดำเนินการทำใน งวดที่3/3 ครับ</CardBody>
