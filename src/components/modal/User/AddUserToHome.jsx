@@ -164,7 +164,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                           key={item.id}
                           className="even:bg-blue-gray-50/50 hover:bg-gray-200"
                         >
-                          <td className="p-4">
+                          <td className="p-2">
                             <Typography
                               variant="small"
                               color="blue-gray"
@@ -173,7 +173,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                               {index + 1}
                             </Typography>
                           </td>
-                          <td className="p-4">
+                          <td className="p-2">
                             <Typography
                               variant="small"
                               color="blue-gray"
@@ -182,7 +182,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                               {item.code}
                             </Typography>
                           </td>
-                          <td className="p-4">
+                          <td className="p-2">
                             <Typography
                               variant="small"
                               color="blue-gray"
@@ -191,7 +191,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                               {item.f_name}
                             </Typography>
                           </td>
-                          <td className="p-4 flex justify-center">
+                          <td className="p-2 flex justify-center">
                             <FcPlus
                               className="cursor-pointer"
                               onClick={() => handleChangeUser(item)}

@@ -21,7 +21,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
     ? [
         {
           key: "dashboard",
-          label: Type,
+          label: "ภาพรวม (ง3/3)",
           path: "/admin",
           icon: <HiOutlineViewGrid />,
         },
@@ -71,7 +71,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
     ? [
         {
           key: "dashboard",
-          label: "ภาพรวม",
+          label: "ภาพรวม (ง3/3)",
           path: "/user",
           icon: <HiOutlineViewGrid />,
         },
@@ -83,13 +83,13 @@ export const DASHBOARD_SIDEBAR_LINKS =
         },
         {
           key: "myHomeShare",
-          label: "บ้านแชร์ของฉัน",
+          label: "บ้านแชร์ของฉัน (ง3/3)",
           path: "/user/my-wong",
           icon: <HiOutlineLocationMarker />,
         },
         {
           key: "user-report",
-          label: "รายงาน",
+          label: "รายงาน (ง3/3)",
           path: "/admin",
           icon: <HiOutlineChartSquareBar />,
         },
@@ -98,7 +98,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
     ? [
         {
           key: "home-dashboard",
-          label: "ภาพรวม",
+          label: "ภาพรวม (ง3/3)",
           path: "/home",
           icon: <HiOutlineViewGrid />,
         },
@@ -122,13 +122,13 @@ export const DASHBOARD_SIDEBAR_LINKS =
         } : {key: "noData"},
         {
           key: "play-share",
-          label: "เล่นแชร์",
+          label: "เล่นแชร์ (ง3/3)",
           path: "/home/play",
           icon: <HiOutlinePlay />,
         },
         {
           key: "home-homeShare",
-          label: "รายงาน",
+          label: "รายงาน (ง3/3)",
           path: "/home/report",
           icon: <HiOutlineChartSquareBar />,
         },
@@ -147,7 +147,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
   {
     key: "settings",
-    label: "ข้อมูลส่วนตัว",
+    label: "ข้อมูลส่วนตัว (ง3/3)",
     path: "/settings",
     icon: <HiOutlineCog />,
   },

@@ -12,6 +12,7 @@ import DataUser from "./DataUser";
 import DataActivity from "./DataActivity";
 import AddUserToHome from "../../../components/modal/User/AddUserToHome";
 import axios from "axios";
+import classNames from "classnames";
 
 const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อ", "เลือก"];
 
@@ -35,7 +36,10 @@ const TABLE_ROWS = [
 
 const ManageUser = () => {
   const [statusBtn , setStatusBtn] = useState(1)
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
+  const [selectData , setSelectData] = useState({})
+  const [activeItem, setActiveItem] = useState();
+
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
@@ -53,9 +57,15 @@ try {
     }
   })
   console.log(res.data);
+  setData(res.data)
 } catch (error) {
   console.log(error);
 }
+}
+
+const handleSelect = (item, index)=>{
+  setSelectData(item)
+  setActiveItem(index)
 }
 
 useEffect(()=>{
@@ -64,13 +74,13 @@ useEffect(()=>{
 
   return (
     <div>
-      <AddUserToHome handleOpen={handleOpen} open={open}  />
+      <AddUserToHome handleOpen={handleOpen} open={open}   />
 
       <div className="flex flex-col md:flex-row gap-4">
         <Card className="ring-2 ring-gray-800/5 w-full md:w-1/3">
           <CardBody>
             <div className="flex flex-col md:flex-row   md:justify-between">
-              <h2 className="text-lg text-black font-bold flex items-center gap-3">
+              <h2 className="text-lg text-black font-bold flex items-center gap-1">
                 <HiOutlineUsers />
                 ลูกแชร์ (3)
               </h2>
@@ -82,14 +92,16 @@ useEffect(()=>{
               <Input className="" label="ค้นหา รหัส หรือ ชื่อลูกค้า" color="purple" />
             </div>
 
-            <ul className="mt-5 overflow-y-scroll">
-                {TABLE_ROWS.map((item, index) => (
-                  <li className=" hover:bg-gray-200 py-2 flex justify-between items-center" key={index}>
-                    {`${item.date} (${item.job})`}
-                    <FcPlus className=" cursor-pointer" onClick={() => handleClick_1(index)} size={23} />
+            <ul className="mt-5 overflow-y-scroll ">
+                {data.map((item, index) => (
+                  <li className={classNames(activeItem === index && "bg-gray-800/20", "hover:bg-gray-200 py-2 flex justify-between items-center px-2" )} key={index}>
+
+                  {`${index + 1}.  ${item.f_name} (${item.code})`}
+                    <FcPlus className=" cursor-pointer" onClick={() => handleSelect(item, index)} size={23} />
                   </li>
                 ))}
               </ul>
+
 
 
 
@@ -100,14 +112,14 @@ useEffect(()=>{
         <div className="w-full md:w-2/3 ">
           <div className="flex flex-row gap-4 justify-center md:justify-start">
             <Button color="blue" size="sm" className=" text-sm flex items-center gap-2 " onClick={()=>handleBtnPage(1)}><HiOutlineHome size={20} /> ข้อมูลลูกแชร์</Button>
-            <Button color="green" size="sm" className=" text-sm flex items-center gap-2" onClick={()=>handleBtnPage(2)}> <HiOutlineCalendar size={20}/> ข้อมูลกิจกรรม</Button>
+            <Button color="green" size="sm" className=" text-sm flex items-center gap-2" disabled={!selectData.user_id} onClick={()=>handleBtnPage(2)} > <HiOutlineCalendar size={20}/> ข้อมูลกิจกรรม</Button>
 
           </div>
           <Card className="ring-2  ring-gray-800/5 mt-6 ">
             <CardBody>
               <div>
-                {statusBtn === 1 && <DataUser data={data}/>}
-                {statusBtn === 2 && <DataActivity/>}
+                {statusBtn === 1 && <DataUser data={data} selectData={selectData}/>}
+                {statusBtn === 2 && <DataActivity />}
 
               </div>
             </CardBody>

@@ -200,7 +200,7 @@ const AddToWongShare = () => {
                     <tbody>
                       {TABLE_ROWS.map(({ name, job, date, status }, index) => (
                         <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
-                          <td className="p-4">
+                          <td className="p-3">
                             <Typography
                               variant="small"
                               color="blue-gray"
@@ -209,7 +209,7 @@ const AddToWongShare = () => {
                               {name}
                             </Typography>
                           </td>
-                          <td className="p-4">
+                          <td className="p-3">
                             <Typography
                               variant="small"
                               color="blue-gray"
@@ -218,7 +218,7 @@ const AddToWongShare = () => {
                               {job}
                             </Typography>
                           </td>
-                          <td className="p-4">
+                          <td className="p-3">
                             <Typography
                               variant="small"
                               color="blue-gray"
@@ -227,7 +227,7 @@ const AddToWongShare = () => {
                               {date}
                             </Typography>
                           </td>
-                          <td className="p-4">
+                          <td className="p-3">
                             <Typography
                               variant="small"
                               color={

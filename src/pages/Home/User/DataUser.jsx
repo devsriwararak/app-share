@@ -2,7 +2,7 @@ import { Button, Card, CardBody, CardHeader } from "@material-tailwind/react";
 import React from "react";
 import { HiOutlineHome, HiOutlinePencilAlt } from "react-icons/hi";
 
-const DataUser = ({ data }) => {
+const DataUser = ({ data , selectData}) => {
   return (
     <>
       <div className="flex justify-between">
@@ -14,23 +14,23 @@ const DataUser = ({ data }) => {
 
       <div className="flex flex-col md:flex-row gap-4 mt-5">
         <div className="w-full">
-          <b>รหัส : </b> <span> {data.code} </span>
+          <b>รหัส : </b> <span> {selectData.code} </span>
         </div>
         <div className="w-full">
-          <b>ชื่อ : </b> <span> {data.name} </span>
+          <b>ชื่อ : </b> <span> {selectData.f_name} </span>
         </div>
         <div className="w-full">
-          <b>สกุล : </b> <span>xxxx</span>
+          <b>สกุล : </b> <span>{selectData.l_nane}</span>
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 mt-4">
         <div className="w-1/3">
-          <b>เบอร์โทร : </b> <span>xxxx</span>
+          <b>เบอร์โทร : </b> <span>{selectData.tel}</span>
 
         </div>
         <div className="w-2/3">
-        <b>ที่อยู่ : </b> <span>xxxx</span>
+        <b>ที่อยู่ : </b> <span>{selectData.address}</span>
 
         </div>
       </div>

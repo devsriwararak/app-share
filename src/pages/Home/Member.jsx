@@ -27,6 +27,8 @@ import ViewWongShare from "../../components/modal/Basic/ViewWongShare";
 import AddMember from "../../components/modal/Member/AddMember";
 import axios from "axios";
 import ViewMember from "../../components/modal/Member/ViewMember";
+import { calculatePageIndices, calculatePagination } from "../../components/pagination/PaginationUtils";
+import Pagination from "../../components/pagination/Pagination";
 
 const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อพนักงาน", "Username", "แก้ไข/ลบ"];
 
@@ -87,15 +89,15 @@ const Member = () => {
   const [dataToModal , setDataToModal] = useState({})
   const [search, setSearch] = useState("")
 
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const itemsPerPage = 10;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const getPaginatedData = () => {
+    return calculatePagination(currentPage, itemsPerPage, data);
   };
+  const { firstIndex, lastIndex } = calculatePageIndices(currentPage, itemsPerPage);
+
 
   const fetchData = async () => {
     try {
@@ -198,7 +200,7 @@ const Member = () => {
 
       <Card className=" h-[550px]  w-full mx-auto   md:w-full  mt-8 shadow-lg ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
-          <table className=" w-full  min-w-max table-auto text-left">
+          <table className=" w-full  min-w-max table-auto text-center">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (
@@ -218,11 +220,11 @@ const Member = () => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((item, index) => {
+              {getPaginatedData().map((item, index) => {
                 const isLast = index === data.length - 1;
                 const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
+                  ? "p-2"
+                  : "p-2 border-b border-blue-gray-50";
 
                 return (
                   <tr key={index} className="hover:bg-gray-200">
@@ -232,7 +234,7 @@ const Member = () => {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {index + 1}
+                        {firstIndex + index}
                       </Typography>
                     </td>
                     <td className={classes}>
@@ -269,21 +271,24 @@ const Member = () => {
                     <td className={classes}>
                       <div className="flex  gap-2 ">
                         <HiOutlineDesktopComputer
-                          size={24}
-                          color="white"
-                          className="cursor-pointer bg-gray-900 rounded-full w-8 h-8 p-1.5 "
+                          
+                          size={20}
+                          color="black"
+                          className="cursor-pointer  "
                           onClick={() => handleDataToModal(item,3)}
                         />
                         <HiPencilAlt
-                          size={24}
-                          color="white"
-                          className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                         
+                         size={20}
+                         color="black"
+                         className="cursor-pointer  "
                           onClick={() => handleDataToModal(item,1)}
                         />
                         <HiTrash
-                          size={24}
-                          color="white"
-                          className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                          
+                          size={20}
+                          color="red"
+                          className="cursor-pointer  "
                           onClick={() => handleDelete(item.user_id)}
                         />
                       </div>
@@ -295,39 +300,13 @@ const Member = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Button
-            onClick={() => handlePageChange(currentPage - 1)}
-            variant="outlined"
-            size="sm"
-            color="purple"
-          >
-            ก่อนหน้า
-          </Button>
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <IconButton
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                variant="filled"
-                size="sm"
-                className={
-                  currentPage == index + 1
-                    ? "bg-purple-400"
-                    : "bg-white text-black"
-                }
-              >
-                {index + 1}
-              </IconButton>
-            ))}
-          </div>
-          <Button
-            color="purple"
-            onClick={() => handlePageChange(currentPage + 1)}
-            variant="outlined"
-            size="sm"
-          >
-            ถัดไป
-          </Button>
+        <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={data.length}
+            paginate={paginate}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </CardFooter>
       </Card>
     </div>

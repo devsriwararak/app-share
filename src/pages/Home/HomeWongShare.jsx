@@ -16,14 +16,17 @@ import {
   HiOutlineChatAlt2,
   HiPencilAlt,
   HiTrash,
-  HiOutlineDesktopComputer, 
-  HiOutlinePlusSm
+  HiOutlineDesktopComputer,
+  HiOutlinePlusSm,
 } from "react-icons/hi";
 import WongShareModal from "../../components/modal/Basic/WongShareModal";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import ViewWongShare from "../../components/modal/Basic/ViewWongShare";
 import axios from "axios";
+
+import Pagination from "../../components/pagination/Pagination";
+import { calculatePageIndices, calculatePagination } from "../../components/pagination/PaginationUtils";
 
 const TABLE_HEAD = ["ลำดับ", "ชื่อวงแชร์", "Date", "Status", "แก้ไข/ลบ"];
 
@@ -109,30 +112,38 @@ const HomeWongShare = () => {
   const handleOpenView = (number) => (setOpenView(!openView), setId(number));
 
   // State
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+
+
+
+  // Pagination
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = TABLE_ROWS.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(TABLE_ROWS.length / itemsPerPage);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const itemsPerPage = 10;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const getPaginatedData = () => {
+    return calculatePagination(currentPage, itemsPerPage, TABLE_ROWS);
   };
+  const { firstIndex, lastIndex } = calculatePageIndices(
+    currentPage,
+    itemsPerPage
+  );
 
-  const fetchData = async()=>{
-try {
-  const res = await axios.get(`${import.meta.env.VITE_APP_API}/share/share-search?name=` , {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("Token")}`,
-    },
-  })
-  console.log(res.data);
-} catch (error) {
-  console.log(error);
-}
-  }
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}/share/share-search?name=`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -151,14 +162,14 @@ try {
     });
   };
 
-  useEffect(()=>{
-    fetchData()
-  },[])
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="">
       <WongShareModal handleOpen={handleOpen} open={open} id={id} />
-      <ViewWongShare handleOpen={handleOpenView} open={openView} id={id}   />
+      <ViewWongShare handleOpen={handleOpenView} open={openView} id={id} />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
@@ -173,7 +184,7 @@ try {
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-72 bg-slate-50 rounded-md  bg-gray-50  ">
-            <Input variant="outlined" label="ค้นหาวงค์แชร์" />
+            <Input variant="outlined" label="ค้นหาวงค์แชร์" color="purple" />
           </div>
           <div className="">
             <Button
@@ -183,7 +194,7 @@ try {
               size="sm"
               className="text-sm  flex items-center gap-1 "
             >
-              <HiOutlinePlusSm size={20}  />
+              <HiOutlinePlusSm size={20} />
               สร้างวงค์แชร์
             </Button>
           </div>
@@ -192,7 +203,7 @@ try {
 
       <Card className=" h-[550px]  w-full mx-auto   md:w-full  mt-8 shadow-lg ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
-          <table className=" w-full  min-w-max table-auto text-left">
+          <table className=" w-full  min-w-max table-auto text-center">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (
@@ -212,7 +223,7 @@ try {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map(
+              {getPaginatedData().map(
                 (
                   {
                     name,
@@ -227,8 +238,8 @@ try {
                 ) => {
                   const isLast = index === TABLE_ROWS.length - 1;
                   const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50 ";
+                    ? "p-2"
+                    : "p-2 border-b border-blue-gray-50 ";
 
                   return (
                     <tr key={index} className="hover:bg-gray-200">
@@ -238,7 +249,7 @@ try {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {amount}
+                              {firstIndex + index}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -251,59 +262,43 @@ try {
                         </Typography>
                       </td>
                       <td className={classes}>
-                        <div className="w-max">
-                          <Chip
-                            size="sm"
-                            variant="ghost"
-                            value={status}
-                            color={
-                              status === "paid"
-                                ? "green"
-                                : status === "pending"
-                                ? "amber"
-                                : "red"
-                            }
-                          />
-                        </div>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {date}
+                        </Typography>
                       </td>
                       <td className={classes}>
-                        <div className="flex items-center gap-3">
-                          <div className="flex flex-col">
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal capitalize"
-                            >
-                              {account.split("-").join(" ")} {accountNumber}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal opacity-70"
-                            >
-                              {expiry}
-                            </Typography>
-                          </div>
-                        </div>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {date}
+                        </Typography>
                       </td>
                       <td className={classes}>
                         <div className="flex  gap-2 ">
                           <HiOutlineDesktopComputer
-                            size={24}
-                            color="white"
-                            className="cursor-pointer bg-gray-900 rounded-full w-8 h-8 p-1.5 "
-                            onClick={()=>handleOpenView(3)}
+                           size={20}
+                            color="black"
+                            className="cursor-pointer  "
+                            onClick={() => handleOpenView(3)}
                           />
                           <HiPencilAlt
-                            size={24}
-                            color="white"
-                            className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                            
+                            size={20}
+                            color="black"
+                            className="cursor-pointer  "
                             onClick={() => handleOpen(1)}
                           />
                           <HiTrash
-                            size={24}
-                            color="white"
-                            className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                            
+                            size={20}
+                            color="red"
+                            className="cursor-pointer  "
                             onClick={() => handleDelete(2)}
                           />
                         </div>
@@ -316,7 +311,15 @@ try {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Button
+
+          <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={TABLE_ROWS.length}
+            paginate={paginate}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+          {/* <Button
             onClick={() => handlePageChange(currentPage - 1)}
             variant="outlined"
             size="sm"
@@ -348,7 +351,7 @@ try {
             size="sm"
           >
             ถัดไป
-          </Button>
+          </Button> */}
         </CardFooter>
       </Card>
     </div>
@@ -356,5 +359,3 @@ try {
 };
 
 export default HomeWongShare;
-
-

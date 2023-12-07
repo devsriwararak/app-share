@@ -76,7 +76,7 @@ const MyWongActivity = ({ data }) => {
                 <tbody>
                   {TABLE_ROWS_2.map(({ name, job, date, price }, index) => (
                     <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -85,7 +85,7 @@ const MyWongActivity = ({ data }) => {
                           {name}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -94,7 +94,7 @@ const MyWongActivity = ({ data }) => {
                           {job}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -103,7 +103,7 @@ const MyWongActivity = ({ data }) => {
                           {date}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -152,7 +152,7 @@ const MyWongActivity = ({ data }) => {
                 <tbody>
                   {TABLE_ROWS_2.map(({ name, job, date, price }, index) => (
                     <tr key={name} className="even:bg-blue-gray-50/50 hover:bg-gray-200">
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -161,7 +161,7 @@ const MyWongActivity = ({ data }) => {
                           {name}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -170,7 +170,7 @@ const MyWongActivity = ({ data }) => {
                           {job}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -179,7 +179,7 @@ const MyWongActivity = ({ data }) => {
                           {date}
                         </Typography>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3">
                         <Typography
                           variant="small"
                           color="blue-gray"

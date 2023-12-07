@@ -29,6 +29,8 @@ import HomeShareModal from "../../../components/modal/Basic/HomeShareModal";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Pagination from "../../../components/pagination/Pagination";
+import { calculatePageIndices, calculatePagination } from "../../../components/pagination/PaginationUtils";
 
 const TABLE_HEAD = [
   "ลำดับ",
@@ -120,16 +122,14 @@ const BasicHome = () => {
   const [search, setSearch] = useState("");
   const [dataToModal , setDataTomodal] = useState({})
 
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = TABLE_ROWS.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const itemsPerPage = 10;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const getPaginatedData = () => {
+    return calculatePagination(currentPage, itemsPerPage, data);
   };
-
+  const { firstIndex, lastIndex } = calculatePageIndices(currentPage, itemsPerPage);
 
 
   const fetchData = async () => {
@@ -231,7 +231,7 @@ const BasicHome = () => {
 
       <Card className=" h-[550px] w-full m-4 mx-auto shadow-lg   md:w-full  mt-8 ">
         <CardBody className="  px-2 -mt-4 overflow-scroll">
-          <table className=" w-full  min-w-max table-auto text-left ">
+          <table className=" w-full  min-w-max table-auto text-center ">
             <thead className="  ">
               <tr>
                 {TABLE_HEAD.map((head) => (
@@ -251,11 +251,11 @@ const BasicHome = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => {
+              {getPaginatedData().map((item, index) => {
                 const isLast = index === data.length - 1;
                 const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
+                  ? "p-2"
+                  : "p-2 border-b border-blue-gray-50";
 
                 return (
                   <tr key={index} className="hover:bg-gray-200">
@@ -265,7 +265,7 @@ const BasicHome = () => {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {index + 1}
+                        {firstIndex + index}
                       </Typography>
                     </td>
 
@@ -300,18 +300,18 @@ const BasicHome = () => {
                     </td>
 
                     <td className={classes}>
-                      <div className="flex  gap-2 ">
+                      <div className="flex justify-center  gap-2 ">
                         <HiPencilAlt
                           size={20}
-                          color="white"
-                          className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                          color="black"
+                          className=" cursor-pointer"
                           onClick={() => handleOpenEdit(item.id, item.sh_name)}
                         />
 
                         <HiTrash
-                          size={25}
-                          color="white"
-                          className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5  "
+                          size={20}
+                          color="red"
+                          className=" cursor-pointer"
                           onClick={() => handleDelete(item.id)}
                         />
                       </div>
@@ -323,39 +323,13 @@ const BasicHome = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4 ">
-          <Button
-            onClick={() => handlePageChange(currentPage - 1)}
-            variant="outlined"
-            size="sm"
-            color="purple"
-          >
-            ก่อนหน้า
-          </Button>
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <IconButton
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                variant="filled"
-                size="sm"
-                className={
-                  currentPage == index + 1
-                    ? "bg-purple-400"
-                    : "bg-white text-black"
-                }
-              >
-                {index + 1}
-              </IconButton>
-            ))}
-          </div>
-          <Button
-            color="purple"
-            onClick={() => handlePageChange(currentPage + 1)}
-            variant="outlined"
-            size="sm"
-          >
-            ถัดไป
-          </Button>
+        <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={data.length}
+            paginate={paginate}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </CardFooter>
       </Card>
     </div>

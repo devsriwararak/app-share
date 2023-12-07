@@ -12,6 +12,7 @@ import PlayData from "./PlayData";
 import PlayMoney from "./PlayMoney";
 import PlaySetting from "./PlaySetting";
 import WongShareModal from "../../../components/modal/Basic/WongShareModal";
+import classNames from "classnames";
 
 const dataWongShare = [
   { code: "W00001", name: "วงข้าวโพด 500" },
@@ -23,6 +24,7 @@ const dataWongShare = [
 const Play = () => {
   const [statusBtn, setStatusBtn] = useState(1);
   const [data, setData] = useState({})
+  const [activeItem, setActiveItem] = useState();
 
   const [open, setOpen] = useState(false);
   const handleOpen = (number) => setOpen(!open);
@@ -31,12 +33,13 @@ const Play = () => {
     setStatusBtn(number);
   };
 
-  const handleSelect = (data)=>{
+  const handleSelect = (data, index)=>{
     setData((prev)=>({
       ...prev,
       name: data.name,
       code: data.code
     }))
+    setActiveItem(index)
   }
 
 
@@ -71,12 +74,12 @@ const Play = () => {
             <ul className="mt-4 overflow-y-scroll">
               {dataWongShare.map((data, index) => (
                 <div key={index}>
-                  <li className="flex justify-between hover:bg-gray-200 cursor-pointer">
+                  <li className={classNames(activeItem === index && "bg-gray-800/20", "hover:bg-gray-200 py-2 flex justify-between items-center px-2 rounded-lg" )} >
                     {` ${index + 1}.  ${data.code}  (${data.name})`}
 
-                    <FcPlus onClick={()=>handleSelect(data)} className=" cursor-pointer" size={25} />
+                    <FcPlus onClick={()=>handleSelect(data, index)} className=" cursor-pointer" size={25} />
                   </li>
-                  <hr className="m-1.5" />
+                  {/* <hr className="m-1.5" /> */}
                 </div>
               ))}
             </ul>

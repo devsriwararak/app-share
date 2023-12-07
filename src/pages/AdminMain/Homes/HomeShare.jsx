@@ -25,15 +25,13 @@ const HomeShare = () => {
 
   const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อ", "username", "แก้ไข/ลบ"];
 
-
-
   const [search1, setSearch1] = useState("");
   const [search2, setSearch2] = useState("");
 
-    // State
-    const [dataHome, setDataHome] = useState([]);
-    const [dataMember, setDataMember] = useState([]);
-    const [dataToModal, setDataToModal] = useState({});
+  // State
+  const [dataHome, setDataHome] = useState([]);
+  const [dataMember, setDataMember] = useState([]);
+  const [dataToModal, setDataToModal] = useState({});
 
   // Footer Table 1
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,8 +50,6 @@ const HomeShare = () => {
 
   const handleOpen1 = () => setOpen1(!open1);
   const handleOpen2 = () => setOpen2(!open2);
-
-
 
   // Fetch data home
   const fetchDataHome = async () => {
@@ -110,7 +106,7 @@ const HomeShare = () => {
       );
       toast.success("ลบข้อมูลสำเร็จ");
       fetchDataHome();
-      fetchDataMember()
+      fetchDataMember();
     } catch (error) {
       console.log(error);
     }
@@ -189,7 +185,7 @@ const HomeShare = () => {
               </div>
 
               <Card className="h-full w-full mt-6 overflow-scroll ">
-                <table className="w-full min-w-max table-auto text-left">
+                <table className="w-full min-w-max table-auto  text-center">
                   <thead>
                     <tr>
                       {TABLE_HEAD.map((head) => (
@@ -208,13 +204,13 @@ const HomeShare = () => {
                       ))}
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody >
                     {dataHome.map((item, index) => (
                       <tr
                         key={index}
-                        className="even:bg-blue-gray-50/50 hover:bg-gray-200"
+                        className="even:bg-blue-gray-50/50 hover:bg-gray-200 "
                       >
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -223,7 +219,7 @@ const HomeShare = () => {
                             {index + 1}
                           </Typography>
                         </td>
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -232,7 +228,7 @@ const HomeShare = () => {
                             {item?.code || ""}
                           </Typography>
                         </td>
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -242,7 +238,7 @@ const HomeShare = () => {
                           </Typography>
                         </td>
 
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -252,18 +248,18 @@ const HomeShare = () => {
                           </Typography>
                         </td>
 
-                        <td className="p-4">
-                          <div className="flex  gap-2 ">
+                        <td className="p-3">
+                          <div className="flex  gap-1 ">
                             <HiPencilAlt
-                              size={24}
-                              color="white"
-                              className="cursor-pointer bg-purple-500 rounded-full w-7 h-7 p-1.5 "
+                              size={20}
+                              color="black"
+                              className="cursor-pointer "
                               onClick={() => handleDataToModal(item, 1)}
                             />
                             <HiTrash
-                              size={24}
-                              color="white"
-                              className="cursor-pointer bg-red-500 rounded-full w-7 h-7 p-1.5 "
+                              size={20}
+                              color="red"
+                              className="cursor-pointer "
                               onClick={() => handleDelete(item.id)}
                             />
                           </div>
@@ -275,39 +271,7 @@ const HomeShare = () => {
               </Card>
             </CardBody>
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-              <Button
-                onClick={() => handlePageChange(currentPage - 1)}
-                variant="outlined"
-                size="sm"
-                color="purple"
-              >
-                ก่อนหน้า
-              </Button>
-              <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }).map((_, index) => (
-                  <IconButton
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    variant="filled"
-                    size="sm"
-                    className={
-                      currentPage == index + 1
-                        ? "bg-purple-400"
-                        : "bg-white text-black"
-                    }
-                  >
-                    {index + 1}
-                  </IconButton>
-                ))}
-              </div>
-              <Button
-                color="purple"
-                onClick={() => handlePageChange(currentPage + 1)}
-                variant="outlined"
-                size="sm"
-              >
-                ถัดไป
-              </Button>
+   
             </CardFooter>
           </Card>
         </div>
@@ -366,7 +330,7 @@ const HomeShare = () => {
                         key={index}
                         className="even:bg-blue-gray-50/50 hover:bg-gray-200"
                       >
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -375,7 +339,7 @@ const HomeShare = () => {
                             {index + 1}
                           </Typography>
                         </td>
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -384,7 +348,7 @@ const HomeShare = () => {
                             {item?.code}
                           </Typography>
                         </td>
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -394,7 +358,7 @@ const HomeShare = () => {
                           </Typography>
                         </td>
 
-                        <td className="p-4">
+                        <td className="p-3">
                           <Typography
                             variant="small"
                             color="blue-gray"
@@ -404,18 +368,18 @@ const HomeShare = () => {
                           </Typography>
                         </td>
 
-                        <td className="p-4">
+                        <td className="p-3">
                           <div className="flex  gap-2 ">
                             <HiPencilAlt
-                              size={24}
-                              color="white"
-                              className="cursor-pointer bg-purple-500 rounded-full w-7 h-7 p-1.5 "
+                              size={20}
+                              color="black"
+                              className="cursor-pointer  "
                               onClick={() => handleDataToModal(item, 2)}
                             />
                             <HiTrash
-                              size={24}
-                              color="white"
-                              className="cursor-pointer bg-red-500 rounded-full w-7 h-7 p-1.5 "
+                              size={20}
+                              color="red"
+                              className="cursor-pointer  "
                               onClick={() => handleDelete(item.id)}
                             />
                           </div>
@@ -427,39 +391,7 @@ const HomeShare = () => {
               </Card>
             </CardBody>
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-              <Button
-                onClick={() => handlePageChange(currentPage - 1)}
-                variant="outlined"
-                size="sm"
-                color="purple"
-              >
-                ก่อนหน้า
-              </Button>
-              <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }).map((_, index) => (
-                  <IconButton
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    variant="filled"
-                    size="sm"
-                    className={
-                      currentPage == index + 1
-                        ? "bg-purple-400"
-                        : "bg-white text-black"
-                    }
-                  >
-                    {index + 1}
-                  </IconButton>
-                ))}
-              </div>
-              <Button
-                color="purple"
-                onClick={() => handlePageChange(currentPage + 1)}
-                variant="outlined"
-                size="sm"
-              >
-                ถัดไป
-              </Button>
+         
             </CardFooter>
           </Card>
         </div>

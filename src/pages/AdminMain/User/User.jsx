@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { PencilIcon } from "@heroicons/react/24/solid";
 
 import {
   Card,
-  CardHeader,
   Typography,
   Button,
   CardBody,
-  Chip,
   CardFooter,
-  Avatar,
-  IconButton,
-  Tooltip,
   Input,
 } from "@material-tailwind/react";
 import {
-  HiOutlineUserAdd,
-  HiOutlineChatAlt2,
-  HiOutlinePlusCircle,
   HiPencilAlt,
   HiTrash,
   HiOutlineShoppingCart,
@@ -28,31 +19,9 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import DataTable from 'react-data-table-component';
+import { calculatePageIndices, calculatePagination } from "../../../components/pagination/PaginationUtils";
+import Pagination from "../../../components/pagination/Pagination";
 
-const columns = [
-  {
-      name: 'Title',
-      selector: row => row.title,
-  },
-  {
-      name: 'Year',
-      selector: row => row.year,
-  },
-];
-
-const dataTest = [
-  {
-      id: 1,
-      title: 'Beetlejuice',
-      year: '1988',
-  },
-  {
-      id: 2,
-      title: 'Ghostbusters',
-      year: '1984',
-  },
-]
 
 
 const TABLE_HEAD = [
@@ -74,15 +43,15 @@ const User = () => {
   const [dataToModal, setDataToModal] = useState({});
 
 
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const itemsPerPage = 3;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const getPaginatedData = () => {
+    return calculatePagination(currentPage, itemsPerPage, data);
   };
+  const { firstIndex, lastIndex } = calculatePageIndices(currentPage, itemsPerPage);
+
 
   const fetchData = async () => {
     try {
@@ -159,7 +128,7 @@ const User = () => {
 
         <div className="flex gap-2 flex-col items-center   md:flex-row">
           <div className="w-full bg-slate-50 rounded-md bg-gray-50  ">
-            <Input variant="outlined" label="ค้นหาชื่อ / รหัส" className="" />
+            <Input variant="outlined" label="ค้นหาชื่อ / รหัส"  onChange={(e)=>(setSearch(e.target.value), setCurrentPage(1))} />
           </div>
           <Button
             variant="filled"
@@ -174,12 +143,7 @@ const User = () => {
         </div>
       </div>
 
-   {/* <div>
-   <DataTable
-            columns={columns}
-            data={dataTest}
-        />
-   </div> */}
+
 
       <Card className=" h-[550px]  w-full mx-auto   md:w-full  mt-4 ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
@@ -203,11 +167,11 @@ const User = () => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((item, index) => {
-                const isLast = index === data.length - 1;
+              {getPaginatedData().map((item, index) => {
+                const isLast = index === getPaginatedData().length - 1;
                 const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
+                  ? "p-2"
+                  : "p-2 border-b border-blue-gray-50";
 
                 return (
                   <tr key={index} className="hover:bg-gray-200">
@@ -217,7 +181,7 @@ const User = () => {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {index + 1}
+                        {firstIndex + index}
                       </Typography>
                     </td>
                     <td className={classes}>
@@ -264,15 +228,15 @@ const User = () => {
                     <td className={classes}>
                       <div className="flex  gap-2 ">
                         <HiPencilAlt
-                          size={24}
-                          color="white"
-                          className="cursor-pointer bg-purple-500 rounded-full w-8 h-8 p-1.5 "
+                          size={20}
+                          color="black"
+                          className="cursor-pointer  "
                           onClick={()=>handleDataToModal(item)}
                         />
                         <HiTrash
-                          size={24}
-                          color="white"
-                          className="cursor-pointer bg-red-500 rounded-full w-8 h-8 p-1.5 "
+                            size={20}
+                            color="red"
+                            className="cursor-pointer  "
                           onClick={() => handleDelete(item.id)}
                         />
                       </div>
@@ -284,39 +248,13 @@ const User = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Button
-            onClick={() => handlePageChange(currentPage - 1)}
-            variant="outlined"
-            size="sm"
-            color="purple"
-          >
-            ก่อนหน้า
-          </Button>
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <IconButton
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                variant="filled"
-                size="sm"
-                className={
-                  currentPage == index + 1
-                    ? "bg-purple-400"
-                    : "bg-white text-black"
-                }
-              >
-                {index + 1}
-              </IconButton>
-            ))}
-          </div>
-          <Button
-            color="purple"
-            onClick={() => handlePageChange(currentPage + 1)}
-            variant="outlined"
-            size="sm"
-          >
-            ถัดไป
-          </Button>
+        <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={data.length}
+            paginate={paginate}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </CardFooter>
       </Card>
     </div>
