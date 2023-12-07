@@ -40,7 +40,7 @@ const Pagination = ({
               d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
             ></path>
           </svg>
-          ก่อนหน้านี้
+          ก่อนหน้านี้.
         </button>
         <div className="flex items-center gap-2">
           {pageNumbers.map((_, index) => (
