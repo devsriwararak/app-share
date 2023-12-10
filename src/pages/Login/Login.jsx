@@ -151,9 +151,7 @@ const Login = () => {
             <h2 className="font-bold text-2xl text-purple-800 flex justify-center md:justify-start">
               เข้าสู่ระบบ
             </h2>
-            <p className="text-sm mt-4 flex justify-center md:justify-start">
-              รายละเอียดด เดี๋ยวค่อยใส่
-            </p>
+          
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <input
