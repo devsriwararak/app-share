@@ -120,6 +120,7 @@ const Header = ({ openSidebar, setOpenSideBar }) => {
                   backgroundImage:
                     'url("https://img.freepik.com/free-photo/people-technology-concept-smiling-asian-girl-using-smartphone-texting-mobile-phone-standing-against-white-background_1258-89474.jpg?w=740&t=st=1699023939~exp=1699024539~hmac=b35c4ea6ba09d1deb11cf8323f2da4363deeee3f8b3ee61cf77030c20973633f")',
                 }}
+                onClick={() => setOpenSideBar(openSidebar ? setOpenSideBar(false) : setOpenSideBar(true) )}
               >
                 <span className="sr-only">Hi Jackson</span>
               </div>
