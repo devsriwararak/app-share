@@ -30,7 +30,10 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Pagination from "../../../components/pagination/Pagination";
-import { calculatePageIndices, calculatePagination } from "../../../components/pagination/PaginationUtils";
+import {
+  calculatePageIndices,
+  calculatePagination,
+} from "../../../components/pagination/PaginationUtils";
 
 const TABLE_HEAD = [
   "ลำดับ",
@@ -120,7 +123,7 @@ const BasicHome = () => {
 
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
-  const [dataToModal , setDataTomodal] = useState({})
+  const [dataToModal, setDataTomodal] = useState({});
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -129,13 +132,20 @@ const BasicHome = () => {
   const getPaginatedData = () => {
     return calculatePagination(currentPage, itemsPerPage, data);
   };
-  const { firstIndex, lastIndex } = calculatePageIndices(currentPage, itemsPerPage);
-
+  const { firstIndex, lastIndex } = calculatePageIndices(
+    currentPage,
+    itemsPerPage
+  );
 
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=${search}`
+        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
       );
       console.log(res.data);
       setData(res.data);
@@ -156,35 +166,36 @@ const BasicHome = () => {
       cancelButtonText: "ยกเลิก",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteData(id)
-
+        deleteData(id);
       }
     });
   };
 
-  const deleteData = async (id) =>{
+  const deleteData = async (id) => {
     console.log(id);
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_APP_API}/homesh/delete/${id}`)
+      const res = await axios.delete(
+        `${import.meta.env.VITE_APP_API}/homesh/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
       console.log(res);
       toast.success("ลบข้อมูลสำเร็จ");
-      fetchData()
+      fetchData();
     } catch (error) {
       console.log(error);
       toast.error("ลบข้อมูลสำเร็จ");
-
     }
+  };
 
-  }
-
-  const handleOpenEdit = (id, sh_name)=>{
-    handleOpen(id)
-    setDataTomodal({sh_name:sh_name})
+  const handleOpenEdit = (id, sh_name) => {
+    handleOpen(id);
+    setDataTomodal({ sh_name: sh_name });
     console.log(sh_name);
-
-  }
-
-
+  };
 
   useEffect(() => {
     fetchData();
@@ -192,7 +203,13 @@ const BasicHome = () => {
 
   return (
     <div className="">
-      <HomeShareModal handleOpen={handleOpen} open={open} id={id} fetchData={fetchData} dataToModal={dataToModal}  />
+      <HomeShareModal
+        handleOpen={handleOpen}
+        open={open}
+        id={id}
+        fetchData={fetchData}
+        dataToModal={dataToModal}
+      />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
@@ -216,7 +233,7 @@ const BasicHome = () => {
           </div>
           <div className="">
             <Button
-              onClick={() => handleOpen(null)}
+              onClick={() => (handleOpen(null), setDataTomodal({}))}
               variant="filled"
               color="purple"
               size="sm"
@@ -275,27 +292,27 @@ const BasicHome = () => {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {item.sh_code}
+                        {item?.sh_code}
                       </Typography>
                     </td>
-                    
+
                     <td className={classes}>
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {item.sh_name}
+                        {item?.sh_name}
                       </Typography>
                     </td>
-           
+
                     <td className={classes}>
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                       ออนไลน์
+                        ออนไลน์
                       </Typography>
                     </td>
 
@@ -323,7 +340,7 @@ const BasicHome = () => {
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4 ">
-        <Pagination
+          <Pagination
             itemsPerPage={itemsPerPage}
             totalItems={data.length}
             paginate={paginate}

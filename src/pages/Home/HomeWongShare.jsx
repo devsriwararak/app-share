@@ -26,9 +26,13 @@ import ViewWongShare from "../../components/modal/Basic/ViewWongShare";
 import axios from "axios";
 
 import Pagination from "../../components/pagination/Pagination";
-import { calculatePageIndices, calculatePagination } from "../../components/pagination/PaginationUtils";
+import {
+  calculatePageIndices,
+  calculatePagination,
+} from "../../components/pagination/PaginationUtils";
+import MyWongShare from "../../components/modal/HomeShare/MyWongShare";
 
-const TABLE_HEAD = ["ลำดับ", "ชื่อวงแชร์", "Date", "Status", "แก้ไข/ลบ"];
+const TABLE_HEAD = ["ลำดับ", "ชื่อวงแชร์", "รูปแบบ", "จำนวนมือ","้เงินต้น", "แก้ไข/ลบ"];
 
 const TABLE_ROWS = [
   {
@@ -113,8 +117,7 @@ const HomeWongShare = () => {
 
   // State
   const [data, setData] = useState([]);
-
-
+  const [dataToModal , setDataToModal] = useState({})
 
   // Pagination
 
@@ -122,7 +125,7 @@ const HomeWongShare = () => {
   const itemsPerPage = 10;
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const getPaginatedData = () => {
-    return calculatePagination(currentPage, itemsPerPage, TABLE_ROWS);
+    return calculatePagination(currentPage, itemsPerPage, data);
   };
   const { firstIndex, lastIndex } = calculatePageIndices(
     currentPage,
@@ -140,6 +143,7 @@ const HomeWongShare = () => {
         }
       );
       console.log(res.data);
+      setData(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -157,10 +161,41 @@ const HomeWongShare = () => {
       cancelButtonText: "ยกเลิก",
     }).then((result) => {
       if (result.isConfirmed) {
-        toast.success("ลบข้อมูลสำเร็จ");
+        deleteRow(id)
       }
     });
   };
+
+  const deleteRow = async (id) => {
+    try {
+      const res = await axios.delete(
+        `${import.meta.env.VITE_APP_API}/share/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
+      toast.success("ลบข้อมูลสำเร็จ");
+      fetchData()
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const handleChange = (item)=>{
+    handleOpen(1)
+    console.log(item);
+    setDataToModal(item)
+  }
+
+  const handleViewModal = (item) => {
+    handleOpenView(3);
+    setDataToModal(item);
+  };
+
 
   useEffect(() => {
     fetchData();
@@ -168,8 +203,15 @@ const HomeWongShare = () => {
 
   return (
     <div className="">
-      <WongShareModal handleOpen={handleOpen} open={open} id={id} />
-      <ViewWongShare handleOpen={handleOpenView} open={openView} id={id} />
+      <MyWongShare handleOpen={handleOpen} open={open} id={id} fetchNewDat={fetchData} dataToModal={dataToModal} />
+      {/* <WongShareModal handleOpen={handleOpen} open={open} id={id} /> */}
+      {/* <ViewWongShare handleOpen={handleOpenView} open={openView} id={id} /> */}
+      <ViewWongShare
+        handleOpen={handleOpenView}
+        open={openView}
+        id={id}
+        dataToModal={dataToModal}
+      />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
@@ -223,135 +265,97 @@ const HomeWongShare = () => {
               </tr>
             </thead>
             <tbody>
-              {getPaginatedData().map(
-                (
-                  {
-                    name,
-                    amount,
-                    date,
-                    status,
-                    account,
-                    accountNumber,
-                    expiry,
-                  },
-                  index
-                ) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast
-                    ? "p-2"
-                    : "p-2 border-b border-blue-gray-50 ";
+              {getPaginatedData().map((item, index) => {
+                const isLast = index === TABLE_ROWS.length - 1;
+                const classes = isLast
+                  ? "p-2"
+                  : "p-2 border-b border-blue-gray-50 ";
 
-                  return (
-                    <tr key={index} className="hover:bg-gray-200">
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                              {firstIndex + index}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <div className="flex  gap-2 ">
-                          <HiOutlineDesktopComputer
-                           size={20}
-                            color="black"
-                            className="cursor-pointer  "
-                            onClick={() => handleOpenView(3)}
-                          />
-                          <HiPencilAlt
-                            
-                            size={20}
-                            color="black"
-                            className="cursor-pointer  "
-                            onClick={() => handleOpen(1)}
-                          />
-                          <HiTrash
-                            
-                            size={20}
-                            color="red"
-                            className="cursor-pointer  "
-                            onClick={() => handleDelete(2)}
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
+                return (
+                  <tr key={index} className="hover:bg-gray-200">
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {firstIndex + index}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item.p_share_name}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item.p_share_type}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item.p_share_hand}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item.p_share_paid}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex justify-center  gap-2 ">
+                        <HiOutlineDesktopComputer
+                          size={20}
+                          color="black"
+                          className="cursor-pointer  "
+                          onClick={() =>handleViewModal(item)}
+                        />
+                        <HiPencilAlt
+                          size={20}
+                          color="black"
+                          className="cursor-pointer  "
+                          onClick={() =>handleChange(item)}
+                        />
+                        <HiTrash
+                          size={20}
+                          color="red"
+                          className="cursor-pointer  "
+                          onClick={() => handleDelete(item.id)}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-
+          
           <Pagination
             itemsPerPage={itemsPerPage}
-            totalItems={TABLE_ROWS.length}
+            totalItems={data.length}
             paginate={paginate}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
-          {/* <Button
-            onClick={() => handlePageChange(currentPage - 1)}
-            variant="outlined"
-            size="sm"
-            color="purple"
-          >
-            ก่อนหน้า
-          </Button>
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <IconButton
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                variant="filled"
-                size="sm"
-                className={
-                  currentPage == index + 1
-                    ? "bg-purple-400"
-                    : "bg-white text-black"
-                }
-              >
-                {index + 1}
-              </IconButton>
-            ))}
-          </div>
-          <Button
-            color="purple"
-            onClick={() => handlePageChange(currentPage + 1)}
-            variant="outlined"
-            size="sm"
-          >
-            ถัดไป
-          </Button> */}
+          
         </CardFooter>
       </Card>
     </div>

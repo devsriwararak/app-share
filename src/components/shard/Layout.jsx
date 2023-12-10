@@ -37,7 +37,7 @@ const Layout = () => {
 
         <div className=" w-full md:w-10/12   text-white    ">
           <Header openSidebar={openSidebar} setOpenSideBar={setOpenSideBar} />
-          <ToastContainer theme="colored" autoClose={1500} />
+          <ToastContainer className="z-50 " theme="colored" autoClose={1500} />
 
           <div className=" bg-gray-100 p-4 overflow-y-scroll pt-20   h-screen  ">
             <Card>

@@ -25,58 +25,34 @@ import classNames from "classnames";
 import axios from "axios";
 
 const TABLE_HEAD = ["ลำดับ", "รหัส", "ชื่อลูกแชร์", "เลือก"];
-const TABLE_HEAD_2 = ["ลำดับ", "รหัส", "ชื่อลูกแชร์","สถานะ" ,"เลือก"];
+const TABLE_HEAD_2 = ["รหัส", "ชื่อลูกแชร์", "วงแชร์", "สถานะ", "เลือก"];
 
-
-const TABLE_ROWS = [
-  {
-    name: "1",
-    job: "Manager",
-    date: "23/04/18",
-    status: "รอดำเนินการ",
-  },
-  {
-    name: "2",
-    job: "Developer",
-    date: "23/04/18",
-    status: "รอดำเนินการ",
-  },
-  {
-    name: "3",
-    job: "Executive",
-    date: "19/09/17",
-    status: "ปฏิเสธ",
-  },
-  {
-    name: "4",
-    job: "Developer",
-    date: "24/12/08",
-    status: "เข้าร่วม",
-  },
-  {
-    name: "5",
-    job: "Manager",
-    date: "04/10/21",
-    status: "เข้าร่วม",
-  },
-];
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+const selectStatus = [
+  { value: "0", label: "รออนุญาติ" },
+  { value: "1", label: "อนุญาติ" },
+  { value: "2", label: "ปฏิเสธ" },
 ];
 
 const AddUserToHome = ({ handleOpen, open }) => {
   const [data, setData] = useState({});
   const [dataUser, setDataUser] = useState([]);
+  const [dataMyWongShare, setDataMyWingShare] = useState([]);
+  const [dataMyUser, setDataMyUser] = useState([]);
   const [searchUser, setSearchuser] = useState("");
   const [sendDataUser, setSendDataUser] = useState({});
+  const [sendDataWongShare, setSendDataWongShare] = useState({});
+  const [updateStatusUser, setUpdateStatusUser] = useState({});
+  const [message, setMessage] = useState({});
 
   const fetchDataUser = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/u-search?name=${searchUser}`
+        `${import.meta.env.VITE_APP_API}/u-search?name=${searchUser}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
       );
       console.log(res.data);
       setDataUser(res.data);
@@ -94,24 +70,118 @@ const AddUserToHome = ({ handleOpen, open }) => {
   };
 
   const fetchDataWongShare = async () => {
-    // try {
-    //   const res = await axios.get(
-    //     `${import.meta.env.VITE_APP_API}/sharehouse/mem-w-search?w_search=1`
-    //   );
-    //   console.log(res.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}/sharehouse/w-details`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
+      console.log(res.data);
+      const setNewData = res.data.map((item, index) => ({
+        value: item.id,
+        label: item.p_share_name,
+      }));
+      setDataMyWingShare(setNewData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleAddUser = () => {
-    toast.success("บันทึกสำเร็จ");
+  const handleAddUser = async () => {
+    try {
+      const data = {
+        share_id: Number(localStorage.getItem("share_w_id")) || "",
+        user_id: sendDataUser.id || "",
+        share_v_id: sendDataUser.share_v_id || "",
+        is_apporvee: 1,
+      };
+
+      console.log(data);
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_APP_API}/sharehouse/addsharehouse`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
+      console.log(res.data);
+      fetchDataMyUser();
+      toast.success("บันทึกสำเร็จ");
+    } catch (error) {
+      console.log(error);
+      toast.error("บันทึกไม่สำเร็จ");
+      setMessage((prev) => ({
+        ...prev,
+        message_1: "ผู้ใช้งานนี้ถูกเพิ่มเข้าวงแชร์นี้ไปแล้ว !",
+      }));
+    }
+  };
+
+  const fetchDataMyUser = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}/sharehouse/user-details?search_term=${
+          sendDataWongShare?.share_v_id || ""
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
+
+      // console.log(res.data);
+      setDataMyUser(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelectMyUser = (item) => {
+    console.log(item);
+    setUpdateStatusUser((prev) => ({
+      ...prev,
+      id: item.id,
+      username: item.username,
+    }));
+  };
+
+  const handleUpdateMyUser = async () => {
+    const data = {
+      id: updateStatusUser.id,
+      is_apporvee: updateStatusUser.is_apporvee,
+    };
+
+    try {
+      const res = await axios.put(
+        `${import.meta.env.VITE_APP_API}/sharehouse/edit`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
+      );
+      console.log(res.data);
+      fetchDataMyUser();
+      setUpdateStatusUser({});
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchDataUser();
     fetchDataWongShare();
-  }, [searchUser]);
+    fetchDataMyUser();
+    setMessage({})
+  }, [searchUser, sendDataWongShare.share_v_id]);
   return (
     <div>
       <Dialog open={open} size="xl" handler={handleOpen}>
@@ -121,11 +191,12 @@ const AddUserToHome = ({ handleOpen, open }) => {
           เพิ่มลูกแชร์เข้าบ้านตัวเอง
         </DialogHeader>
         <DialogBody className="overflow-y-scroll h-[500px] md:h-full">
+
           <div className="flex flex-col md:flex-row gap-4">
             <Card className="w-1/2 ring-2 ring-gray-300/20">
               <CardBody>
                 <div className="flex flex-col md:flex-row justify-between">
-                  <h2 className="text-base font-bold flex items-center gap-2">
+                  <h2 className="text-black font-bold flex items-center gap-2">
                     <HiOutlineUserAdd size={20} />
                     ลูกแชร์
                   </h2>
@@ -139,7 +210,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
                 </div>
 
                 <Card className=" w-full overflow-y-scroll h-64 mt-5">
-                  <table className="w-full min-w-max table-auto text-left">
+                  <table className="w-full min-w-max table-auto text-center">
                     <thead>
                       <tr>
                         {TABLE_HEAD.map((head) => (
@@ -206,21 +277,35 @@ const AddUserToHome = ({ handleOpen, open }) => {
 
                 <div className="flex flex-col md:flex-row gap-4 mt-5 items-center">
                   <div className="w-full">
-                    <b className="font-bold">ลูกแชร์ : </b>
+                    <b className="font-bold text-black">ลูกแชร์ : </b>
                     <span>{sendDataUser.f_name}</span>
                   </div>
                   <Select
                     className="w-full"
-                    options={options}
-                    placeholder="เลือกวงค์แชร์"
+                    options={dataMyWongShare}
+                    placeholder="เลือกวงแชร์"
+                    onChange={(e) =>
+                      setSendDataUser((prev) => ({
+                        ...prev,
+                        share_v_id: e.value,
+                      }))
+                    }
                   />
                 </div>
-                <div className="flex justify-end mt-5">
+                <div className="flex items-center justify-end mt-5">
+                  <h4 className="text-sm font-semibold mx-4 text-red-500">
+                    {message?.message_1 || ""}
+                  </h4>
+
                   <Button
                     color="purple"
                     size="sm"
                     className="text-sm"
                     onClick={handleAddUser}
+                    // disabled={
+                    //   sendDataUser?.id === undefined && sendDataUser?.share_v_id === undefined
+
+                    // }
                   >
                     บันทึก
                   </Button>
@@ -230,19 +315,37 @@ const AddUserToHome = ({ handleOpen, open }) => {
 
             <Card className="w-1/2 ring-2 ring-gray-300/20 ">
               <CardBody>
-            <div className="flex flex-col md:flex-row justify-between items-center">
-            <h2 className="text-base font-bold flex items-center gap-2 w-2/4">
-                  {" "}
-                  <HiOutlineHome size={24} />
-                  ลูกแชร์ในบ้าน
-                </h2>
+                <div className="flex flex-col md:flex-row justify-between items-center">
+                  <h2 className="text-black font-bold flex items-center gap-2 w-full">
+                    {" "}
+                    <HiOutlineHome size={24} />
+                    ลูกแชร์ในบ้าน
+                  </h2>
 
-                <Select
-                  className="w-2/4 "
-                  options={options}
-                  placeholder="เลือกวงค์แชร์ที่ต้องการ"
-                />
-            </div>
+                  <Select
+                    className="w-full"
+                    options={dataMyWongShare}
+                    placeholder="เลือกวงแชร์"
+                    onChange={(e) =>
+                      setSendDataWongShare((prev) => ({
+                        ...prev,
+                        share_v_id: e.value,
+                      }))
+                    }
+                  />
+                  <Button
+                    className="m-2 text-sm"
+                    size="sm"
+                    onClick={() =>
+                      setSendDataWongShare((prev) => ({
+                        ...prev,
+                        share_v_id: "",
+                      }))
+                    }
+                  >
+                    ทั้งหมด
+                  </Button>
+                </div>
 
                 <Card>
                   <CardBody className=" overflow-y-scroll h-64 mt-2 ">
@@ -266,83 +369,70 @@ const AddUserToHome = ({ handleOpen, open }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {TABLE_ROWS.map(
-                          ({ name, job, date, status }, index) => (
-                            <tr
-                              key={name}
-                              className="even:bg-blue-gray-50/50 hover:bg-gray-200"
-                            >
-                              <td className="p-2">
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal"
-                                >
-                                  {name}
-                                </Typography>
-                              </td>
-                              <td className="p-2">
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal"
-                                >
-                                  {job}
-                                </Typography>
-                              </td>
-                              <td className="p-2">
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal"
-                                >
-                                  {date}
-                                </Typography>
-                              </td>
-                              <td className="p-2">
-                                <Typography
-                                  variant="small"
-                                  color={
-                                    status === "รอดำเนินการ"
-                                      ? "orange"
-                                      : status === "ปฏิเสธ"
-                                      ? "red"
-                                      : status === "เข้าร่วม"
-                                      ? "green"
-                                      : ""
-                                  }
-                                  // className="font-bold"
-                                  className={classNames(
-                                    status === "รอดำเนินการ"
-                                      ? "bg-orange-100"
-                                      : status === "ปฏิเสธ"
-                                      ? "bg-red-100"
-                                      : status === "เข้าร่วม"
-                                      ? "bg-green-100"
-                                      : "",
-                                    "font-bold p-1"
-                                  )}
-                                >
-                                  {status}
-                                </Typography>
-                              </td>
-                              <td className="p-2 ">
-                                <div className="flex cursor-pointer gap-2">
-                                  <HiOutlinePencilAlt
-                                    className="bg-purple-500 p-1 rounded-full"
-                                    color="white"
-                                    size={26}
-                                  />
-                                  <HiTrash
-                                    className="bg-red-500 p-1 rounded-full"
-                                    color="white"
-                                    size={26}
-                                  />
-                                </div>
-                              </td>
-                            </tr>
-                          )
-                        )}
+                        {dataMyUser.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="even:bg-blue-gray-50/50 hover:bg-gray-200"
+                          >
+                            <td className="p-2">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {item.code}
+                              </Typography>
+                            </td>
+
+                            <td className="p-2">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {item.username}
+                              </Typography>
+                            </td>
+
+                            <td className="p-2">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {item.p_share_name}
+                              </Typography>
+                            </td>
+
+                            <td className="p-2">
+                              {item.is_apporvee === 0 && (
+                                <p className="bg-yellow-300 bg-opacity-50 text-orange-700 rounded-lg ">
+                                  รออนุมัติ
+                                </p>
+                              )}
+                              {item.is_apporvee === 1 && (
+                                <p className="bg-green-300 bg-opacity-50 text-green-700 rounded-lg">
+                                  อนุมัติ
+                                </p>
+                              )}
+                              {item.is_apporvee === 2 && (
+                                <p className="bg-red-300 bg-opacity-50 text-red-700 rounded-lg">
+                                  ปฏิเสธ
+                                </p>
+                              )}
+                            </td>
+                            <td className="p-2 ">
+                              <div className="flex cursor-pointer justify-center gap-2">
+                                <HiOutlinePencilAlt
+                                  className="cursor-pointer"
+                                  color="black"
+                                  size={20}
+                                  onClick={(e) => handleSelectMyUser(item)}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </CardBody>
@@ -350,21 +440,29 @@ const AddUserToHome = ({ handleOpen, open }) => {
 
                 <div className="flex flex-col md:flex-row gap-4 mt-5 items-center">
                   <div className="w-full">
-                    <b className="font-bold">ชื่อลูกแชร์ : </b>{" "}
-                    <span>{data.name}</span>
+                    <b className="font-bold text-black">ชื่อลูกแชร์ : </b>{" "}
+                    <span>{updateStatusUser?.username}</span>
                   </div>
                   <Select
                     className="w-full"
-                    options={options}
+                    options={selectStatus}
                     placeholder="เลือกสถานะใหม่"
+                    onChange={(e) =>
+                      setUpdateStatusUser((prev) => ({
+                        ...prev,
+                        is_apporvee: e.value,
+                      }))
+                    }
                   />
                 </div>
                 <div className="flex justify-end mt-5">
+                  {/* <h4 className="text-lg mx-4 text-red-500">{message}</h4> */}
+
                   <Button
                     color="purple"
                     size="sm"
                     className="text-sm"
-                    onClick={handleAddUser}
+                    onClick={handleUpdateMyUser}
                   >
                     อัพเดท
                   </Button>

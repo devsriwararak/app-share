@@ -54,12 +54,12 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
       >
         <p className="">{JSON.stringify(open)}</p>
         <div className="flex items-center gap-2 px-1 py-2 justify-center ">
-          <FaBeer fontSize={24} color="purple" />
+          <FaBeer fontSize={24} className="text-gray-800" />
           <span
             className="text-gray-700 font-bold text-lg cursor-pointer"
             onClick={closePopup}
           >
-            APP-SHARE
+            APP SHARE
           </span>
         </div>
 

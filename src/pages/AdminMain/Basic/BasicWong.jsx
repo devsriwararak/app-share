@@ -141,7 +141,12 @@ const BasicWong = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/share/share-search?name=${search}`
+        `${import.meta.env.VITE_APP_API}/share/share-search?name=${search}`,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+
+          }
+        }
       );
       console.log(res.data);
       setData(res.data);

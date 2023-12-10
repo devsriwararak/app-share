@@ -28,7 +28,12 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
   const fetchHome = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=`
+        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
       );
       const addData = res.data.map((item) => ({
         value: item.id,
@@ -60,7 +65,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
       bank_acc: sendData.bank_acc || "",
       bank_name: sendData.bank_name || "",
       tel: sendData.tel || "",
-      line : sendData.line || ""
+      line: sendData.line || "",
     };
     console.log(data);
     try {
@@ -104,7 +109,7 @@ const HomeAdminModal = ({ open, handleOpen, fetchDataHome, dataToModal }) => {
       bank_acc: sendData.bank_acc || "",
       bank_name: sendData.bank_name || "",
       tel: sendData.tel || "",
-      line : sendData.line || ""
+      line: sendData.line || "",
     };
     console.log(data);
     try {

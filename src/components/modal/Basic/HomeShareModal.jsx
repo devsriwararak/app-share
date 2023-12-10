@@ -11,7 +11,7 @@ import { HiOutlineHome } from "react-icons/hi";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
+const HomeShareModal = ({ open, handleOpen, id, fetchData, dataToModal }) => {
   const [sendData, setSendData] = useState({});
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      sh_name: sendData.sh_name,
+      sh_name: sendData.sh_name || "",
     };
 
     console.log(data);
@@ -30,12 +30,17 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_APP_API}/homesh/adddata`,
-        data
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
       );
 
       console.log(res.data);
       toast.success("บันทึกสำเร็จ");
-      setSendData({})
+      setSendData({});
       handleOpen();
       fetchData();
     } catch (error) {
@@ -53,7 +58,12 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
     try {
       const res = await axios.put(
         `${import.meta.env.VITE_APP_API}/homesh/edit`,
-        data
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
       );
       toast.success("บันทึกสำเร็จ");
       handleOpen();
@@ -63,12 +73,12 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
     }
   };
 
-  useEffect(()=>{
-    setSendData((prev)=> ({
+  useEffect(() => {
+    setSendData((prev) => ({
       ...prev,
-      sh_name : dataToModal.sh_name || ""
-    }))
-  },[dataToModal])
+      sh_name: dataToModal?.sh_name || "",
+    }));
+  }, [dataToModal]);
 
   return (
     <Dialog open={open} size="sm" handler={handleOpen}>
@@ -77,8 +87,6 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
         <HiOutlineHome /> {id ? "แก้ไขบ้านแชร์" : "สร้างบ้านแชร์"}
       </DialogHeader>
       <DialogBody className="  h-fit  md:h-full md:overflow-auto  ">
-        ID : {id ? id : ""}
-        test : {JSON.stringify(sendData.sh_name)}
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Input
@@ -86,7 +94,7 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
               label="ชื่อบ้านแชร์ "
               required
               onChange={(e) => handleChange(e)}
-              value={id && sendData.sh_name }
+              value={sendData?.sh_name || ""}
               type="text"
             />
           </div>
@@ -95,7 +103,7 @@ const HomeShareModal = ({ open, handleOpen, id, fetchData , dataToModal }) => {
             <Button
               variant="gradient"
               color="red"
-              onClick={(()=>handleOpen())}
+              onClick={() => handleOpen()}
               className="mr-1 text-sm"
               size="sm"
             >

@@ -32,7 +32,11 @@ const HomeMemberModal = ({
   const fetchHome = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=`
+        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=`, {
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          }
+        }
       );
       const addData = res.data.map((item) => ({
         value: item.id,

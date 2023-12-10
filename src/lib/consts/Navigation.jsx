@@ -38,7 +38,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
               icon: <HiChevronRight />,
             },
             {
-              label: "ข้อมูลวงค์แชร์",
+              label: "ข้อมูลวงแชร์",
               key: "basicHome_2",
               path: "/admin/basic/wong",
               icon: <HiChevronRight />,
@@ -77,7 +77,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
         },
         {
           key: "addToWongShare",
-          label: "ขอเข้าวงค์แชร์",
+          label: "ขอเข้าวงแชร์",
           path: "/user/add-to-wong-share",
           icon: <HiOutlineUserAdd />,
         },

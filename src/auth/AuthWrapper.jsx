@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Login from "../pages/Login/Login";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 
 
@@ -14,23 +14,32 @@ export const AuthContent = createContext();
 const AuthWrapper = () => {
   const [user, setUser] = useState({ name: "", isAuthenticated: false });
   const [token, setToken] = useState(localStorage.getItem("Token"));
-  const navigate = useNavigate();
+  // const [token, setToken]=useState("")
+  const [dataLogin , setDataLogin] = useState({})
+
+  // const updateValue = (key,value)=>{
+  //   setDataLogin((prev)=>({
+  //     ...prev,
+  //     key,value
+  //   }))
+
+  // }
 
   useEffect(()=>{
-
   },[token])
 
 
 
   return (
-    <AuthContent.Provider value={{ user, token, setToken }}>
+    <AuthContent.Provider value={{ user, token }}>
       <>
+      {/* {JSON.stringify(dataLogin)} */}
         {token ? (
           <PrivateRoute />
         ) : (
           <Routes>
-            <Route path="/" element={<Login setToken={setToken} />} />
-            <Route path="/login" element={<Login setToken={setToken} />} />
+            <Route path="/" element={<Login  />} />
+            <Route path="/login" element={<Login  />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
