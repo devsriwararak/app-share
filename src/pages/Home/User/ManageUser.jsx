@@ -110,7 +110,7 @@ useEffect(()=>{
         </Card>
 
         <div className="w-full md:w-2/3 ">
-          <div className="flex flex-row gap-4 justify-center md:justify-start">
+          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
             <Button color="blue" size="sm" className=" text-sm flex items-center gap-2 " onClick={()=>handleBtnPage(1)}><HiOutlineHome size={20} /> ข้อมูลลูกแชร์</Button>
             <Button color="green" size="sm" className=" text-sm flex items-center gap-2" disabled={!selectData.user_id} onClick={()=>handleBtnPage(2)} > <HiOutlineCalendar size={20}/> ข้อมูลกิจกรรม</Button>
 

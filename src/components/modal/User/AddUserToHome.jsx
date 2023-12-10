@@ -193,7 +193,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
         <DialogBody className="overflow-y-scroll h-[500px] md:h-full">
 
           <div className="flex flex-col md:flex-row gap-4">
-            <Card className="w-1/2 ring-2 ring-gray-300/20">
+            <Card className="w-full md:w-1/2 ring-2 ring-gray-300/20">
               <CardBody>
                 <div className="flex flex-col md:flex-row justify-between">
                   <h2 className="text-black font-bold flex items-center gap-2">
@@ -313,7 +313,7 @@ const AddUserToHome = ({ handleOpen, open }) => {
               </CardBody>
             </Card>
 
-            <Card className="w-1/2 ring-2 ring-gray-300/20 ">
+            <Card className="w-full md:w-1/2 ring-2 ring-gray-300/20 ">
               <CardBody>
                 <div className="flex flex-col md:flex-row justify-between items-center">
                   <h2 className="text-black font-bold flex items-center gap-2 w-full">

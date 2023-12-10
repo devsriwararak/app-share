@@ -198,7 +198,7 @@ const Member = () => {
         </div>
       </div>
 
-      <Card className=" h-[550px]  w-full mx-auto   md:w-full  mt-8 shadow-lg ">
+      <Card className=" h-full  w-full mx-auto   md:w-full  mt-8 shadow-lg ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
           <table className=" w-full  min-w-max table-auto text-center">
             <thead>
