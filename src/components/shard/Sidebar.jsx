@@ -46,7 +46,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
   return (
     <>
       <div
-        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-lg  bg-white z-50 overflow-y-scroll ${
+        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-lg  bg-white z-50 overflow-y-scroll  ${
           openSidebar
             ? "  md:block md:static  md:top-auto md:left-auto md:shadow-lg md:border-2   "
             : " hidden md:block  md:static   md:top-auto md:left-auto md:shadow-lg md:border-2   "
@@ -75,7 +75,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
             ></SidebarLink>
           ))}
         </div>
-        <div className="flex flex-col gap-0.5 pt-2 border-t border-gray-400">
+        <div className="flex flex-col gap-0.5 pt-2 border-t border-gray-400  ">
           {DASHBOARD_SIDEBAR_BOTTOM_LINKS?.map((item) => (
             <SidebarLink
               key={item?.key}
@@ -84,19 +84,19 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
               setOpenSideBar={setOpenSideBar}
             />
           ))}
+        </div>
 
-          <div
-            className={classNames(
-              "text-white cursor-pointer bg-red-500  ",
-              "flex item-center gap-3 font-light px-3 py-2 hover:bg-red-700 hover:text-white   rounded-lg"
-            )}
-            onClick={handleLogout}
-          >
-            <span className="text-xl">
-              <HiOutlineLogout />
-            </span>
-            ออกจากระบบ
-          </div>
+        <div
+          className={classNames(
+            "text-white cursor-pointer bg-red-500  ",
+            "flex item-center gap-3 font-light px-3 py-2 hover:bg-red-700 hover:text-white   rounded-lg "
+          )}
+          onClick={handleLogout}
+        >
+          <span className="text-xl">
+            <HiOutlineLogout />
+          </span>
+          ออกจากระบบ
         </div>
       </div>
     </>
@@ -117,7 +117,6 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
       closePopup();
     }
   };
-
 
   return (
     <div>
@@ -143,9 +142,6 @@ function SidebarLink({ item, handleOpen, open, closePopup }) {
           )}
         </Link>
       )}
-
-
-
     </div>
   );
 }
