@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { Input } from "@material-tailwind/react";
 
 const Login = () => {
   const [dataLogin, setDataLogin] = useState({});
@@ -86,7 +87,7 @@ const Login = () => {
         // updateToken(token)
         localStorage.setItem("Token", token);
         localStorage.setItem("id", decoded.id);
-        localStorage.setItem("name", decoded.f_name +" " + decoded.l_nane);
+        localStorage.setItem("name", decoded.f_name + " " + decoded.l_nane);
         // updateValue("share_w_id", decoded?.share_w_id)
         // แบ่ง navigate
         if (decoded.level === "0") {
@@ -103,41 +104,48 @@ const Login = () => {
           localStorage.setItem("Type", "user");
         } else if (decoded.level === "3") {
           // status - 3
-          fetchDataHome(decoded.share_w_id , decoded.level)
+          fetchDataHome(decoded.share_w_id, decoded.level);
           localStorage.setItem("Type", "home");
         } else if (decoded.level === "4") {
           // status - 4
-          fetchDataHome(decoded.share_w_id , decoded.level)
+          fetchDataHome(decoded.share_w_id, decoded.level);
           localStorage.setItem("Type", "member");
         }
-      setTimeout(() => {
-        window.location.reload()
-       }, 1500);
-
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error)
+      toast.error(error);
     }
   };
 
-  const fetchDataHome = async(share_w_id, level)=> {
+  const fetchDataHome = async (share_w_id, level) => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_APP_API}/homesh/home-search?name=${share_w_id}`, {
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API}/homesh/home-search?name=${share_w_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
         }
-      })
+      );
       console.log(share_w_id);
       console.log(res.data[0].sh_name);
-      level ==="3" && (localStorage.setItem("status", res.data[0]?.sh_name || ""), localStorage.setItem("share_w_id", share_w_id || ""));
-      level ==="4" && (localStorage.setItem("status", `พนักงาน : ${res.data[0]?.sh_name || ""}`),localStorage.setItem("share_w_id", share_w_id || "") );
-
+      level === "3" &&
+        (localStorage.setItem("status", res.data[0]?.sh_name || ""),
+        localStorage.setItem("share_w_id", share_w_id || ""));
+      level === "4" &&
+        (localStorage.setItem(
+          "status",
+          `พนักงาน : ${res.data[0]?.sh_name || ""}`
+        ),
+        localStorage.setItem("share_w_id", share_w_id || ""));
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -145,34 +153,39 @@ const Login = () => {
         <ToastContainer theme="colored" autoClose={2000} />
 
         {/* Container */}
-        <div className="p-5 m-8 bg-gray-300 flex rounded-2xl shadow-lg max-w-5xl border border-gray-300 py-16">
+        <div className="p-5 m-0 bg-gray-300 flex rounded-2xl shadow-lg max-w-5xl border border-gray-300 py-16">
           {/* form */}
           <div className="sm:w-1/2 px-10 flex flex-col justify-center   ">
             <h2 className="font-bold text-2xl text-purple-800 flex justify-center md:justify-start">
               เข้าสู่ระบบ
             </h2>
-          
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <input
-                className="p-2 mt-8 rounded-xl border focus:ring-gray-200"
-                type="text"
-                name="username"
-                placeholder="Username"
-                onChange={(e) => handleChange(e)}
-              />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-5">
+            <div className="bg-white rounded-lg">
+                  <Input
+                    name="username"
+                    label="username"
+                    color="purple"
+                    type="text"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+   
               <div className="relative">
-                <input
-                  className="p-2  rounded-xl border w-full"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={(e) => handleChange(e)}
-                />
-                <AiOutlineEye
+                <div className="bg-white rounded-lg">
+                  <Input
+                    name="password"
+                    label="password"
+                    color="purple"
+                    type="password"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+        
+                {/* <AiOutlineEye
                   className="absolute top-1/2 right-3 -translate-y-1/2  "
                   size={20}
-                />
+                /> */}
               </div>
               <button
                 type="submit"

@@ -1,3 +1,4 @@
+import { Input } from "@material-tailwind/react";
 import axios from "axios";
 import React, { useState } from "react";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -25,16 +26,15 @@ const Register = () => {
       console.log(res.data);
       setSendData({});
 
-
-      if(res.data.result){
+      if (res.data.result ="เพิ่มข้อมูลสำเร็จ") {
+        toast.success("สมัครสมาชิกสำเร็จ");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
         toast.error("สมัครสมาชิกไม่สำเร็จ !");
-      }else {
-      toast.success("สมัครสมาชิกสำเร็จ");
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-      }
 
+      }
     } catch (error) {
       console.log(error);
       toast.error("สมัครสมาชิกไม่สำเร็จ !");
@@ -42,21 +42,20 @@ const Register = () => {
   };
   return (
     <>
-      <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+      <section className="bg-gray-50 min-h-screen flex items-center justify-center p-4">
         <ToastContainer theme="colored" autoClose={2000} />
         {/* {JSON.stringify(sendData)} */}
 
         {/* Container */}
-        <div className="p-5 bg-gray-200 flex rounded-2xl shadow-lg max-w-5xl border border-gray-200 py-16">
+        <div className="p-5 m-0 bg-gray-300 flex rounded-2xl shadow-lg max-w-5xl border border-gray-300 py-16">
           {/* form */}
 
           <div className="sm:w-1/2 px-10 flex flex-col justify-center   ">
             <h2 className="font-bold text-2xl text-purple-800">สมัครสมาชิก</h2>
-            <p className="text-sm mt-4">กำลังปรับปรุง !! </p>
 
             <form className="flex flex-col gap-4">
               <div className="flex flex-col md:flex-row gap-2 justify-center items-center mt-4 ">
-                <div className="">
+                {/* <div className="">
                   <input
                     className="p-2 mt-2 rounded-xl border w-full  focus:ring-gray-200 "
                     type="text"
@@ -64,9 +63,19 @@ const Register = () => {
                     placeholder="Username"
                     onChange={(e) => handleChange(e)}
                   />
+                </div> */}
+
+                <div className="bg-white rounded-lg">
+                  <Input
+                    name="username"
+                    label="username"
+                    color="purple"
+                    type="text"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
 
-                <div className="relative ">
+                {/* <div className="relative ">
                   <input
                     className="p-2 w-full mt-2  rounded-xl border "
                     type="password"
@@ -78,11 +87,21 @@ const Register = () => {
                     className="absolute top-1/2 right-3  -translate-y-35   "
                     size={20}
                   />
+                </div> */}
+
+                <div className="bg-white rounded-lg">
+                  <Input
+                    name="password"
+                    label="password"
+                    color="purple"
+                    type="password"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
               </div>
 
               <div className="flex flex-col md:flex-row gap-2 justify-center items-center ">
-                <div className="">
+                {/* <div className="">
                   <input
                     className="p-2 mt-2 rounded-xl border w-full  focus:ring-gray-200 "
                     type="text"
@@ -90,8 +109,19 @@ const Register = () => {
                     placeholder="ชื่อ"
                     onChange={(e) => handleChange(e)}
                   />
+                </div> */}
+
+                <div className="bg-white rounded-lg">
+                  <Input
+                    name="fname"
+                    label="ชื่อ"
+                    color="purple"
+                    type="text"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
-                <div className="relative ">
+
+                {/* <div className="relative ">
                   <input
                     className="p-2 w-full mt-2  rounded-xl border "
                     type="text"
@@ -99,37 +129,66 @@ const Register = () => {
                     placeholder="สกุล"
                     onChange={(e) => handleChange(e)}
                   />
+                </div> */}
+                <div className="bg-white rounded-lg">
+                  <Input
+                    name="lnane"
+                    label="สกุล"
+                    color="purple"
+                    type="text"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
               </div>
 
-              <input
+              {/* <input
                 className="p-2 w-full mt-2  rounded-xl border "
                 type="text"
                 name="tell"
                 placeholder="เบอร์โทรศัพท์"
                 onChange={(e) => handleChange(e)}
-              />
+              /> */}
 
-              <input
+              <div className="bg-white rounded-lg">
+                <Input
+                  name="tell"
+                  label="เบอร์โทรศัพท์"
+                  color="purple"
+                  type="text"
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+
+              {/* <input
                 className="p-2 mt-2  rounded-xl border focus:ring-gray-200"
                 type="text"
                 name="address"
                 placeholder="ที่อยู่"
                 onChange={(e) => handleChange(e)}
-              />
+              /> */}
+
+              <div className="bg-white rounded-lg">
+                <Input
+                  name="address"
+                  label="ที่อยู่"
+                  color="purple"
+                  type="text"
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
 
               <button
                 onClick={sendDataToAPI}
-                className=" bg-purple-700 text-white rounded-xl mt-4 py-2 hover:scale-105 duration-300"
+                className=" bg-purple-700 text-white rounded-xl mt-2 py-2 hover:scale-105 duration-300"
               >
                 สมัครสมาชิก
               </button>
             </form>
 
             <div className="mt-5 grid grid-cols-3 items-center">
-              <hr className="border-gray-300" />
-              <p className="text-center text-gray-400">หรือ</p>
-              <hr className="border-gray-300" />
+              <hr className="border-gray-400" />
+              <p className="text-center text-gray-600">หรือ</p>
+              <hr className="border-gray-400" />
             </div>
 
             <Link to="/login">
