@@ -136,7 +136,6 @@ const AddUserToHome = ({ handleOpen, open }) => {
         }
       );
 
-      // console.log(res.data);
       setDataMyUser(res.data);
     } catch (error) {
       console.log(error);

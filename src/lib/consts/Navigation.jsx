@@ -13,6 +13,8 @@ import {
   HiOutlineUserCircle,
   HiOutlineUserAdd,
   HiOutlinePlay,
+  HiOutlineHome,
+  HiOutlineLightBulb,
 } from "react-icons/hi";
 let Type = localStorage.getItem("Type");
 
@@ -26,25 +28,18 @@ export const DASHBOARD_SIDEBAR_LINKS =
           icon: <HiOutlineViewGrid />,
         },
         {
-          key: "basicHome",
-          label: "ข้อมูลพื้นฐาน",
-          icon: <HiOutlineCube />,
-          submenuActive: 1,
-          submenu: [
-            {
-              label: "ข้อมูลบ้านแชร์",
-              key: "basicHome_1",
-              path: "/admin/basic/home",
-              icon: <HiChevronRight />,
-            },
-            {
-              label: "ข้อมูลวงแชร์",
-              key: "basicHome_2",
-              path: "/admin/basic/wong",
-              icon: <HiChevronRight />,
-            },
-          ],
+          key: "basicHome_1",
+          label: "ข้อมูลบ้านแชร์",
+          path: "/admin/basic/home",
+          icon: <HiOutlineHome />,
         },
+        {
+          key: "basicHome_2",
+          label: "ข้อมูลวงแชร์",
+          path: "/admin/basic/wong",
+          icon: <HiOutlineLightBulb />,
+        },
+ 
         Type == "admin"
           ? { key: "noData" }
           : {
