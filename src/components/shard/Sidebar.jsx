@@ -46,19 +46,19 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
   return (
     <>
       <div
-        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-lg  bg-white z-50 overflow-y-scroll  ${
+        className={`fixed top-0  h-full  left-0   p-3  text-white shadow-sm  bg-white z-50 overflow-y-scroll md:overflow-hidden  ${
           openSidebar
-            ? "  md:block md:static  md:top-auto md:left-auto md:shadow-lg md:border-2   "
-            : " hidden md:block  md:static   md:top-auto md:left-auto md:shadow-lg md:border-2   "
+            ? "  md:block md:static  md:top-auto md:left-auto md:shadow-sm md:border-2   "
+            : " hidden md:block  md:static   md:top-auto md:left-auto md:shadow-sm md:border-2   "
         }`}
       >
-        <div className="flex items-center gap-2 px-1 py-2  justify-center ">
-          <FaBeer fontSize={24} className="text-gray-800" />
+        <div className="flex items-center gap-2 px-1  justify-start ">
+          <FaBeer fontSize={30} className="text-white bg-purple-300 px-1.5 py-1.5 rounded-full" />
           <span
             className="text-gray-700 font-bold text-lg cursor-pointer"
             onClick={closePopup}
           >
-            APP SHARE
+           ระบบบ้านแชร์
           </span>
         </div>
 
@@ -88,7 +88,7 @@ const Sidebar = ({ openSidebar, setOpenSideBar }) => {
 
         <div
           className={classNames(
-            "text-white cursor-pointer bg-red-500  ",
+            "text-white cursor-pointer bg-red-500 mt-2  ",
             "flex item-center gap-3 font-light px-3 py-2 hover:bg-red-700 hover:text-white   rounded-lg "
           )}
           onClick={handleLogout}
