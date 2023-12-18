@@ -109,6 +109,10 @@ const User = () => {
     handleOpen();
   };
 
+  const handelSendToUserData = (item)=>{
+    setDataToModal(item);
+  }
+
   useEffect(() => {
     fetchData();
   }, [search]);
@@ -168,8 +172,8 @@ const User = () => {
 
             <ul className="mt-4 overflow-y-scroll">
               {data.map((item, index) => (
-                <li className="flex  justify-between hover:bg-gray-200 py-1.5 px-2 cursor-pointer">
-                  {`${item.code} (${item.f_name})`}
+                <li key={item.id} className="flex  justify-between hover:bg-gray-200 py-1.5 px-2 cursor-pointer">
+                  <p onClick={()=>handelSendToUserData(item)}>{`${item.code} (${item.f_name})`}</p>
 
                   <div className="flex flex-row gap-2">
                     <HiPencilAlt
@@ -192,121 +196,11 @@ const User = () => {
         </Card>
 
         <div className="w-full md:w-3/4 flex flex-col md:flex-row gap-2">
-          <UserData />
+          <UserData  dataToModal={dataToModal}/>
         </div>
       </div>
 
-      <Card className="h-full  w-full mx-auto   md:w-full  mt-4 ">
-        <CardBody className="  px-2 overflow-scroll -mt-4">
-          <table className=" w-full  min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th
-                    key={head}
-                    className="border-y border-blue-gray-100 bg-blue-gray-50 p-4"
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-bold leading-none opacity-90"
-                    >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {getPaginatedData().map((item, index) => {
-                const isLast = index === getPaginatedData().length - 1;
-                const classes = isLast
-                  ? "p-2"
-                  : "p-2 border-b border-blue-gray-50";
 
-                return (
-                  <tr key={index} className="hover:bg-gray-200">
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {firstIndex + index}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {item.code}
-                      </Typography>
-                    </td>
-
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {item.f_name} {item.l_nane}
-                      </Typography>
-                    </td>
-
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        0850032649
-                      </Typography>
-                    </td>
-
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {item.username}
-                      </Typography>
-                    </td>
-
-                    <td className={classes}>
-                      <div className="flex  gap-2 ">
-                        <HiPencilAlt
-                          size={20}
-                          color="black"
-                          className="cursor-pointer  "
-                          onClick={() => handleDataToModal(item)}
-                        />
-                        <HiTrash
-                          size={20}
-                          color="red"
-                          className="cursor-pointer  "
-                          onClick={() => handleDelete(item.id)}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Pagination
-            itemsPerPage={itemsPerPage}
-            totalItems={data.length}
-            paginate={paginate}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </CardFooter>
-      </Card>
     </div>
   );
 };
