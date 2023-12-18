@@ -132,9 +132,8 @@ const MyWong = () => {
           </Card>
         </div>
         <div className="w-full md:w-9/12 ">
-          <Card className="ring-1 ring-gray-200">
-            <CardBody>
-              <div className="flex flex-col md:flex-row gap-4">
+
+        <div className="flex flex-col md:flex-row gap-4">
                 <Button
                   color="green"
                   onClick={() => HandleSelectBtn(1)}
@@ -166,8 +165,7 @@ const MyWong = () => {
                 {showComponent === 2 && <MyWongWong data={data} />}
                 {showComponent === 3 && <MyWongActivity data={data} />}
               </div>
-            </CardBody>
-          </Card>
+
         </div>
       </div>
     </div>

@@ -18,6 +18,8 @@ import ManageUser from "../pages/Home/User/ManageUser";
 import HomeWongShare from '../pages/Home/HomeWongShare'
 import Play from "../pages/Home/Play/Play";
 import HomeRePort from '../pages/Home/Report/HomeReport'
+import DashboardUser from "../pages/Dashboards/Users/DashboardUser";
+import DashboardHome from "../pages/Dashboards/Home/DashboardHome";
 let Type = localStorage.getItem("Type");
 
 const PrivateRoute = () => {
@@ -43,7 +45,8 @@ const PrivateRoute = () => {
       {Type == "user" ? (
         <Routes>
           <Route  path="/user" element={<Layout />}>
-            <Route index element={<IndexUser />} />
+            <Route index   element={<DashboardUser />} />
+            {/* <Route path="/user/dashboard" element={<DashboardUser />} /> */}
             <Route path="/user/add-to-wong-share" element={<AddToWongShare />} />
             <Route path="/user/my-wong" element={<MyWong />} />
 
@@ -58,7 +61,7 @@ const PrivateRoute = () => {
       {Type == "home" || Type == "member" ? (
         <Routes>
           <Route path="/home" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<DashboardHome />} />
             <Route path="/home/manage-user" element={<ManageUser />} />
             <Route path="/home/wong-share" element={<HomeWongShare />} />
             <Route path="/home/member" element={<Member />} />

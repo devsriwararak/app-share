@@ -269,7 +269,7 @@ const Member = () => {
             
              
                     <td className={classes}>
-                      <div className="flex  gap-2 ">
+                      <div className="flex justify-center  gap-2 ">
                         <HiOutlineDesktopComputer
                           
                           size={20}

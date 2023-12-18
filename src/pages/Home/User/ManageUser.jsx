@@ -77,14 +77,14 @@ useEffect(()=>{
       <AddUserToHome handleOpen={handleOpen} open={open}   />
 
       <div className="flex flex-col md:flex-row gap-4">
-        <Card className="ring-2 ring-gray-800/5 w-full md:w-1/3">
+        <Card className="ring-2 ring-gray-800/5 w-full h-full md:w-1/3">
           <CardBody>
             <div className="flex flex-col md:flex-row   md:justify-between">
               <h2 className="text-lg text-black font-bold flex items-center gap-1">
                 <HiOutlineUsers />
                 ลูกแชร์ (3)
               </h2>
-              <Button className="text-[14px] flex items-center gap-2  text-sm" color="purple" size="sm" variant="filled" onClick={handleOpen}>
+              <Button className="text-[14px] flex items-center gap-2 mt-2 md:mt-0  text-sm" color="purple" size="sm" variant="filled" onClick={handleOpen}>
                 <HiOutlinePlusSm size={20}   />เพิ่มลูกแชร์ใหม่
               </Button>
             </div>

@@ -97,6 +97,7 @@ const AddToWongShare = () => {
       share_id: dataForSelect.share_id,
       user_id: localStorage.getItem("id"),
       share_v_id: dataForSelect.share_v_id,
+
     };
 
     console.log(data);
@@ -113,6 +114,7 @@ const AddToWongShare = () => {
       console.log(res.data);
       if (res.data.error) {
         toast.error("ทำรายการไม่สำเร็จ !");
+        setDataForSelect({})
       } else {
         toast.success("ทำรายการสำเร็จ");
         fetchDataMyWongShare();

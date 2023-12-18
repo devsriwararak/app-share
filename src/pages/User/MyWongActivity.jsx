@@ -47,7 +47,7 @@ const MyWongActivity = ({ data }) => {
     <div>
       <div className="flex flex-col md:flex-row gap-4 ">
         <Card className="w-full ring-2 ring-gray-800/5 mt-5">
-          <CardHeader className="bg-purple-800 text-white ring-1 ring-gray-300 h-14 flex justify-start items-center gap-3 text-lg px-5 font-bold">
+          <CardHeader className="bg-purple-400 text-white ring-1 ring-gray-300 h-14 flex justify-start items-center gap-3 text-lg px-5 font-bold">
             <HiOutlineCalendar  size={22} /> วันที่กิจกรรมวงค์แชร์ ({data.home})
           </CardHeader>
           <CardBody>
@@ -117,11 +117,13 @@ const MyWongActivity = ({ data }) => {
                 </tbody>
               </table>
             </Card>
+            <p className='text-lg text-gray-800 mt-4'> จะดำเนินการในงวดที่ 3/3 ครับ.</p>
+
           </CardBody>
         </Card>
 
         <Card className="w-full ring-2 ring-gray-800/5 mt-5">
-        <CardHeader className="bg-purple-800 text-white ring-1 ring-gray-300 h-14 flex justify-start items-center gap-3 text-lg px-5 font-bold">
+        <CardHeader className="bg-purple-400 text-white ring-1 ring-gray-300 h-14 flex justify-start items-center gap-3 text-lg px-5 font-bold">
             <HiOutlineScale size={22} /> วันที่จบวงค์แชร์ ({data.home})
           </CardHeader>
           <CardBody>
@@ -193,6 +195,8 @@ const MyWongActivity = ({ data }) => {
                 </tbody>
               </table>
             </Card>
+            <p className='text-lg text-gray-800 mt-4'> จะดำเนินการในงวดที่ 3/3 ครับ.</p>
+
           </CardBody>
         </Card>
       </div>
