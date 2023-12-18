@@ -57,7 +57,7 @@ export const DASHBOARD_SIDEBAR_LINKS =
         },
         {
           key: "ManageUser",
-          label: "ข้อมูลลูกค้า",
+          label: "ข้อมูลลูกแชร์",
           path: "/admin/manage-user",
           icon: <HiOutlineShoppingCart />,
         },
