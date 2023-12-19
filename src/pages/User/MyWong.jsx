@@ -71,7 +71,11 @@ const MyWong = () => {
           <Card className="ring-1 ring-gray-200 ">
             <CardBody>
               <h2 className="text-lg font-bold text-black flex items-center gap-2">
-                <HiOutlineUserAdd />
+       
+                <HiOutlineUserAdd
+                size={35}
+                className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+              />
                 บ้านแชร์ (2)
               </h2>
               <div className="mt-2">

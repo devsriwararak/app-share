@@ -10,7 +10,12 @@ import {
 import axios from "axios";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { HiOutlineHeart, HiOutlineUserAdd } from "react-icons/hi";
+import {
+  HiOutlineHeart,
+  HiOutlineScale,
+  HiOutlineShare,
+  HiOutlineUserAdd,
+} from "react-icons/hi";
 import Select from "react-select";
 import { toast } from "react-toastify";
 
@@ -97,7 +102,6 @@ const AddToWongShare = () => {
       share_id: dataForSelect.share_id,
       user_id: localStorage.getItem("id"),
       share_v_id: dataForSelect.share_v_id,
-
     };
 
     console.log(data);
@@ -114,7 +118,7 @@ const AddToWongShare = () => {
       console.log(res.data);
       if (res.data.error) {
         toast.error("ทำรายการไม่สำเร็จ !");
-        setDataForSelect({})
+        setDataForSelect({});
       } else {
         toast.success("ทำรายการสำเร็จ");
         fetchDataMyWongShare();
@@ -190,14 +194,15 @@ const AddToWongShare = () => {
   }, []);
 
   return (
-
-
     <div className="flex flex-col md:flex-row gap-2 ">
       <div className="w-full">
         <Card className="ring-1  ring-gray-300 shadow-lg">
           <CardBody>
             <h2 className="text-lg font-bold text-black flex items-center gap-2">
-              <HiOutlineUserAdd />
+              <HiOutlineUserAdd
+                size={35}
+                className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+              />
               ขอเข้าวงค์แชร์
             </h2>
             <div className="grid grid-rows-1 md:grid-cols-2 gap-4 mt-5">
@@ -272,7 +277,10 @@ const AddToWongShare = () => {
           <CardBody>
             <div className="flex flex-col md:flex-row justify-between ">
               <h2 className="text-lg font-bold text-black flex items-center gap-2 w-full ">
-                <HiOutlineHeart />
+              <HiOutlineShare
+                size={35}
+                className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+              />
                 วงค์แชร์ของฉัน
               </h2>
               <Input
@@ -338,7 +346,7 @@ const AddToWongShare = () => {
                         </td>
                         <td className="p-2">
                           {item.is_apporvee === 0 && (
-                            <p className="bg-yellow-300 bg-opacity-70 text-yellow-700 rounded-lg">
+                            <p className="bg-yellow-300 bg-opacity-70 text-orange-700 rounded-lg">
                               รออนุมัติ
                             </p>
                           )}

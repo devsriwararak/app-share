@@ -145,11 +145,15 @@ const HomeShare = () => {
           className="mb-2 flex gap-2 items-center
         "
         >
-          <HiDatabase /> ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
+          <HiDatabase
+            size={35}
+            className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+          />
+          ข้อมูลบ้านแชร์และพนักงาน (ทั้งหมด)
         </Typography>
-        <div className="w-full md:w-4/12">
+        {/* <div className="w-full md:w-4/12">
           <Select options={options} placeholder="เลือกบ้านแชร์" />
-        </div>
+        </div> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-4 ">
@@ -204,7 +208,7 @@ const HomeShare = () => {
                       ))}
                     </tr>
                   </thead>
-                  <tbody >
+                  <tbody>
                     {dataHome.map((item, index) => (
                       <tr
                         key={index}
@@ -270,9 +274,9 @@ const HomeShare = () => {
                 </table>
               </Card>
             </CardBody>
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-   
-            </CardFooter>
+            {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+
+            </CardFooter> */}
           </Card>
         </div>
         <div className="w-full">
@@ -390,9 +394,7 @@ const HomeShare = () => {
                 </table>
               </Card>
             </CardBody>
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-         
-            </CardFooter>
+            {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4"></CardFooter> */}
           </Card>
         </div>
       </div>

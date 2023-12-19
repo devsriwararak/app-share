@@ -212,12 +212,14 @@ const BasicHome = () => {
       />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
-        <div className="flex gap-2">
-          <span>
-            <HiOutlineHome size={24} color="black" />
-          </span>{" "}
+        <div className="flex gap-2 items-center">
+    
+          <HiOutlineHome
+          size={35}
+          className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+        />
           <span className="text-xl text-black font-bold">
-            {" "}
+
             จัดการข้อมูลบ้านแชร์
           </span>
         </div>
@@ -246,7 +248,7 @@ const BasicHome = () => {
         </div>
       </div>
 
-      <Card className=" h-full w-full m-4 mx-auto shadow-lg   md:w-full  mt-8 ">
+      <Card className=" h-full w-full m-4 mx-auto shadow-lg   md:w-full  mt-5 ">
         <CardBody className="  px-2 -mt-4 overflow-scroll">
           <table className=" w-full  min-w-max table-auto text-center ">
             <thead className="  ">

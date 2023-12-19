@@ -132,9 +132,11 @@ const User = () => {
 
       <div className="flex flex-col md:flex-row    items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <span>
-            <HiOutlineShoppingCart size={20} color="black" />
-          </span>{" "}
+     
+          <HiOutlineShoppingCart
+            size={35}
+            className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+          />
           <span className="text-lg text-black font-bold">
             จัดการข้อมูลลูกแชร์
           </span>

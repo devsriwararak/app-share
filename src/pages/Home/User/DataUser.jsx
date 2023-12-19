@@ -7,7 +7,11 @@ const DataUser = ({ data, selectData }) => {
     <>
       <div className="flex justify-between">
         <h2 className="text-lg text-black font-bold flex items-center gap-3">
-          <HiOutlineHome /> ข้อมูลลูกแชร์
+          <HiOutlineHome
+            size={30}
+            className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+          />
+          ข้อมูลลูกแชร์
         </h2>
       </div>
 
@@ -38,48 +42,54 @@ const DataUser = ({ data, selectData }) => {
             วงแชร์ทั้งหมดที่เล่น
           </CardHeader>
           <CardBody>
-            <p className="text-black text-lg">18 ธ.ค. 2566</p>
-            <ul>
-              <li>- 217(วง สีม่วง บิทลดต้น 104,720) </li>
-              <li>- (ง.19/22) [104,720] </li>
-            </ul>
-            <hr className="mt-2 border-gray-300" />
-            <p className="text-black text-lg mt-2">18 ธ.ค. 2566</p>
-            <ul>
-              <li>- 217(วง สีม่วง บิทลดต้น 104,720) </li>
-              <li>- (ง.19/22) [104,720] </li>
-            </ul>
-            <hr className="mt-2 border-gray-300" />
-            ดำเนินการทำใน งวดที่3/3 ครับ
+            {selectData?.code && (
+              <div>
+                <p className="text-black text-lg">18 ธ.ค. 2566</p>
+                <ul>
+                  <li>- 217(วง สีม่วง บิทลดต้น 104,720) </li>
+                  <li>- (ง.19/22) [104,720] </li>
+                </ul>
+                <hr className="mt-2 border-gray-300" />
+                <p className="text-black text-lg mt-2">18 ธ.ค. 2566</p>
+                <ul>
+                  <li>- 217(วง สีม่วง บิทลดต้น 104,720) </li>
+                  <li>- (ง.19/22) [104,720] </li>
+                </ul>
+                <hr className="mt-2 border-gray-300" />
+              </div>
+            )}
+
+            <p className="mt-4">ดำเนินการทำใน งวดที่3/3 ครับ</p>
           </CardBody>
         </Card>
 
-        <div className="w-full md:w-1/3">
-          {/* Green Report */}
-          <div className="bg-green-500 p-2 mt-4 rounded-md px-4">
-            <div className="flex justify-between items-center">
-              <h1 className="text-2xl text-white">+ 1,000</h1>
+        {selectData?.code && (
+          <div className="w-full md:w-1/3">
+            {/* Green Report */}
+            <div className="bg-green-500 p-2 mt-4 rounded-md px-4">
+              <div className="flex justify-between items-center">
+                <h1 className="text-2xl text-white">+ 1,000</h1>
+              </div>
+              <hr className="border-1 border-gray-400 mt-2" />
+              <h4 className="mt-3 text-white text-lg">มือเป็น : 1,200 </h4>
+              <h4 className="mt-3 text-white text-lg">มือตาย : 200 </h4>
             </div>
-            <hr className="border-1 border-gray-400 mt-2" />
-            <h4 className="mt-3 text-white text-lg">มือเป็น : 1,200 </h4>
-            <h4 className="mt-3 text-white text-lg">มือตาย : 200 </h4>
-          </div>
 
-          {/* Yellow Report */}
-          <div className="bg-orange-600 p-2 mt-4 rounded-md px-4">
-            <div className="flex justify-between items-center">
-              <h1 className="text-2xl text-white">(+/-) 0</h1>
-              {/* <HiOutlinePhotograph
+            {/* Yellow Report */}
+            <div className="bg-orange-600 p-2 mt-4 rounded-md px-4">
+              <div className="flex justify-between items-center">
+                <h1 className="text-2xl text-white">(+/-) 0</h1>
+                {/* <HiOutlinePhotograph
                   size={25}
                   color="white"
                   className=" cursor-pointer"
                   onClick={handleOpen}
                 /> */}
+              </div>
+              <hr className="border-1 border-gray-400 mt-2" />
+              <h4 className="mt-3 text-white text-lg">มือเป็น : 0 </h4>
+              <h4 className="mt-3 text-white text-lg">มือตาย : 0 </h4>
             </div>
-            <hr className="border-1 border-gray-400 mt-2" />
-            <h4 className="mt-3 text-white text-lg">มือเป็น : 0 </h4>
-            <h4 className="mt-3 text-white text-lg">มือตาย : 0 </h4>
-          </div>
 
             {/* red Report */}
             <div className="bg-red-500 p-2 mt-4 rounded-md px-4">
@@ -96,9 +106,8 @@ const DataUser = ({ data, selectData }) => {
               <h4 className="mt-3 text-white text-lg">มือเป็น : 100 </h4>
               <h4 className="mt-3 text-white text-lg">มือตาย : 500 </h4>
             </div>
-
-
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

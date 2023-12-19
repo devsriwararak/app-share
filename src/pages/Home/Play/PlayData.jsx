@@ -21,7 +21,12 @@ const PlayData = ({ data, setData }) => {
     <div>
       <div className="flex flex-col md:flex-row justify-between">
         <h2 className="text-lg text-black font-bold flex gap-2 items-center">
-          <HiOutlinePencilAlt size={22} /> แก้ไขข้อมูลวงแชร์ ({data.name})
+          <HiOutlinePencilAlt
+                  size={35}
+                  className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+                />
+          
+          แก้ไขข้อมูลวงแชร์ {data?.name}
         </h2>
         <Button color="purple" size="sm" className="text-sm" onClick={handleUpdate}>
           อัพเดท

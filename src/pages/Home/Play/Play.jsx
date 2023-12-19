@@ -23,7 +23,7 @@ const dataWongShare = [
 
 const Play = () => {
   const [statusBtn, setStatusBtn] = useState(1);
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
   const [activeItem, setActiveItem] = useState();
 
   const [open, setOpen] = useState(false);
@@ -33,16 +33,14 @@ const Play = () => {
     setStatusBtn(number);
   };
 
-  const handleSelect = (data, index)=>{
-    setData((prev)=>({
+  const handleSelect = (data, index) => {
+    setData((prev) => ({
       ...prev,
       name: data.name,
-      code: data.code
-    }))
-    setActiveItem(index)
-  }
-
-
+      code: data.code,
+    }));
+    setActiveItem(index);
+  };
 
   return (
     <div className="flex flex-col md:flex-row gap-4">
@@ -53,7 +51,10 @@ const Play = () => {
           <CardBody>
             <div className="flex justify-between">
               <h2 className="text-lg font-bold text-black flex items-center gap-2">
-                <HiOutlineChatAlt2 size={24} />
+                <HiOutlineChatAlt2
+                  size={35}
+                  className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+                />
                 วงแชร์ (4)
               </h2>
               <Button
@@ -74,10 +75,20 @@ const Play = () => {
             <ul className="mt-4 overflow-y-scroll">
               {dataWongShare.map((data, index) => (
                 <div key={index}>
-                  <li className={classNames(activeItem === index && "bg-gray-800/20", "hover:bg-gray-200 py-2 flex justify-between items-center px-2 rounded-lg" )} >
+                  <li
+                    onClick={() => handleSelect(data, index)}
+                    className={classNames(
+                      activeItem === index && "bg-gray-800/20",
+                      "hover:bg-gray-200 py-2 flex justify-between items-center px-2 rounded-lg cursor-pointer"
+                    )}
+                  >
                     {` ${index + 1}.  ${data.code}  (${data.name})`}
 
-                    <FcPlus onClick={()=>handleSelect(data, index)} className=" cursor-pointer" size={25} />
+                    <FcPlus
+                      onClick={() => handleSelect(data, index)}
+                      className=" cursor-pointer"
+                      size={25}
+                    />
                   </li>
                   {/* <hr className="m-1.5" /> */}
                 </div>

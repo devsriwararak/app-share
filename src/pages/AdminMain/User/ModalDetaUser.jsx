@@ -222,8 +222,8 @@ const ModalDetaUser = ({ open, handleOpen, dataToModal }) => {
           </div>
         <p>ดำเนินการในงวดที่ 3/3</p>
       </DialogBody>
-      <DialogFooter>
-        {/* <Button
+      {/* <DialogFooter>
+        <Button
           variant="text"
           color="red"
           onClick={handleOpen}
@@ -233,8 +233,8 @@ const ModalDetaUser = ({ open, handleOpen, dataToModal }) => {
         </Button>
         <Button variant="gradient" color="green" onClick={handleOpen}>
           <span>Confirm</span>
-        </Button> */}
-      </DialogFooter>
+        </Button>
+      </DialogFooter> */}
     </Dialog>
   );
 };

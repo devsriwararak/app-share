@@ -170,9 +170,12 @@ const Member = () => {
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
         <div className="flex gap-2">
-          <span>
-            <HiOutlineUserGroup size={24} color="black" />
-          </span>{" "}
+   
+
+          <HiOutlineUserGroup
+            size={35}
+            className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+          />
           <span className="text-xl text-black font-bold">
             {" "}
             จัดการข้อมูลพนักงาน

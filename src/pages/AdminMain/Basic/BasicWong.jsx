@@ -29,7 +29,10 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import ViewWongShare from "../../../components/modal/Basic/ViewWongShare";
 import axios from "axios";
-import { calculatePageIndices, calculatePagination } from "../../../components/pagination/PaginationUtils";
+import {
+  calculatePageIndices,
+  calculatePagination,
+} from "../../../components/pagination/PaginationUtils";
 import Pagination from "../../../components/pagination/Pagination";
 
 const TABLE_HEAD = [
@@ -126,7 +129,6 @@ const BasicWong = () => {
   const [search, setSearch] = useState("");
   const [dataToModal, setDataToModal] = useState({});
 
-
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
@@ -134,18 +136,19 @@ const BasicWong = () => {
   const getPaginatedData = () => {
     return calculatePagination(currentPage, itemsPerPage, data);
   };
-  const { firstIndex, lastIndex } = calculatePageIndices(currentPage, itemsPerPage);
-
-
+  const { firstIndex, lastIndex } = calculatePageIndices(
+    currentPage,
+    itemsPerPage
+  );
 
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_APP_API}/share/share-search?name=${search}`,{
-          headers:{
+        `${import.meta.env.VITE_APP_API}/share/share-search?name=${search}`,
+        {
+          headers: {
             Authorization: `Bearer ${localStorage.getItem("Token")}`,
-
-          }
+          },
         }
       );
       console.log(res.data);
@@ -223,10 +226,11 @@ const BasicWong = () => {
       />
 
       <div className="flex flex-col md:flex-row   items-center  md:justify-between gap-4">
-        <div className="flex gap-2">
-          <span>
-            <HiOutlineChatAlt2 size={24} color="black" />
-          </span>{" "}
+        <div className="flex gap-2 items-center">
+          <HiOutlineChatAlt2
+            size={35}
+            className="bg-purple-700/5 rounded-full px-1 py-1.5 text-purple-300"
+          />
           <span className="text-xl text-black font-bold">
             {" "}
             จัดการข้อมูลวงค์แชร์
@@ -238,7 +242,7 @@ const BasicWong = () => {
             <Input
               variant="outlined"
               label="ค้นหาวงค์แชร์"
-              onChange={(e) => ( setCurrentPage(1),setSearch(e.target.value))}
+              onChange={(e) => (setCurrentPage(1), setSearch(e.target.value))}
             />
           </div>
           <div className="">
@@ -256,7 +260,7 @@ const BasicWong = () => {
         </div>
       </div>
 
-      <Card className=" h-full md:h-full  w-full mx-auto   md:w-full  mt-8 shadow-lg ">
+      <Card className=" h-full md:h-full  w-full mx-auto   md:w-full  mt-5 shadow-lg ">
         <CardBody className="  px-2 overflow-scroll -mt-4">
           <table className=" w-full  min-w-max table-auto text-center">
             <thead>
@@ -338,22 +342,21 @@ const BasicWong = () => {
                     <td className={classes}>
                       <div className="flex justify-center  gap-2 ">
                         <HiOutlineDesktopComputer
-                         size={20}
+                          size={20}
                           color="black"
                           className=" cursor-pointer"
                           onClick={() => handleViewModal(item)}
                         />
                         <HiPencilAlt
-                           className=" cursor-pointer"
-                           size={20}
+                          className=" cursor-pointer"
+                          size={20}
                           color="black"
                           onClick={() => handleSelectToModal(item)}
                         />
                         <HiTrash
-                        
-                         className=" cursor-pointer"
-                         size={20}
-                        color="red"
+                          className=" cursor-pointer"
+                          size={20}
+                          color="red"
                           onClick={() => handleDelete(item.id)}
                         />
                       </div>
@@ -379,4 +382,3 @@ const BasicWong = () => {
 };
 
 export default BasicWong;
-
