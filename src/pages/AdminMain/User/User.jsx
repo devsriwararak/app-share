@@ -44,7 +44,6 @@ const User = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [dataToModal, setDataToModal] = useState({});
-  const [indexActive, setInDexActive] = useState(null);
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -110,10 +109,9 @@ const User = () => {
     handleOpen();
   };
 
-  const handelSendToUserData = (item, index) => {
+  const handelSendToUserData = (item)=>{
     setDataToModal(item);
-    setInDexActive(index);
-  };
+  }
 
   useEffect(() => {
     fetchData();
@@ -174,19 +172,10 @@ const User = () => {
               />
             </div>
 
-         
-
             <ul className="mt-4 overflow-y-scroll">
               {data.map((item, index) => (
-                <li
-                  key={item.id}
-                  className={`${
-                    indexActive === index && "bg-gray-300"
-                  } flex  justify-between hover:bg-gray-200 py-1.5 px-2 cursor-pointer rounded-md `}
-                >
-                  <p
-                    onClick={() => handelSendToUserData(item, index)}
-                  >{`${item.code} (${item.f_name})`}</p>
+                <li key={item.id} className="flex  justify-between hover:bg-gray-200 py-1.5 px-2 cursor-pointer">
+                  <p onClick={()=>handelSendToUserData(item)}>{`${item.code} (${item.f_name})`}</p>
 
                   <div className="flex flex-row gap-2">
                     <HiPencilAlt
@@ -209,9 +198,11 @@ const User = () => {
         </Card>
 
         <div className="w-full md:w-3/4 flex flex-col md:flex-row gap-2">
-          <UserData dataToModal={dataToModal} />
+          <UserData  dataToModal={dataToModal}/>
         </div>
       </div>
+
+
     </div>
   );
 };
